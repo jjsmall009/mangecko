@@ -1,29 +1,31 @@
 # JJ Small
 # Manga Volume Tracker
 # dir_scanner.py - Code to scan a directory and get a list of manga title/volume count
-import os
+from pathlib import Path
 
-path_name = "D:\Manga\Short Manga"
-root_dir = os.scandir(path_name)
+FILE_EXT = (".cbz", ".cbr", ".zip", ".pdf")
 
-# Traverse one level down for each folder in the path and count how many volumes there are
-series_volumes = {}
-file_ext = (".cbz", ".cbr", ".zip")
-for series in root_dir:
-    if series.is_dir():
-        current_path = os.path.join(path_name, series.name)
-        current_dir = os.scandir(current_path)
-        volume_count = 0
-        for volume in current_dir:
-            if volume.is_file():
-                if volume.name.endswith(file_ext):
-                    volume_count += 1
+def scan_folder(path):
+    """Scans the specified folder and returns each manga title and how many volumes there are"""
+    manga_folders = [folder for folder in path.iterdir() if folder.is_dir()]
+    manga_volume_info = {}
 
-        # A series has to has at least 1 valid volume
-        if volume_count > 0:
-            series_volumes[series.name] = volume_count
+    for manga in manga_folders:
+        volumes = [vol for vol in manga.iterdir() if vol.suffix in FILE_EXT]
+        if len(volumes) > 0:
+            manga_volume_info[manga.name.split(" [", 1)[0]] = len(volumes)
+        else:
+            print(manga.name)
 
-for title, volumes in series_volumes.items():
-    print(f"{title} - {volumes} volumes")
+    return manga_volume_info
 
-print(len(series_volumes))
+def print_volume_info(manga_dict):
+    for title, volumes in manga_dict.items():
+        print(f"{title} - {volumes} volumes")
+    print(f"There are {len(manga_dict)} series")
+
+# Test our code
+path = Path("D:\Manga\Completed")
+
+manga_data = scan_folder(path)
+print_volume_info(manga_data)
