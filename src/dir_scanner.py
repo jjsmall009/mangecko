@@ -24,8 +24,8 @@ def print_volume_info(manga_dict):
         print(f"{title} - {volumes} volumes")
     print(f"There are {len(manga_dict)} series")
 
-# Test our code
-path = Path("D:\Manga\Completed")
+# # Test our code
+# path = Path("D:\Manga\TEST_FILES")
 
-manga_data = scan_folder(path)
-print_volume_info(manga_data)
+# manga_data = scan_folder(path)
+# print_volume_info(manga_data)
