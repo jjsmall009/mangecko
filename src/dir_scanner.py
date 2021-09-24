@@ -6,7 +6,19 @@ from pathlib import Path
 FILE_EXT = (".cbz", ".cbr", ".zip", ".pdf")
 
 def scan_folder(path):
-    """Scans the specified folder and returns each manga title and how many volumes there are"""
+    """
+    Scans the specified folder and returns each manga title and how many volumes there are.
+    
+    Parameters:
+        path (Path object or string): Path of the directory to scan.
+
+    Returns:
+        dict: title/volume count of each series found.
+    
+    Notes:
+        Ignores standalone files and empty directories.
+    """
+
     manga_folders = [folder for folder in path.iterdir() if folder.is_dir()]
     manga_volume_info = {}
 
@@ -20,12 +32,8 @@ def scan_folder(path):
     return manga_volume_info
 
 def print_volume_info(manga_dict):
+    """Helper function to print out the contents of the scanned directory"""
+
     for title, volumes in manga_dict.items():
         print(f"{title} - {volumes} volumes")
-    print(f"There are {len(manga_dict)} series")
-
-# # Test our code
-# path = Path("D:\Manga\TEST_FILES")
-
-# manga_data = scan_folder(path)
-# print_volume_info(manga_data)
+    print(f"There are {len(manga_dict)} series\n")

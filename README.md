@@ -23,10 +23,11 @@ I still have some research to do on which manga API I'll be using but here's the
 
 It will be a pretty basic CRUD app but I want to focus on the look and feel, responsiveness, and good software engineering principles and design.
 
-## Next Steps
+## Current Progress
 
 This readme will be a working document to keep track of what I'm doing and what I need to next.
 
 - [ ] Create a basic design doc of ideas and program features.
-- [ ] Take a look at which API has what I want.
-- [ ] Start iterating and do one small task at a time and build.
+- [x] Take a look at which API has what I want.
+- [x] Start iterating and do one small task at a time and build.
+- [ ] Fuzzy string matching
