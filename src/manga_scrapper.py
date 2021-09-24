@@ -17,18 +17,36 @@ def series_search(manga_title):
     r = requests.post("https://mangaupdates.com/search.html", params={"search": manga_title})
     soup = BeautifulSoup(r.text, "html.parser")
 
-    series_section = soup.find("div", id="main_content").find_all("div", class_="row")
+    search_results = soup.find("div", id="main_content")
 
     try:
-        first_match = series_section[1].find("div", class_="col-6 py-1 py-md-0 text")
-    except IndexError:
-        print("No result found...")
+        series_present = search_results.find(text="Series Info")
+    except AttributeError:
+        print("No results found for this series")
     else:
-        name = first_match.text
-        i_id = first_match.a["href"].replace(
-                        "https://www.mangaupdates.com/series.html?id=", ""
-                    )
-        print(f"{name} - {i_id}")
+        series_section = series_present.parent.findNext("div")
+        possible_titles = series_section.findAll(name="div", 
+            class_=["col-6 py-1 py-md-0 text", "col-6 py-1 py-md-0 text alt"])
+
+        for title in possible_titles:
+            print(f"\t{title.a.text}")
+        
+
+    # if len(search_results) > 0:
+    #     try:
+    #         series_section = soup.find(text="Series Info")
+    #         #first_match = search_results[1].find("div", class_="col-6 py-1 py-md-0 text")
+    #     except:
+    #         print("No series section found...")
+    #     else:
+    #         print(series_section.parent)
+    #         # name = first_match.text
+    #         # i_id = first_match.a["href"].replace(
+    #         #                 "https://www.mangaupdates.com/series.html?id=", ""
+    #         #             )
+    #         # print(f"{name} - {i_id}")
+    # else:
+    #     print("No results found")
 
 def scratch_work():
     url = "https://www.mangaupdats.com/series.html?id="

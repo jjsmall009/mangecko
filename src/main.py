@@ -10,7 +10,7 @@ print("Time to party")
 
 path = Path("D:\Manga\TEST_FILES")
 folder_data = scan_folder(path)
-folder_data = {"dafdsfadsfds": 12}
+folder_data = {"Plus sized elf": 12}
 
 print("Scan results....\n================")
 print_volume_info(folder_data)
