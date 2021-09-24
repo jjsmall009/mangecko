@@ -30,4 +30,5 @@ This readme will be a working document to keep track of what I'm doing and what 
 - [ ] Create a basic design doc of ideas and program features.
 - [x] Take a look at which API has what I want.
 - [x] Start iterating and do one small task at a time and build.
-- [ ] Fuzzy string matching
+- [x] Fuzzy string matching.
+- [ ] Grab series data for each valid search result.
