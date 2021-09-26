@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz, process
 import requests
 
-def series_search(manga_title):
+def search_scrapper(manga_title):
     """
     Finds the most likely match from the list of series in the series section using the
     FuzzyWuzzy module. If the series with the highest score is over the threshold than we 
@@ -48,7 +48,11 @@ def series_search(manga_title):
             print(f"{name} - {i_id}")
         else:
             print(f"No suitable result found for {manga_title}")
+            
 
+def series_scrapper(manga_id):
+
+    pass
 
 def scratch_work():
     url = "https://www.mangaupdats.com/series.html?id="

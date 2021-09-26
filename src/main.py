@@ -1,20 +1,17 @@
 # JJ Small
 # main.py
 # For now this serves as the hub for testing the features of my program as they appear
-from dir_scanner import scan_folder, print_volume_info
-from manga_scrapper import series_search
+from dir_scanner import DirectoryScanner
+from manga_scrapper import search_scrapper, series_scrapper
 from pathlib import Path
 from fuzzywuzzy import fuzz, process
 
-print("Time to party")
-
 path = Path("D:\Manga\TEST_FILES")
-folder_data = scan_folder(path)
-
-print("Scan results....\n================")
-print_volume_info(folder_data)
+scanner = DirectoryScanner(path)
+scanner.scan_directory()
+scanner.print_scanner_results()
 
 print("Search Results...\n=================")
-for manga in folder_data:
-    series_search(manga)
+for manga in scanner.valid_folders:
+    search_scrapper(manga)
     print()
