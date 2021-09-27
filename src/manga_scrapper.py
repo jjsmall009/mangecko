@@ -8,15 +8,29 @@ import time
 import concurrent.futures
 
 def search_scrapper(manga_list):
-    series_ids = []
+    # series_ids = []
 
-    for series in manga_list:
-        id = search(series)
-        if id > 0:
-            series_ids.append(id)
-     
-    # with concurrent.futures.ThreadPoolExecutor(max_workers=3) as exe:
-    #     exe.map(looper, scanner.valid_folders)
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+    #     id_list = list(pool.map(search, manga_list))
+
+    # for id in id_list:
+    #     if id > 0:
+    #         series_ids.append(id)
+
+    series_ids = []
+    for manga in manga_list:
+        while True:
+            try:
+                id = search(manga)
+            except Exception as e:
+                print(e)
+                print(f"---> Fail on {manga}. Retrying.\n")
+                time.sleep(2)
+            else:
+                if id > 0:
+                    series_ids.append(id)
+                print()
+                break
 
     return series_ids
 
@@ -100,29 +114,36 @@ def series_scrapper(manga_id):
         TODO: This will return something at some point
     """
 
-    url = f"https://www.mangaupdates.com/series.html?id={manga_id}"
-    r = requests.get(url=url)
+    while True:
+        try:
+            url = f"https://www.mangaupdates.com/series.html?id={manga_id}"
+            r = requests.get(url=url)
+        except Exception as e:
+            print(f"Studid connection error in SERIES SCRAPPER....")
+            time.sleep(2)
+        else:
+            series_section = BeautifulSoup(r.content, "html.parser").find("div", id="main_content")
+            content = series_section.find_all("div", class_="sContent")
 
-    series_section = BeautifulSoup(r.content, "html.parser").find("div", id="main_content")
-    content = series_section.find_all("div", class_="sContent")
+            title = series_section.find(name="span", class_="releasestitle tabletitle").text
+            source_section = content[6].text.strip("\n")
+            english_section = content[24].text.strip("\n")
 
-    title = series_section.find(name="span", class_="releasestitle tabletitle").text
-    source_section = content[6].text.strip("\n")
-    english_section = content[24].text.strip("\n")
+            source_volumes = re.search(r'\d+', source_section).group()
 
-    source_volumes = re.search(r'\d+', source_section).group()
+            try:
+                english_volumes = re.search(r'\d+', english_section).group()
+            except AttributeError:
+                print("\tNo english license")
+                english_volumes = "N/a"
 
-    try:
-        english_volumes = re.search(r'\d+', english_section).group()
-    except AttributeError:
-        print("No english license")
-        english_volumes = "N/a"
-
-    print(title)
-    print(f"\tSource = {source_section}")
-    print(f"\tResult = {source_volumes}")
-    print(f"\tEnglish = {english_section}")
-    print(f"\tResult = {english_volumes}\n")
+            print(title)
+            print(f"\tSource = {source_section}")
+            print(f"\tResult = {source_volumes}")
+            print(f"\tEnglish = {english_section}")
+            print(f"\tResult = {english_volumes}\n")
+            
+            break
 
 
 def scratch_work():
