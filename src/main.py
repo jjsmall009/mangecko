@@ -11,7 +11,13 @@ scanner = DirectoryScanner(path)
 scanner.scan_directory()
 scanner.print_scanner_results()
 
-print("Search Results...\n=================")
-for manga in scanner.valid_folders:
-    search_scrapper(manga)
-    print()
+# print("Search Results...\n=================")
+# series_IDs = []
+# for manga in scanner.valid_folders:
+#     ID = search_scrapper(manga)
+#     if ID > 0:
+#         series_IDs.append(ID)
+#     print()
+
+series_scrapper(88303)
+series_scrapper(149641)

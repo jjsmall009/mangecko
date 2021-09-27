@@ -2,6 +2,7 @@
 # Scrapes data from MangaUpdates
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz, process
+import re
 import requests
 
 def search_scrapper(manga_title):
@@ -14,7 +15,7 @@ def search_scrapper(manga_title):
         manga_title (string): The name of the series to search for
 
     Returns:
-        TODO: Will eventually return series info if match found, else returns null or something...
+        ID (int): The mangaupdates ID for a series, or -1 if no match is found
     """
 
     r = requests.post("https://mangaupdates.com/search.html", params={"search": manga_title})
@@ -31,10 +32,27 @@ def search_scrapper(manga_title):
             class_=["col-6 py-1 py-md-0 text", "col-6 py-1 py-md-0 text alt"])
 
         titles = [t.text for t in section_rows]
+
+        # ### Do some fuzzy testing
+        # print("\nRatio testing\n------------------")
+        # for title in titles:
+        #     print(f"{manga_title} -> {title} = {fuzz.ratio(manga_title, title)}")
+
+        # print("\nPartial ratio testing\n------------------------")
+        # for title in titles:
+        #     print(f"{manga_title} -> {title} = {fuzz.partial_ratio(manga_title, title)}")
+
+        # print("\nToken ratio\n---------------------")
+        # for title in titles:
+        #     print(f"{manga_title} -> {title} = {fuzz.token_sort_ratio(manga_title, title)}")
+
+        # print("\nExtract all\n----------------")
+        # print(process.extract(manga_title, titles))
+
         potential_match = process.extractOne(manga_title, titles)
    
         # We now have to scan through the series section again to tie the match to the series info
-        if int(potential_match[1]) > 80:
+        if int(potential_match[1]) >= 90:
             final_match = None
             for row in section_rows:
                 title = row.find(name="a", text=potential_match[0])
@@ -45,14 +63,42 @@ def search_scrapper(manga_title):
             i_id = final_match["href"].replace(
                             "https://www.mangaupdates.com/series.html?id=", ""
                         )
-            print(f"{name} - {i_id}")
+            print(f"{manga_title} -> {name} - {i_id}")
+            return int(i_id)
         else:
             print(f"No suitable result found for {manga_title}")
+            return -1
             
 
 def series_scrapper(manga_id):
+    """
+    Grabs data from the specified mangaupdates ID
 
-    pass
+    Parameters:
+        manga_id (int): ID for a mangaupdates.com series
+
+    Returns:
+        TODO: This will return something at some point
+    """
+
+    url = f"https://www.mangaupdates.com/series.html?id={manga_id}"
+    r = requests.get(url=url)
+
+    series_section = BeautifulSoup(r.content, "html.parser").find("div", id="main_content")
+    content = series_section.find_all("div", class_="sContent")
+
+    title = series_section.find(name="span", class_="releasestitle tabletitle").text
+    source_section = content[6].text.strip("\n")
+    english_section = content[24].text.strip("\n")
+    source_volumes = re.search(r'\d+', source_section).group()
+    english_volumes = re.search(r'\d+', english_section).group()
+    
+    print(title)
+    print(f"\tSource = {source_section}")
+    print(f"\tResult = {source_volumes}")
+    print(f"\tEnglish = {english_section}")
+    print(f"\tResult = {english_volumes}\n")
+
 
 def scratch_work():
     url = "https://www.mangaupdats.com/series.html?id="
