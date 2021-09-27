@@ -4,8 +4,24 @@ from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz, process
 import re
 import requests
+import time
+import concurrent.futures
 
-def search_scrapper(manga_title):
+def search_scrapper(manga_list):
+    series_ids = []
+
+    for series in manga_list:
+        id = search(series)
+        if id > 0:
+            series_ids.append(id)
+     
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=3) as exe:
+    #     exe.map(looper, scanner.valid_folders)
+
+    return series_ids
+
+
+def search(manga_title):
     """
     Finds the most likely match from the list of series in the series section using the
     FuzzyWuzzy module. If the series with the highest score is over the threshold than we 
@@ -18,7 +34,10 @@ def search_scrapper(manga_title):
         ID (int): The mangaupdates ID for a series, or -1 if no match is found
     """
 
-    r = requests.post("https://mangaupdates.com/search.html", params={"search": manga_title})
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36"}
+    r = requests.get("https://mangaupdates.com/search.html", 
+                    params={"search": manga_title},
+                    headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
 
     try:
@@ -90,9 +109,15 @@ def series_scrapper(manga_id):
     title = series_section.find(name="span", class_="releasestitle tabletitle").text
     source_section = content[6].text.strip("\n")
     english_section = content[24].text.strip("\n")
+
     source_volumes = re.search(r'\d+', source_section).group()
-    english_volumes = re.search(r'\d+', english_section).group()
-    
+
+    try:
+        english_volumes = re.search(r'\d+', english_section).group()
+    except AttributeError:
+        print("No english license")
+        english_volumes = "N/a"
+
     print(title)
     print(f"\tSource = {source_section}")
     print(f"\tResult = {source_volumes}")
