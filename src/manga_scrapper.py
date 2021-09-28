@@ -6,9 +6,9 @@ import re
 import requests
 import time
 
-def search_scrapper(manga_list):
+def search_scrapper(title):
     """
-    Executes searches for the given list of manga titles
+    Wrapper function to search for a series. Will try and do this concurrently to speed up requests
 
     Parameters:
         manga_list (dict): Title/volumes
@@ -16,22 +16,21 @@ def search_scrapper(manga_list):
     Returns:
         series_ids (list): List of mangaupdates ID for each matching series
     """
-    series_ids = []
-    for manga in manga_list:
-        while True:
-            try:
-                id = search(manga)
-            except Exception as e:
-                print(e)
-                print(f"---> Fail on {manga}. Retrying.\n")
-                time.sleep(2)
-            else:
-                if id > 0:
-                    series_ids.append(id)
-                print()
-                break
 
-    return series_ids
+    series_id = -1
+    while True:
+        try:
+            id = search(title)
+        except Exception as e:
+            print(e)
+            print(f"---> Fail on {title}. Retrying.\n")
+            time.sleep(2)
+        else:
+            if id != None:
+                return id
+            else:
+                return None
+            break
 
 
 def search(manga_title):
@@ -64,10 +63,10 @@ def search(manga_title):
         return id
     else:
         print(f"No match for -> {manga_title}")
-        return -1
+        return None
             
 
-def series_scrapper(manga_id):
+def series_scrapper(manga_id, obj):
     """
     Grabs data from the specified mangaupdates ID
 
@@ -89,23 +88,17 @@ def series_scrapper(manga_id):
             series_section = BeautifulSoup(r.content, "html.parser").find("div", id="main_content")
             content = series_section.find_all("div", class_="sContent")
 
-            title = series_section.find(name="span", class_="releasestitle tabletitle").text
+            obj.site_title = series_section.find(name="span", class_="releasestitle tabletitle").text
             source_section = content[6].text.strip("\n")
             english_section = content[24].text.strip("\n")
 
-            source_status = "Complete" if "Complete" in source_section else "Ongoing"
-            source_volumes = re.search(r'\d+', source_section).group()
+            obj.source_status = "Complete" if "Complete" in source_section else "Ongoing"
+            obj.source_volumes = int(re.search(r'\d+', source_section).group())
 
             try:
-                english_volumes = re.search(r'\d+', english_section).group()
-                english_status = "Complete" if "Complete" in source_section else "Ongoing"
+                obj.eng_volumes = int(re.search(r'\d+', english_section).group())
+                obj.eng_status = "Complete" if "Complete" in source_section else "Ongoing"
             except AttributeError:
                 print("\tNo english license")
-                english_volumes = "N/a"
-                english_status = "N/a"
-
-            print(title)
-            print(f"\tSource Status: {source_status} - Source volumes = {source_volumes}")
-            print(f"\tEnglish Status: {english_status} - English volumes = {english_volumes}")
 
             break

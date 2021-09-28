@@ -38,16 +38,22 @@ class DirectoryScanner():
             else:
                 self.invalid_folders.append(manga.name)
 
-    def print_scanner_results(self):
-        """Helper function to print out the contents of the scanned directory"""
+    def print_valid(self):
+        """Helper function to print out the valid folders"""
 
-        print(f"\nResults for {self.path}\n=============================================")
+        print("\n==================================================================")
+        print("Valid folders - These are the manga series found in this directory")
+        for title, volumes in self.valid_folders.items():
+            print(f"\t{title} - {volumes} volumes")
 
+        print(f"There are {len(self.valid_folders)} valid series")
+
+    def print_invalid(self):
+        """Helper function to print out the invalid foldesr"""
+
+        print("\n=======================================================")
         print("Invalid folders - Folders that don't meet the criteria")
         for folder in self.invalid_folders:
             print(f"\t{folder}")
 
-        print("Valid folders - These are the manga series found in this directory")
-        for title, volumes in self.valid_folders.items():
-            print(f"\t{title} - {volumes} volumes")
-        print(f"There are {len(self.valid_folders)} valid series\n")
+        print(f"There are {len(self.invalid_folders)} invalid series")

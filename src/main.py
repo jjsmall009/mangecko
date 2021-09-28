@@ -1,20 +1,60 @@
-# JJ Small
-# main.py
-# For now this serves as the hub for testing the features of my program as they appear
-from dir_scanner import DirectoryScanner
-from manga_scrapper import search_scrapper, series_scrapper, search
-from pathlib import Path
-import time
+#################################################################################################
+"""Manga Volume Tracker
 
+Author: JJ Small
+Date: September 2021
+
+main.py
+Description:
+    This main script acts as a collection manager for the directory you want to scan. For each valid
+    folder(series) it finds it will create a Manga object and update the information about it.
+Output:
+    The output is the various lists of data. Valid series, invalid series, manga with matching 
+    results, etc.
+"""
+#################################################################################################
+from dir_scanner import DirectoryScanner
+from manga_scrapper import search_scrapper, series_scrapper
+from manga import Manga
+from pathlib import Path
+
+# For a given path there are a few kinds of data we're working with
+# - Dict of valid series (key:value = series name: local volume count)
+# - List of invalid series (don't contain any volumes, aren't organized correctly, etc.)
+# - List of Manga objects (series that are found, not found, etc.)
 path = Path("D:\Manga\TEST_FILES")
+valid_series = {}
+invalid_series = []
+manga = []
+
 scanner = DirectoryScanner(path)
 scanner.scan_directory()
-scanner.print_scanner_results()
+valid_series = scanner.valid_folders
+invalid_series = scanner.invalid_folders
 
-print("Search Results...\n=================")
-ids = search_scrapper(scanner.valid_folders)
-print(len(ids))  
+# For each valid folder, create a Manga object and then get some precious data
+for series, vol_count in valid_series.items():
+    current_manga = Manga(series, vol_count)
+    id = search_scrapper(series)
 
-print("Grabbing series data...\n==============================")
-for id in ids:
-    series_scrapper(id)
+    if id != None:
+        current_manga.id = id
+        current_manga.has_match = True
+        series_scrapper(id, current_manga)
+
+    manga.append(current_manga)
+
+# Output all of the data we have to let the user know how things went
+scanner.print_valid()
+scanner.print_invalid()
+
+print("\n========================\nSeries with no matches")
+[manga.print_no_match() for manga in manga if manga.has_match == False]
+
+print("\n======================\nSeries with matches")
+[manga.print_has_match() for manga in manga if manga.has_match == True]
+
+for manga in manga:
+    if manga.eng_volumes != None:
+        if manga.my_volumes < manga.eng_volumes:
+            print(f"{manga.local_title} has new volumes")
