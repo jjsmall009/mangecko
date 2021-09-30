@@ -17,6 +17,7 @@ from dir_scanner import DirectoryScanner
 from manga_scrapper import search_scrapper, series_scrapper
 from manga import Manga
 from pathlib import Path
+import db_manager
 import time
 
 start = time.time()
@@ -61,5 +62,13 @@ for manga in manga:
     if manga.eng_volumes != None:
         if manga.my_volumes < manga.eng_volumes:
             print(f"{manga.local_title} has new volumes")
+
+#####################################
+# Database testing
+
+conn = db_manager.create_connection("data\TEST_FILES")
+db_manager.create_table(conn, "manga")
+db_manager.add_data(conn)
+
 
 print(f"Elapsed time = {time.time() - start}")

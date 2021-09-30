@@ -1,6 +1,7 @@
 # JJ Small
 # series.py
 # This class is a representation of what a manga series has/does
+from dataclasses import dataclass
 
 class Manga:
     def __init__(self, title, my_volumes):
