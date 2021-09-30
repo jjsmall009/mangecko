@@ -17,14 +17,13 @@ def search_scrapper(title):
         series_ids (list): List of mangaupdates ID for each matching series
     """
 
-    series_id = -1
     while True:
         try:
             id = search(title)
         except Exception as e:
             print(e)
             print(f"---> Fail on {title}. Retrying.\n")
-            time.sleep(2)
+            time.sleep(1)
         else:
             if id != None:
                 return id
@@ -59,7 +58,7 @@ def search(manga_title):
     if potential_match[1] >= 90:
         index = titles.index(potential_match[0])
         id = int(results[index]["id"])
-        print(f"{manga_title} -> {potential_match[0]} -> ID = {id}")
+        #print(f"{manga_title} -> {potential_match[0]} -> ID = {id}")
         return id
     else:
         print(f"No match for -> {manga_title}")
@@ -73,8 +72,6 @@ def series_scrapper(manga_id, obj):
     Parameters:
         manga_id (int): ID for a mangaupdates.com series
 
-    Returns:
-        TODO: This will return something at some point
     """
 
     while True:
@@ -83,7 +80,7 @@ def series_scrapper(manga_id, obj):
             r = requests.get(url=url)
         except Exception as e:
             print(f"Studid connection error in SERIES SCRAPPER....")
-            time.sleep(2)
+            time.sleep(1)
         else:
             series_section = BeautifulSoup(r.content, "html.parser").find("div", id="main_content")
             content = series_section.find_all("div", class_="sContent")

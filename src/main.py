@@ -17,6 +17,9 @@ from dir_scanner import DirectoryScanner
 from manga_scrapper import search_scrapper, series_scrapper
 from manga import Manga
 from pathlib import Path
+import time
+
+start = time.time()
 
 # For a given path there are a few kinds of data we're working with
 # - Dict of valid series (key:value = series name: local volume count)
@@ -32,6 +35,9 @@ scanner.scan_directory()
 valid_series = scanner.valid_folders
 invalid_series = scanner.invalid_folders
 
+scanner.print_valid()
+scanner.print_invalid()
+
 # For each valid folder, create a Manga object and then get some precious data
 for series, vol_count in valid_series.items():
     current_manga = Manga(series, vol_count)
@@ -45,9 +51,6 @@ for series, vol_count in valid_series.items():
     manga.append(current_manga)
 
 # Output all of the data we have to let the user know how things went
-scanner.print_valid()
-scanner.print_invalid()
-
 print("\n========================\nSeries with no matches")
 [manga.print_no_match() for manga in manga if manga.has_match == False]
 
@@ -58,3 +61,5 @@ for manga in manga:
     if manga.eng_volumes != None:
         if manga.my_volumes < manga.eng_volumes:
             print(f"{manga.local_title} has new volumes")
+
+print(f"Elapsed time = {time.time() - start}")

@@ -44,5 +44,6 @@ This readme will be a working document to keep track of what I'm doing and what 
 - [x] Take a look at which API has what I want.
 - [x] Start iterating and do one small task at a time and build.
 - [x] Fuzzy string matching.
-- [ ] Grab series data for each valid search result.
-- [ ] Compare volume results
+- [x] Grab series data for each valid search result.
+- [x] Compare volume results
+- [ ] Test some database functionality and design.
