@@ -47,3 +47,4 @@ This readme will be a working document to keep track of what I'm doing and what 
 - [x] Grab series data for each valid search result.
 - [x] Compare volume results
 - [ ] Test some database functionality and design.
+- [ ] Implement console menu design.

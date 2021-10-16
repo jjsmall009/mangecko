@@ -1,4 +1,3 @@
-#################################################################################################
 """Manga Volume Tracker
 
 Author: JJ Small
@@ -12,13 +11,51 @@ Output:
     The output is the various lists of data. Valid series, invalid series, manga with matching 
     results, etc.
 """
-#################################################################################################
 from dir_scanner import DirectoryScanner
 from manga_scrapper import search_scrapper, series_scrapper
 from manga import Manga
 from pathlib import Path
 import db_manager
 import time
+
+opening_header = """============================
+Welcome to Manga Manager 1.0
+============================"""
+
+options="""
+Options:
+    * 1: Add a Library
+    * 2: Scan a Library
+    * 3: Update Volume Info
+    * 4: View a Library
+    * 5: Exit
+"""
+
+print(opening_header, end="")
+
+while True:
+    print(options)
+    choice = input("Enter a choice: ")
+
+    if choice == "1":
+        path = input("\t-> Path to directory: ")
+        print(f"\t-> Scanning {path}..........")
+
+    elif choice == "2":
+        # get path and scan directory for file changes
+        pass
+    elif choice == "3":
+        # get library and grab new volume data from api
+        pass
+    elif choice == "4":
+        # get some data and print it out
+        pass
+    elif choice == "5":
+        print("Happy reading!")
+        break
+    else:
+        print("Invalid input. Try again...")
+    
 
 start = time.time()
 
