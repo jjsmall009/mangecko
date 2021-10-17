@@ -1,9 +1,9 @@
 # JJ Small
 # Manga Volume Tracker
-# dir_scanner.py - Code to scan a directory and get a list of manga title/volume count
+# library_scanner.py - Code to scan a directory and get a list of manga title/volume count
 from pathlib import Path
 
-class DirectoryScanner():
+class LibraryScanner():
     """
     This is a class because it's easier to track the state of which folder in the directory is what.
     

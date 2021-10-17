@@ -11,7 +11,7 @@ Output:
     The output is the various lists of data. Valid series, invalid series, manga with matching 
     results, etc.
 """
-from library_scanner import DirectoryScanner
+from library_scanner import LibraryScanner
 from manga_scrapper import search_scrapper, series_scrapper
 from manga import Manga
 from pathlib import Path
@@ -21,10 +21,23 @@ import time
 
 
 def add_library():
-    path = input("\t-> Path to directory: ")
-    print(f"\t-> Scanning {path}..........")
+    path = Path(input("\t-> Path to directory: "))
 
+    if not Path(path).exists():
+        print("Invalid path...")
+        return
 
+    scanner = LibraryScanner(path)
+    scanner.scan_directory()
+
+    if len(scanner.valid_folders) == 0:
+        print("No folders founds. Not a valid library. Exiting...")
+        return
+    else:
+        print(f"\tThis library has {len(scanner.valid_folders)} series.")
+        choice = input("\tAdd this library and continue? (y/n): ")
+
+    
 opening_header = """============================
 Welcome to Manga Manager 1.0
 ============================"""
@@ -37,8 +50,6 @@ Options:
     * 4: View New Volumes
     * 5: Exit
 """
-
-db_path = "data\manga_library.db"
 
 # Initialize our database and setup our connection
 db_manager.create_database()
@@ -92,7 +103,7 @@ start = time.time()
 #     id = search_scrapper(series)
 
 #     if id != None:
-#         current_manga.id = id
+#         current_manga.site_id = id
 #         current_manga.has_match = True
 #         series_scrapper(id, current_manga)
 

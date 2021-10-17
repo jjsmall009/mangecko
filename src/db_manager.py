@@ -1,19 +1,49 @@
 # Manage a database of manga??? Not sure what I'm doing
 import sqlite3
 
+db_path = "data\manga_library.db"
+
 def create_database():
     """First time running the program create the database"""
     try:
-        with sqlite3.connect("data\manga_library.db"):
+        with sqlite3.connect(db_path) as conn:
+            libraries_table = """CREATE TABLE IF NOT EXISTS libraries (
+                                    library_id INTEGER PRIMARY KEY,
+                                    library_name TEXT,
+                                    path_name TEXT);
+
+                """
+            create_table(conn, libraries_table)
+
+            manga_table = """CREATE TABLE IF NOT EXISTS manga_series (
+                                id INTEGER PRIMARY KEY,
+                                local_title TEXT NOT NULL,
+                                site_title TEXT,
+                                site_id INTEGER,
+                                my_volumes INTEGER NOT NULL,
+                                eng_volumes INTEGER,
+                                eng_status TEXT
+                                source_volumes INTEGER,
+                                source_status TEXT,
+                                has_match TEXT);
+                """
+            create_table(conn, manga_table)
+
+            junction = """CREATE TABLE IF NOT EXISTS library_manga (
+                            library_id INTEGER,
+                            manga_id INTEGER,
+                            FOREIGN KEY(library_id) REFERENCES libraries(library_id),
+                            FOREIGN KEY(manga_id) REFERENCES manga(id));
+                """
+            create_table(conn, junction)
+            
             print("Database created successfully.")
     except sqlite3.Error as e:
         print(e)
 
-def database_exists():
-    return
-
 def create_connection(database_name):
     """Connects to database or creates it if not found"""
+
     conn = None
     try:
         conn = sqlite3.connect(database_name)
@@ -23,21 +53,9 @@ def create_connection(database_name):
 
     return conn
 
-def create_table(conn, table_name):
+def create_table(conn, statement):
     """Creates a table for a library of manga"""
 
-    statement = """CREATE TABLE IF NOT EXISTS manga (
-                        id INTEGER PRIMARY KEY,
-                        local_title TEXT NOT NULL,
-                        site_title TEXT,
-                        has_match TEXT,
-                        manga_id INTEGER,
-                        my_volumes INTEGER NOT NULL,
-                        source_volumes INTEGER,
-                        source_status TEXT,
-                        eng_volumes INTEGER,
-                        eng_status TEXT);
-                """
     try:
         c = conn.cursor()
         c.execute(statement)
