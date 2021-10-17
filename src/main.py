@@ -29,6 +29,8 @@ def add_library():
 
     scanner = LibraryScanner(path)
     scanner.scan_directory()
+    valid_series = scanner.valid_folders
+    manga = []
 
     if len(scanner.valid_folders) == 0:
         print("No folders founds. Not a valid library. Exiting...")
@@ -39,6 +41,21 @@ def add_library():
 
         if choice == "y":
             db_manager.insert_library(path.name, str(path))
+
+            # For each valid folder, create a Manga object and then get some precious data
+            for series, vol_count in valid_series.items():
+                current_manga = Manga(series, vol_count)
+                id = search_scrapper(series)
+
+                if id != None:
+                    current_manga.site_id = id
+                    current_manga.has_match = True
+                    series_scrapper(id, current_manga)
+
+                manga.append(current_manga)
+
+            db_manager.insert_manga(manga, path.name)
+
 
     
 opening_header = """============================

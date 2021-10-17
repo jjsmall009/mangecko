@@ -1,4 +1,5 @@
 # Manage a database of manga??? Not sure what I'm doing
+from os import stat
 import sqlite3
 
 db_path = "data\manga_library.db"
@@ -9,7 +10,7 @@ def create_database():
         with sqlite3.connect(db_path) as conn:
             libraries_table = """CREATE TABLE IF NOT EXISTS libraries (
                                     library_id INTEGER PRIMARY KEY,
-                                    library_name TEXT,
+                                    library_name TEXT UNIQUE,
                                     path_name TEXT);
 
                 """
@@ -22,7 +23,7 @@ def create_database():
                                 site_id INTEGER,
                                 my_volumes INTEGER NOT NULL,
                                 eng_volumes INTEGER,
-                                eng_status TEXT
+                                eng_status TEXT,
                                 source_volumes INTEGER,
                                 source_status TEXT,
                                 has_match TEXT);
@@ -66,35 +67,38 @@ def create_connection():
 
 
 def insert_library(name, path):
+    try:
+        with create_connection() as conn:
+            statement = """INSERT INTO libraries (library_name, path_name) VALUES (?, ?);"""
+
+            cur = conn.cursor()
+            cur.execute(statement, (name, path))
+            conn.commit()
+    except sqlite3.IntegrityError:
+        print("Library already exists. Moving on...")
+
+def insert_manga(manga_list, library_name):
     with create_connection() as conn:
-        statement = """INSERT INTO libraries (library_name, path_name) VALUES (?, ?);"""
-
         cur = conn.cursor()
-        cur.execute(statement, (name, path))
-        conn.commit()
+        find_library = """SELECT library_id from libraries WHERE library_name = ?;"""
+        cur.execute(find_library, [library_name])
+        library_id = cur.fetchall()[0][0]
 
+        for manga in manga_list:
+            statement = """INSERT INTO manga_series (local_title,site_title,site_id,my_volumes,
+                                eng_volumes,eng_status,source_volumes,source_status,has_match) 
+                                
+                                VALUES (?,?,?,?,?,?,?,?,?);"""
 
-def add_data(conn):
-    """Adds a row to the table if it doesn't already exist in said table"""
-    
-    statement = """
-                insert into manga 
-                    (local_title, has_match, manga_id, my_volumes, eng_status) values
-                    ("Dragon ball", True, 123, 16, "Complete");
-    
-    """
+            data = (manga.local_title,manga.site_title,manga.site_id,manga.my_volumes,
+                    manga.eng_volumes,manga.eng_status,manga.source_volumes, manga.source_status,
+                    manga.has_match)
+            cur.execute(statement, data)
+            
+            cur.execute("select last_insert_rowid();")
+            last_manga_id = cur.fetchall()[0][0]
 
-    cur = conn.cursor()
-    cur.execute(statement)
+            junction = """INSERT INTO library_manga (library_id, manga_id) VALUES (?,?);"""
+            cur.execute(junction, (library_id, last_manga_id))
 
-    statement = """
-                insert into manga 
-                    (local_title, site_title, has_match, manga_id, my_volumes, eng_status) values
-                    ("Aho-Girl", "Aho Girl", True, 123, 16, "Complete");
-    
-    """
-    cur.execute(statement)
-
-
-    conn.commit()
-
+            conn.commit()
