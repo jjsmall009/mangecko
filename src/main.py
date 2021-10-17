@@ -37,6 +37,9 @@ def add_library():
         print(f"\tThis library has {len(scanner.valid_folders)} series.")
         choice = input("\tAdd this library and continue? (y/n): ")
 
+        if choice == "y":
+            db_manager.insert_library(path.name, str(path))
+
     
 opening_header = """============================
 Welcome to Manga Manager 1.0

@@ -41,17 +41,6 @@ def create_database():
     except sqlite3.Error as e:
         print(e)
 
-def create_connection(database_name):
-    """Connects to database or creates it if not found"""
-
-    conn = None
-    try:
-        conn = sqlite3.connect(database_name)
-        return conn
-    except sqlite3.Error as e:
-        print(e)
-
-    return conn
 
 def create_table(conn, statement):
     """Creates a table for a library of manga"""
@@ -61,6 +50,28 @@ def create_table(conn, statement):
         c.execute(statement)
     except sqlite3.Error as e:
         print(e)
+
+
+def create_connection():
+    """Connects to database or creates it if not found"""
+
+    conn = None
+    try:
+        conn = sqlite3.connect(db_path)
+        return conn
+    except sqlite3.Error as e:
+        print(e)
+
+    return conn
+
+
+def insert_library(name, path):
+    with create_connection() as conn:
+        statement = """INSERT INTO libraries (library_name, path_name) VALUES (?, ?);"""
+
+        cur = conn.cursor()
+        cur.execute(statement, (name, path))
+        conn.commit()
 
 
 def add_data(conn):
