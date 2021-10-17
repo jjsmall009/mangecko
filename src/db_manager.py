@@ -1,6 +1,17 @@
 # Manage a database of manga??? Not sure what I'm doing
 import sqlite3
 
+def create_database():
+    """First time running the program create the database"""
+    try:
+        with sqlite3.connect("data\manga_library.db"):
+            print("Database created successfully.")
+    except sqlite3.Error as e:
+        print(e)
+
+def database_exists():
+    return
+
 def create_connection(database_name):
     """Connects to database or creates it if not found"""
     conn = None
