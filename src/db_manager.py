@@ -8,7 +8,7 @@ def create_database():
     """First time running the program create the database"""
     try:
         with sqlite3.connect(db_path) as conn:
-            libraries_table = """CREATE TABLE IF NOT EXISTS libraries (
+            libraries_table = """--sql CREATE TABLE IF NOT EXISTS libraries (
                                     library_id INTEGER PRIMARY KEY,
                                     library_name TEXT UNIQUE,
                                     path_name TEXT);
@@ -16,7 +16,7 @@ def create_database():
                 """
             create_table(conn, libraries_table)
 
-            manga_table = """CREATE TABLE IF NOT EXISTS manga_series (
+            manga_table = """--sql CREATE TABLE IF NOT EXISTS manga_series (
                                 id INTEGER PRIMARY KEY,
                                 local_title TEXT NOT NULL,
                                 site_title TEXT,
@@ -30,7 +30,7 @@ def create_database():
                 """
             create_table(conn, manga_table)
 
-            junction = """CREATE TABLE IF NOT EXISTS library_manga (
+            junction = """--sql CREATE TABLE IF NOT EXISTS library_manga (
                             library_id INTEGER,
                             manga_id INTEGER,
                             FOREIGN KEY(library_id) REFERENCES libraries(library_id) ON DELETE CASCADE,
@@ -69,7 +69,7 @@ def create_connection():
 def insert_library(name, path):
     try:
         with create_connection() as conn:
-            statement = """INSERT INTO libraries (library_name, path_name) VALUES (?, ?);"""
+            statement = """--sql INSERT INTO libraries (library_name, path_name) VALUES (?, ?);"""
 
             cur = conn.cursor()
             cur.execute(statement, (name, path))
@@ -83,12 +83,12 @@ def insert_library(name, path):
 def insert_manga(manga_list, library_name):
     with create_connection() as conn:
         cur = conn.cursor()
-        find_library = """SELECT library_id from libraries WHERE library_name = ?;"""
+        find_library = """--sql SELECT library_id from libraries WHERE library_name = ?;"""
         cur.execute(find_library, [library_name])
         library_id = cur.fetchall()[0][0]
 
         for manga in manga_list:
-            statement = """INSERT INTO manga_series (local_title,site_title,site_id,my_volumes,
+            statement = """--sql INSERT INTO manga_series (local_title,site_title,site_id,my_volumes,
                                 eng_volumes,eng_status,source_volumes,source_status,has_match) 
                                 
                                 VALUES (?,?,?,?,?,?,?,?,?);"""
@@ -98,10 +98,10 @@ def insert_manga(manga_list, library_name):
                     manga.has_match)
             cur.execute(statement, data)
             
-            cur.execute("select last_insert_rowid();")
+            cur.execute("""--sql select last_insert_rowid();""")
             last_manga_id = cur.fetchall()[0][0]
 
-            junction = """INSERT INTO library_manga (library_id, manga_id) VALUES (?,?);"""
+            junction = """--sql INSERT INTO library_manga (library_id, manga_id) VALUES (?,?);"""
             cur.execute(junction, (library_id, last_manga_id))
 
             conn.commit()
@@ -111,7 +111,7 @@ def get_libraries():
     try:
         with create_connection() as conn:
             cur = conn.cursor()
-            cur.execute("""SELECT library_id, library_name from libraries""")
+            cur.execute("""--sql SELECT library_id, library_name from libraries""")
 
             return cur.fetchall()
     except sqlite3.Error as e:
