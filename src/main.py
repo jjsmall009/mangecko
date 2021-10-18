@@ -40,7 +40,8 @@ def add_library():
         choice = input("\tAdd this library and continue? (y/n): ")
 
         if choice == "y":
-            db_manager.insert_library(path.name, str(path))
+            if not db_manager.insert_library(path.name, str(path)):
+                return
 
             # For each valid folder, create a Manga object and then get some precious data
             for series, vol_count in valid_series.items():
@@ -56,6 +57,31 @@ def add_library():
 
             db_manager.insert_manga(manga, path.name)
 
+def scan_library(libraries):
+    """
+        1. Before getting here, this is tested for valid library name/path
+        2. For each folder in this library
+            a. Are you in the database?
+                1. Yes, update my_volume count and move on
+                2. No, 
+                    a. create Manga object
+                    b. Query api for data
+                    c. Add manga entry to database
+        3. For each row in database for this library
+            a. Are you stored locally?
+                1. Yes, carry on
+                2. No, delete from junction table
+            
+    """
+
+    for l in libraries:
+        print(f"\t{l[0]}: {l[1]}")
+
+    choice = int(input("\tWhich library do you want to scan?: "))
+    if choice not in [l[0] for l in libraries]:
+        print("Not a valid library. Try again...")
+    else:
+        print("Scanning library..........")
 
     
 opening_header = """============================
@@ -81,10 +107,12 @@ while True:
 
     if choice == "1":
         add_library()
-
     elif choice == "2":
-        # get path and scan directory for file changes
-        pass
+        libraries = db_manager.get_libraries()
+        if len(libraries) > 0:
+            scan_library(libraries)
+        else:
+            print("No libraries in database")
     elif choice == "3":
         # get library and grab new volume data from api
         pass

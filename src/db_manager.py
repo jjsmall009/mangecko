@@ -74,8 +74,11 @@ def insert_library(name, path):
             cur = conn.cursor()
             cur.execute(statement, (name, path))
             conn.commit()
+            return True
     except sqlite3.IntegrityError:
         print("Library already exists. Moving on...")
+        return False
+
 
 def insert_manga(manga_list, library_name):
     with create_connection() as conn:
@@ -102,3 +105,14 @@ def insert_manga(manga_list, library_name):
             cur.execute(junction, (library_id, last_manga_id))
 
             conn.commit()
+
+
+def get_libraries():
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("""SELECT library_id, library_name from libraries""")
+
+            return cur.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error in getting libraries ---> {e}")
