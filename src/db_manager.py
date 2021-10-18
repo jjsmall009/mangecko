@@ -33,8 +33,8 @@ def create_database():
             junction = """CREATE TABLE IF NOT EXISTS library_manga (
                             library_id INTEGER,
                             manga_id INTEGER,
-                            FOREIGN KEY(library_id) REFERENCES libraries(library_id),
-                            FOREIGN KEY(manga_id) REFERENCES manga(id));
+                            FOREIGN KEY(library_id) REFERENCES libraries(library_id) ON DELETE CASCADE,
+                            FOREIGN KEY(manga_id) REFERENCES manga(id) ON DELETE CASCADE);
                 """
             create_table(conn, junction)
             
