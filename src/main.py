@@ -118,7 +118,7 @@ while True:
         pass
     elif choice == "4":
         # get some data and print it out
-        pass
+        db_manager.delete_test()
     elif choice == "5":
         print("Happy reading!")
         break
