@@ -19,7 +19,6 @@ from pathlib import Path
 import db_manager
 import time
 
-
 def add_library():
     path = Path(input("\t-> Path to directory: "))
 
@@ -118,7 +117,7 @@ while True:
         pass
     elif choice == "4":
         # get some data and print it out
-        db_manager.delete_test()
+        pass
     elif choice == "5":
         print("Happy reading!")
         break

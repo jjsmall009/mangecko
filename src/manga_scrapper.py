@@ -94,7 +94,7 @@ def series_scrapper(manga_id, obj):
 
             try:
                 obj.eng_volumes = int(re.search(r'\d+', english_section).group())
-                obj.eng_status = "Complete" if "Complete" in source_section else "Ongoing"
+                obj.eng_status = "Complete" if "Complete" in english_section else "Ongoing"
             except AttributeError:
                 print("\tNo english license")
 
