@@ -27,7 +27,7 @@ The whole crux of this program is to get an accurate english volume count for ea
 - Series title from page
 - Status in Country of Origin
   - \# of volumes
-- Complete, Ongoing, Cancelled, etc.
+  - Complete, Ongoing, Cancelled, Hiatus
 - Licensed (in English)
   - Yes, No, Dropped
 - English Publisher
@@ -40,7 +40,7 @@ The whole crux of this program is to get an accurate english volume count for ea
 
 Eventually this will be full fledged GUI app but for now the first implementation will be a console app. The menu below gives an idea of the features and functionality for phase one.
 
-```
+```text
 ============================
 Welcome to Manga Manager 1.0
 ============================

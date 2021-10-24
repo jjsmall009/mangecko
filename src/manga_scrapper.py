@@ -5,6 +5,7 @@ from fuzzywuzzy import fuzz, process
 import re
 import requests
 import time
+import bs4
 
 def search_scrapper(title):
     """
@@ -86,16 +87,48 @@ def series_scrapper(manga_id, obj):
             content = series_section.find_all("div", class_="sContent")
 
             obj.site_title = series_section.find(name="span", class_="releasestitle tabletitle").text
-            source_section = content[6].text.strip("\n")
-            english_section = content[24].text.strip("\n")
+            source_section = [m.strip("\n") for m in content[6] if type(m) is bs4.element.NavigableString]
+            english_section = [m.strip("\n") for m in content[24] if type(m) is bs4.element.NavigableString and m != "\n"]
+            english_section.sort()
+            
+            if ("Complete" or "Completed") in source_section[0]:
+                obj.source_status = "Complete"
+            elif "Ongoing" in source_section[0]:
+                obj.source_status = "Ongoing"
+            elif ("Cancelled" or "Canceled") in source_section[0]:
+                obj.source_status = "Cancelled"
+            elif "Hiatus" in source_section[0]:
+                obj.source_status = "Hiatus"
+            else:
+                obj.source_status = "Unknown"
 
-            obj.source_status = "Complete" if "Complete" in source_section else "Ongoing"
-            obj.source_volumes = int(re.search(r'\d+', source_section).group())
+            obj.source_volumes = int(re.search(r'\d+', source_section[0]).group())
 
             try:
-                obj.eng_volumes = int(re.search(r'\d+', english_section).group())
-                obj.eng_status = "Complete" if "Complete" in english_section else "Ongoing"
+                obj.eng_volumes = int(re.search(r'\d+', english_section[0]).group())
+                #obj.eng_status = "Complete" if "Complete" in english_section else "Ongoing"
+                if ("Complete" or "Completed") in english_section[0]:
+                    obj.eng_status = "Complete"
+                elif "Ongoing" in english_section[0]:
+                    obj.eng_status = "Ongoing"
+                elif ("Cancelled" or "Canceled") in english_section[0]:
+                    obj.eng_status = "Cancelled"
+                elif "Hiatus" in english_section[0]:
+                    obj.eng_status = "Hiatus"
+                elif "Dropped" in english_section[0]:
+                    obj.eng_status = "Dropped"
+                else:
+                    obj.eng_status = "Unknown"
             except AttributeError:
-                print("\tNo english license")
+                print("\tNo english volumes")
+            except IndexError:
+                print("\tNo english volumes")
+
+            if "Yes" in content[23].text:
+                obj.is_licensed = True
+            else:
+                obj.is_licensed = False
+
+            obj.year = int(content[20].text.strip("\n"))
 
             break

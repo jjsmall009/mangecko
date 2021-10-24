@@ -21,11 +21,13 @@ def create_database():
                                 site_title TEXT,
                                 site_id INTEGER,
                                 my_volumes INTEGER NOT NULL,
+                                is_licensed TEXT,
                                 eng_volumes INTEGER,
                                 eng_status TEXT,
                                 source_volumes INTEGER,
                                 source_status TEXT,
-                                has_match TEXT);
+                                has_match TEXT,
+                                year INTEGER);
                 """
             create_table(conn, manga_table)
 
@@ -87,17 +89,17 @@ def insert_manga(manga_list, library_name):
 
         for manga in manga_list:
             statement = """INSERT INTO manga_series (local_title,site_title,site_id,my_volumes,
-                                eng_volumes,eng_status,source_volumes,source_status,has_match) 
+                                                    is_licensed,eng_volumes,eng_status,source_volumes,
+                                                    source_status,has_match,year) 
                                 
-                                VALUES (?,?,?,?,?,?,?,?,?);"""
+                                VALUES (?,?,?,?,?,?,?,?,?,?,?);"""
 
             data = (manga.local_title,manga.site_title,manga.site_id,manga.my_volumes,
-                    manga.eng_volumes,manga.eng_status,manga.source_volumes, manga.source_status,
-                    manga.has_match)
+                    manga.is_licensed,manga.eng_volumes,manga.eng_status,manga.source_volumes, 
+                    manga.source_status,manga.has_match,manga.year)
             cur.execute(statement, data)
             
-            cur.execute("""select last_insert_rowid();""")
-            last_manga_id = cur.fetchall()[0][0]
+            last_manga_id = cur.lastrowid
 
             junction = """INSERT INTO library_manga VALUES (?,?);"""
             cur.execute(junction, (library_id, last_manga_id))
