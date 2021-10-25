@@ -117,6 +117,26 @@ def get_libraries():
     except sqlite3.Error as e:
         print(f"Error in getting libraries ---> {e}")
 
+
+def series_with_new_volumes(library_id):
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            statement = """SELECT manga_series.local_title, manga_series.my_volumes, manga_series.eng_volumes
+                            FROM manga_series
+                            INNER JOIN library_manga
+                            ON manga_series.id = library_manga.manga_id
+                            WHERE library_manga.library_id = ?
+                            AND manga_series.my_volumes < manga_series.eng_volumes
+                            AND manga_series.eng_volumes IS NOT NULL
+                            """
+
+            cur.execute(statement, (library_id,))
+
+            return cur.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error in doing volume stuff ---> {e}")
+
 def delete_test():
     with create_connection() as conn:
         cur = conn.cursor()

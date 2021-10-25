@@ -56,7 +56,22 @@ def add_library():
 
             db_manager.insert_manga(manga, path.name)
 
-def scan_library(libraries):
+
+def choose_library():
+    libraries = db_manager.get_libraries()
+
+    for l in libraries:
+        print(f"\t{l[0]}: {l[1]}")
+
+    choice = int(input("\tWhich library do you want to scan?: "))
+    if choice not in [l[0] for l in libraries]:
+        print("Not a valid library. Try again...")
+        return -1
+    else:
+        print("Scanning library..........")
+        return choice
+
+def scan_library():
     """
         1. Before getting here, this is tested for valid library name/path
         2. For each folder in this library
@@ -72,17 +87,28 @@ def scan_library(libraries):
                 2. No, delete from junction table
             
     """
+    library_id = choose_library()
 
-    for l in libraries:
-        print(f"\t{l[0]}: {l[1]}")
-
-    choice = int(input("\tWhich library do you want to scan?: "))
-    if choice not in [l[0] for l in libraries]:
-        print("Not a valid library. Try again...")
+    if library_id == -1:
+        print("No libraries in database")
+        return
     else:
-        print("Scanning library..........")
+        print("Scanning library........")
 
-    
+
+def find_new_volumes():
+    library_id = choose_library()
+
+    if library_id == -1:
+        print("No libraries in database")
+        return
+    else:
+        series = db_manager.series_with_new_volumes(library_id)
+
+        for s in series:
+            print(s)
+
+
 opening_header = """============================
 Welcome to Manga Manager 1.0
 ============================"""
@@ -107,17 +133,12 @@ while True:
     if choice == "1":
         add_library()
     elif choice == "2":
-        libraries = db_manager.get_libraries()
-        if len(libraries) > 0:
-            scan_library(libraries)
-        else:
-            print("No libraries in database")
+        scan_library()
     elif choice == "3":
         # get library and grab new volume data from api
         pass
     elif choice == "4":
-        # get some data and print it out
-        pass
+        find_new_volumes()
     elif choice == "5":
         print("Happy reading!")
         break
