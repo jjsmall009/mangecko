@@ -87,42 +87,10 @@ def series_scrapper(manga_id, obj):
             content = series_section.find_all("div", class_="sContent")
 
             obj.site_title = series_section.find(name="span", class_="releasestitle tabletitle").text
-            source_section = [m.strip("\n") for m in content[6] if type(m) is bs4.element.NavigableString]
-            english_section = [m.strip("\n") for m in content[24] if type(m) is bs4.element.NavigableString and m != "\n"]
-            english_section.sort()
             
-            if ("Complete" or "Completed") in source_section[0]:
-                obj.source_status = "Complete"
-            elif "Ongoing" in source_section[0]:
-                obj.source_status = "Ongoing"
-            elif ("Cancelled" or "Canceled") in source_section[0]:
-                obj.source_status = "Cancelled"
-            elif "Hiatus" in source_section[0]:
-                obj.source_status = "Hiatus"
-            else:
-                obj.source_status = "Unknown"
+            obj.source_status, obj.source_volumes = get_source_info(content)
 
-            obj.source_volumes = int(re.search(r'\d+', source_section[0]).group())
-
-            try:
-                obj.eng_volumes = int(re.search(r'\d+', english_section[0]).group())
-                #obj.eng_status = "Complete" if "Complete" in english_section else "Ongoing"
-                if ("Complete" or "Completed") in english_section[0]:
-                    obj.eng_status = "Complete"
-                elif "Ongoing" in english_section[0]:
-                    obj.eng_status = "Ongoing"
-                elif ("Cancelled" or "Canceled") in english_section[0]:
-                    obj.eng_status = "Cancelled"
-                elif "Hiatus" in english_section[0]:
-                    obj.eng_status = "Hiatus"
-                elif "Dropped" in english_section[0]:
-                    obj.eng_status = "Dropped"
-                else:
-                    obj.eng_status = "Unknown"
-            except AttributeError:
-                print("\tNo english volumes")
-            except IndexError:
-                print("\tNo english volumes")
+            obj.eng_status, obj.eng_volumes = get_english_info(content)
 
             if "Yes" in content[23].text:
                 obj.is_licensed = True
@@ -132,3 +100,55 @@ def series_scrapper(manga_id, obj):
             obj.year = int(content[20].text.strip("\n"))
 
             break
+
+
+def get_source_info(content_section):
+    source_section = [m.strip("\n") for m in content_section[6] if type(m) is bs4.element.NavigableString]
+    source_volumes = int(re.search(r'\d+', source_section[0]).group())
+
+    if ("Complete" or "Completed") in source_section[0]:
+        status = "Complete"
+    elif "Ongoing" in source_section[0]:
+        status = "Ongoing"
+    elif ("Cancelled" or "Canceled") in source_section[0]:
+        status = "Cancelled"
+    elif "Hiatus" in source_section[0]:
+        status = "Hiatus"
+    else:
+        status = "Unknown"
+
+    return status, source_volumes
+
+
+def get_english_info(content_section):
+    """
+    The english source section can have multiple publishers and volume counts. The criteria is that
+    the publisher with the largest volume count is most likely the one we want so sort the lines in
+    the section and grab data from the first line.
+    """
+
+    english_section = [m.strip("\n") for m in content_section[24] if type(m) is bs4.element.NavigableString and m != "\n"]
+    english_section.sort()
+    eng_status, eng_volumes = None, None
+
+    try:
+        eng_volumes = int(re.search(r'\d+', english_section[0]).group())
+        #obj.eng_status = "Complete" if "Complete" in english_section else "Ongoing"
+        if ("Complete" or "Completed") in english_section[0]:
+            eng_status = "Complete"
+        elif "Ongoing" in english_section[0]:
+            eng_status = "Ongoing"
+        elif ("Cancelled" or "Canceled") in english_section[0]:
+            eng_status = "Cancelled"
+        elif "Hiatus" in english_section[0]:
+            eng_status = "Hiatus"
+        elif "Dropped" in english_section[0]:
+            eng_status = "Dropped"
+        else:
+            eng_status = "Unknown"
+    except AttributeError:
+        print("\tNo english volumes")
+    except IndexError:
+        print("\tNo english volumes")
+
+    return eng_status, eng_volumes
