@@ -20,6 +20,12 @@ import db_manager
 import time
 
 def add_library():
+    """
+    A library is just a collection of folders that are related to one another (Completed, Ongoing, Favorites, Raw, etc.)
+
+    A library in the database stores info about all mathcing series in the folder, even ones that don't have a MangaUpdates match.
+    """
+
     path = Path(input("\t-> Path to directory: "))
 
     if not Path(path).exists():
@@ -71,6 +77,7 @@ def choose_library():
         print("Scanning library..........")
         return choice
 
+
 def scan_library():
     """
         1. Before getting here, this is tested for valid library name/path
@@ -94,6 +101,23 @@ def scan_library():
         return
     else:
         print("Scanning library........")
+
+
+def update_library():
+    library_id = choose_library()
+    if library_id == -1:
+        return
+        
+    # Query DB and get ongoing series
+    ongoing_series = db_manager.get_ongoing(library_id)
+
+    # Series tuple = (local_title, my_volumes, site_id)
+    for series in ongoing_series:
+        current_manga = Manga(series[0], series[1])
+
+        series_scrapper(series[2], current_manga)
+
+        db_manager.update_manga(current_manga)
 
 
 def find_new_volumes():
@@ -135,8 +159,7 @@ while True:
     elif choice == "2":
         scan_library()
     elif choice == "3":
-        # get library and grab new volume data from api
-        pass
+        update_library()
     elif choice == "4":
         find_new_volumes()
     elif choice == "5":

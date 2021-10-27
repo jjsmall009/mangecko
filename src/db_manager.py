@@ -1,10 +1,24 @@
-# Manage a database of manga??? Not sure what I'm doing
+# JJ Small
+# The database manager is a set of functions that manipulates the database, obviously.
 import sqlite3
 
 db_path = "data\manga_library.db"
 
+def create_connection():
+    """Connects to database or creates it if not found"""
+
+    conn = None
+    try:
+        conn = sqlite3.connect(db_path)
+        conn.execute("""PRAGMA foreign_keys = ON""")
+        return conn
+    except sqlite3.Error as e:
+        print(e)
+
+
 def create_database():
     """First time running the program create the database"""
+
     try:
         with create_connection() as conn:
             libraries_table = """CREATE TABLE IF NOT EXISTS libraries (
@@ -54,19 +68,9 @@ def create_table(conn, statement):
         print(e)
 
 
-def create_connection():
-    """Connects to database or creates it if not found"""
-
-    conn = None
-    try:
-        conn = sqlite3.connect(db_path)
-        conn.execute("""PRAGMA foreign_keys = ON""")
-        return conn
-    except sqlite3.Error as e:
-        print(e)
-
-
 def insert_library(name, path):
+    """A library is a collection of related manga series"""
+
     try:
         with create_connection() as conn:
             statement = """INSERT INTO libraries (library_name, path_name) VALUES (?, ?);"""
@@ -81,6 +85,11 @@ def insert_library(name, path):
 
 
 def insert_manga(manga_list, library_name):
+    """
+    In order to maintain good data integrity we use a junction table to connect a manga
+    to a library. That is, a library has many manga and a manga can be in many libraries.
+    """
+
     with create_connection() as conn:
         cur = conn.cursor()
         find_library = """SELECT library_id from libraries WHERE library_name = ?;"""
@@ -118,7 +127,50 @@ def get_libraries():
         print(f"Error in getting libraries ---> {e}")
 
 
+def get_ongoing(library_id):
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            statement = """SELECT manga_series.local_title, manga_series.my_volumes, manga_series.site_id 
+                            FROM manga_series
+                            INNER JOIN library_manga
+                            ON manga_series.id = library_manga.manga_id
+                            WHERE library_manga.library_id = ?
+                            AND (eng_status = "Ongoing" OR source_status = "Ongoing)"""
+
+            cur.execute(statement, (library_id,))
+
+            return cur.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error in getting ongoing series ---> {e}")
+
+
+def update_manga(manga):
+    """Update new data for things we care about"""
+
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            statement = """UPDATE manga_series
+                            SET is_licensed=?,eng_volumes=?,eng_status=?,source_volumes=?,source_status=?
+                            WHERE site_id = ?"""
+
+            data = (manga.is_licensed, manga.eng_volumes, manga.eng_status,
+                    manga.source_volumes, manga.source_status, manga.site_id)
+
+            cur.execute(statement, data)
+
+            conn.commit()
+    except sqlite3.Error as e:
+        print(f"Error in updating manga ---> {e}")
+
+
 def series_with_new_volumes(library_id):
+    """
+    The main focus is series that have an official translation in English, but we fall back
+    onto checking the original Japanese source if there isn't an English version.
+    """
+
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -136,6 +188,7 @@ def series_with_new_volumes(library_id):
             return cur.fetchall()
     except sqlite3.Error as e:
         print(f"Error in doing volume stuff ---> {e}")
+
 
 def delete_test():
     with create_connection() as conn:
