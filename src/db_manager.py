@@ -136,7 +136,10 @@ def get_ongoing(library_id):
                             INNER JOIN library_manga
                             ON manga_series.id = library_manga.manga_id
                             WHERE library_manga.library_id = ?
-                            AND (eng_status = "Ongoing" OR source_status = "Ongoing)"""
+                            AND (manga_series.eng_status = \"Ongoing\"
+                                OR manga_series.eng_status = \"Hiatus\"
+                                OR manga_series.source_status = \"Ongoing\"
+                                OR manga_series.source_status = \"Hiatus\")"""
 
             cur.execute(statement, (library_id,))
 
@@ -173,7 +176,7 @@ def series_with_new_volumes(library_id):
 
     try:
         with create_connection() as conn:
-            cur = conn.cursor()
+            cur = conn.cursor() 
             statement = """SELECT manga_series.local_title, manga_series.my_volumes, manga_series.eng_volumes
                             FROM manga_series
                             INNER JOIN library_manga

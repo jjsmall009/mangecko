@@ -23,7 +23,7 @@ def add_library():
     """
     A library is just a collection of folders that are related to one another (Completed, Ongoing, Favorites, Raw, etc.)
 
-    A library in the database stores info about all mathcing series in the folder, even ones that don't have a MangaUpdates match.
+    A library in the database stores info about all matching series in the folder, even ones that don't have a MangaUpdates match.
     """
 
     path = Path(input("\t-> Path to directory: "))
@@ -113,6 +113,7 @@ def update_library():
     # Series tuple = (local_title, my_volumes, site_id)
     for series in ongoing_series:
         current_manga = Manga(series[0], series[1])
+        current_manga.site_id = series[2]
 
         series_scrapper(series[2], current_manga)
 
@@ -120,6 +121,8 @@ def update_library():
 
 
 def find_new_volumes():
+    """Query the DB for series with local volumes < english or source volumes"""
+
     library_id = choose_library()
 
     if library_id == -1:
@@ -166,9 +169,7 @@ while True:
         break
     else:
         print("Invalid input. Try again...")
-    
 
-start = time.time()
 
 # For a given path there are a few kinds of data we're working with
 # - Dict of valid series (key:value = series name: local volume count)
