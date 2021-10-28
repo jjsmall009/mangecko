@@ -104,7 +104,12 @@ def series_scrapper(manga_id, obj):
 
 def get_source_info(content_section):
     source_section = [m.strip("\n") for m in content_section[6] if type(m) is bs4.element.NavigableString]
-    source_volumes = int(re.search(r'\d+', source_section[0]).group())
+    source_volumes = None
+
+    try:
+        source_volumes = int(re.search(r'\d+', source_section[0]).group())
+    except AttributeError:
+        print("No source???")
 
     if ("Complete" or "Completed") in source_section[0]:
         status = "Complete"

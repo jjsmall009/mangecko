@@ -68,7 +68,6 @@ def choose_library():
         print("Not a valid library. Try again...")
         return -1
     else:
-        print("Scanning library..........")
         return choice
 
 def scan_library():
@@ -106,7 +105,7 @@ def find_new_volumes():
         series = db_manager.series_with_new_volumes(library_id)
 
         for s in series:
-            print(s)
+            print(f"{s[0]:<50} Volume {s[1]} -> Volume {s[2]}")
 
 
 opening_header = """============================
