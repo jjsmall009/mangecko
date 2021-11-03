@@ -123,6 +123,11 @@ def scan_library():
                 manga.append(current_manga)
         db_manager.insert_manga(manga, path.name)
 
+        db_series = db_manager.get_series(library_id)
+        for series in db_series:
+            if series not in valid_series:
+                db_manager.delete_series(series)
+
 def update_library():
     library_id = choose_library()
     if library_id == -1:
