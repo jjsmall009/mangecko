@@ -1,5 +1,6 @@
 # JJ Small
 # The database manager is a set of functions that manipulates the database, obviously.
+from os import stat
 import sqlite3
 
 db_path = "data\manga_library.db"
@@ -125,6 +126,49 @@ def get_libraries():
             return cur.fetchall()
     except sqlite3.Error as e:
         print(f"Error in getting libraries ---> {e}")
+
+
+def get_library_path(library_id):
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("""SELECT path_name from libraries WHERE library_id = ?""", (library_id,))
+
+            return cur.fetchone()[0]
+    except sqlite3.Error as e:
+        print(f"Error in getting libraries ---> {e}")
+
+
+def series_exists(title, library_id):
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            statement = """SELECT manga_series.* 
+                            FROM manga_series
+                            INNER JOIN library_manga
+                            ON manga_series.id = library_manga.manga_id
+                            WHERE library_manga.library_id = ?
+                            AND manga_series.local_title = ?"""
+
+            cur.execute(statement, (library_id, title))
+
+            return cur.fetchone()
+    except sqlite3.Error as e:
+        print(f"Error in seraching for series ---> {e}")
+        
+
+def update_volume_info(title, volumes):
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            statement = """UPDATE manga_series
+                            SET my_volumes = ?
+                            WHERE local_title = ?"""
+
+            cur.execute(statement, (volumes, title))
+            conn.commit()
+    except sqlite3.Error as e:
+        print(f"Error in updating volume info ---> {e}")
 
 
 def get_ongoing(library_id):

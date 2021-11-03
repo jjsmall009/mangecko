@@ -74,6 +74,7 @@ def series_scrapper(manga_id, obj):
         manga_id (int): ID for a mangaupdates.com series
 
     """
+    print(f"scraping {manga_id}")
 
     while True:
         try:
