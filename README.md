@@ -40,11 +40,11 @@ It will be a pretty basic CRUD app but I want to focus on the look and feel, res
 
 This readme will be a working document to keep track of what I'm doing and what I need to next.
 
-- [ ] Create a basic design doc of ideas and program features.
+- [x] Create a basic design doc of ideas and program features.
 - [x] Take a look at which API has what I want.
 - [x] Start iterating and do one small task at a time and build.
 - [x] Fuzzy string matching.
 - [x] Grab series data for each valid search result.
 - [x] Compare volume results
-- [ ] Test some database functionality and design.
-- [ ] Implement console menu design.
+- [x] Test some database functionality and design.
+- [x] Implement console menu design.
