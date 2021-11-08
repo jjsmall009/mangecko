@@ -1,5 +1,5 @@
 # JJ Small
-# series.py
+# manga_model.py
 # This class is a representation of what a manga series has/does
 
 class Manga:

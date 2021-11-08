@@ -1,21 +1,20 @@
 from library_scanner import LibraryScanner
 from manga_scrapper import search_scrapper, series_scrapper
-from manga import Manga
+from manga_model import Manga
 from pathlib import Path
-import db_manager
-import time
+import database_manager
 
-opening_header = """============================
-Welcome to Manga Manager 1.0
-============================"""
+opening_header = "============================\n" + \
+                 "Welcome to Manga Manager 1.0\n" + \
+                 "============================"
 
-options="""
+options = """
 Options:
     * 1: Add a Library
     * 2: Scan a Library
     * 3: Update Volume Info
     * 4: View New Volumes
-    * 5: Exit
+    * 5: Exit 
 """
 
 def add_library():
@@ -44,7 +43,7 @@ def add_library():
         choice = input("\tAdd this library and continue? (y/n): ")
 
         if choice == "y":
-            if not db_manager.insert_library(path.name, str(path)):
+            if not database_manager.insert_library(path.name, str(path)):
                 return
 
             # For each valid folder, create a Manga object and then get some precious data
@@ -59,11 +58,11 @@ def add_library():
 
                 manga.append(current_manga)
 
-            db_manager.insert_manga(manga, path.name)
+            database_manager.insert_manga(manga, path.name)
 
 
 def choose_library():
-    libraries = db_manager.get_libraries()
+    libraries = database_manager.get_libraries()
 
     for l in libraries:
         print(f"\t{l[0]}: {l[1]}")
@@ -76,39 +75,24 @@ def choose_library():
         return choice
 
 
-def scan_library():
-    """
-        1. Before getting here, this is tested for valid library name/path
-        2. For each folder in this library
-            a. Are you in the database?
-                1. Yes, update my_volume count and move on
-                2. No, 
-                    a. create Manga object
-                    b. Query api for data
-                    c. Add manga entry to database
-        3. For each row in database for this library
-            a. Are you stored locally?
-                1. Yes, carry on
-                2. No, delete from junction table
-            
-    """
+def scan_library(): 
     library_id = choose_library()
 
     if library_id == -1:
         print("No libraries in database")
         return
     else:
-        path = Path(db_manager.get_library_path(library_id))
+        path = Path(database_manager.get_library_path(library_id))
         scanner = LibraryScanner(path)
         scanner.scan_directory()
         valid_series = scanner.valid_folders
         manga = []
 
         for series, vol_count in valid_series.items():
-            has_match = db_manager.series_exists(series, library_id)
+            has_match = database_manager.series_exists(series, library_id)
             if has_match:
                 print(f"{series} -> you exist")
-                db_manager.update_volume_info(series, vol_count)
+                database_manager.update_volume_info(series, vol_count)
             else:
                 print("you are dead...")
                 current_manga = Manga(series, vol_count)
@@ -120,12 +104,12 @@ def scan_library():
                     series_scrapper(id, current_manga)
 
                 manga.append(current_manga)
-        db_manager.insert_manga(manga, path.name)
+        database_manager.insert_manga(manga, path.name)
 
-        db_series = db_manager.get_series(library_id)
+        db_series = database_manager.get_series(library_id)
         for series in db_series:
             if series not in valid_series:
-                db_manager.delete_series(series)
+                database_manager.delete_series(series)
 
 def update_library():
     library_id = choose_library()
@@ -133,7 +117,7 @@ def update_library():
         return
         
     # Query DB and get ongoing series
-    ongoing_series = db_manager.get_ongoing(library_id)
+    ongoing_series = database_manager.get_ongoing(library_id)
 
     # Series tuple = (local_title, my_volumes, site_id)
     for series in ongoing_series:
@@ -142,7 +126,7 @@ def update_library():
 
         series_scrapper(series[2], current_manga)
 
-        db_manager.update_manga(current_manga)
+        database_manager.update_manga(current_manga)
 
 
 def find_new_volumes():
@@ -154,7 +138,7 @@ def find_new_volumes():
         print("No libraries in database")
         return
     else:
-        series = db_manager.series_with_new_volumes(library_id)
+        series = database_manager.series_with_new_volumes(library_id)
 
         for s in series:
             print(f"{s[0]:<50} Volume {s[1]} -> Volume {s[2]}")
@@ -163,7 +147,7 @@ def find_new_volumes():
 
 def menu_loop():
     # Initialize our database and setup our connection
-    db_manager.create_database()
+    database_manager.create_database()
 
     print(opening_header, end="")
     while True:

@@ -1,9 +1,8 @@
 # JJ Small
 # The database manager is a set of functions that manipulates the database, obviously.
-from os import stat
 import sqlite3
 
-db_path = "data\manga_library.db"
+db_path = "data\database.db"
 
 def create_connection():
     """Connects to database or creates it if not found"""

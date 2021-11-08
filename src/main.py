@@ -1,15 +1,11 @@
 """Manga Volume Tracker
 
 Author: JJ Small
-Date: September 2021
+Date: November 2021
 
 main.py
 Description:
-    This main script acts as a collection manager for the directory you want to scan. For each valid
-    folder(series) it finds it will create a Manga object and update the information about it.
-Output:
-    The output is the various lists of data. Valid series, invalid series, manga with matching 
-    results, etc.
+    Clean and simple. Runs the main menu loop.
 """
 import menu
 

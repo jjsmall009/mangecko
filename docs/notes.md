@@ -66,3 +66,21 @@ Now, some of the options might get combined or use bits and pieces of each other
   2. "Update a Library" to get new data for ongoing series (or mark as complete).
   3. "Find New Volumes" to grab data from the database and print out a list.  
   
+### Random notes
+
+Updating a library
+
+```text
+1. Before getting here, this is tested for valid library name/path
+2. For each folder in this library
+    a. Are you in the database?
+        1. Yes, update my_volume count and move on
+        2. No, 
+            a. create Manga object
+            b. Query api for data
+            c. Add manga entry to database
+3. For each row in database for this library
+    a. Are you stored locally?
+        1. Yes, carry on
+        2. No, delete from junction table
+```
