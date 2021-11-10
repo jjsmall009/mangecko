@@ -19,9 +19,11 @@ Options:
 
 def add_library():
     """
-    A library is just a collection of folders that are related to one another (Completed, Ongoing, Favorites, Raw, etc.)
+    A library is just a collection of series that are related to one another 
+    (Completed, Ongoing, Favorites, Raw, etc.)
 
-    A library in the database stores info about all matching series in the folder, even ones that don't have a MangaUpdates match.
+    A library in the database stores info about all matching series in the folder, 
+    even ones that don't have a MangaUpdates match.
     """
 
     path = Path(input("\t-> Path to directory: "))
@@ -146,9 +148,6 @@ def find_new_volumes():
 
 
 def menu_loop():
-    # Initialize our database and setup our connection
-    database_manager.create_database()
-
     print(opening_header, end="")
     while True:
         print(options)
