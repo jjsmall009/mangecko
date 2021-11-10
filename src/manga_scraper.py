@@ -7,7 +7,7 @@ import requests
 import time
 import bs4
 
-def search_scrapper(title):
+def series_search(title):
     """
     Wrapper function to search for a series. Will try and do this concurrently to speed up requests
 
@@ -23,7 +23,7 @@ def search_scrapper(title):
             id = search(title)
         except Exception as e:
             print(e)
-            print(f"---> Fail on {title}. Retrying.\n")
+            print(f"---> Too many attempts. Failed to search for {title}. Retrying.\n")
             time.sleep(1)
         else:
             if id != None:
@@ -59,14 +59,13 @@ def search(manga_title):
     if potential_match[1] >= 90:
         index = titles.index(potential_match[0])
         id = int(results[index]["id"])
-        #print(f"{manga_title} -> {potential_match[0]} -> ID = {id}")
         return id
     else:
-        print(f"No match for -> {manga_title}")
+        print(f"---> No match for -> {manga_title}")
         return None
             
 
-def series_scrapper(manga_id, obj):
+def series_scraper(manga_id, obj):
     """
     Grabs data from the specified mangaupdates ID
 
@@ -81,7 +80,7 @@ def series_scrapper(manga_id, obj):
             url = f"https://www.mangaupdates.com/series.html?id={manga_id}"
             r = requests.get(url=url)
         except Exception as e:
-            print(f"Studid connection error in SERIES SCRAPPER....")
+            print(f"---> Studid connection error on {manga_id}... Retrying")
             time.sleep(1)
         else:
             series_section = BeautifulSoup(r.content, "html.parser").find("div", id="main_content")
@@ -153,8 +152,8 @@ def get_english_info(content_section):
         else:
             eng_status = "Unknown"
     except AttributeError:
-        print("\tNo english volumes")
+        print(f"\t---> Attribute error: No english volumes")
     except IndexError:
-        print("\tNo english volumes")
+        print("\t---> Index Error: No english volumes")
 
     return eng_status, eng_volumes
