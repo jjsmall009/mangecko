@@ -88,6 +88,8 @@ def series_scraper(manga_id, obj):
 
             obj.site_title = series_section.find(name="span", class_="releasestitle tabletitle").text
             
+            obj.cover = get_cover_url(content)
+            
             obj.source_status, obj.source_volumes = get_source_info(content)
 
             obj.eng_status, obj.eng_volumes = get_english_info(content)
@@ -100,6 +102,15 @@ def series_scraper(manga_id, obj):
             obj.year = int(content[20].text.strip("\n"))
 
             break
+
+def get_cover_url(content_section):
+    url_section = content_section[13]
+
+    try:
+        return url_section.img['src']
+    except TypeError:
+        print("No image for this series...")
+
 
 
 def get_source_info(content_section):

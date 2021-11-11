@@ -15,6 +15,7 @@ class Manga:
         self.source_status = None
         self.has_match = False
         self.year = -1
+        self.cover = None
 
     def print_has_match(self):
         temp = vars(self)

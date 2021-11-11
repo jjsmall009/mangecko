@@ -66,6 +66,10 @@ def add_library():
 def choose_library():
     libraries = database_manager.get_libraries()
 
+    if len(libraries) == 0:
+        print("No libraries in database...")
+        return
+
     for l in libraries:
         print(f"\t{l[0]}: {l[1]}")
 
@@ -74,7 +78,7 @@ def choose_library():
 
         if choice not in [l[0] for l in libraries]:
             print("Not a valid library. Try again...")
-            return -1
+            return
         else:
             return choice
     except Exception:
@@ -83,44 +87,44 @@ def choose_library():
 def scan_library(): 
     library_id = choose_library()
 
-    if library_id == -1:
-        print("No libraries in database")
+    if not library_id:
         return
-    else:
-        path = Path(database_manager.get_library_path(library_id))
-        scanner = LibraryScanner(path)
-        scanner.scan_directory()
-        valid_series = scanner.valid_folders
-        manga = []
 
-        for series, vol_count in valid_series.items():
-            has_match = database_manager.series_exists(series, library_id)
-            if has_match:
-                database_manager.update_volume_info(series, vol_count)
-            else:
-                print(f"New series added -> {series}")
-                current_manga = Manga(series, vol_count)
-                id = series_search(series)
+    path = Path(database_manager.get_library_path(library_id))
+    scanner = LibraryScanner(path)
+    scanner.scan_directory()
+    valid_series = scanner.valid_folders
+    manga = []
 
-                if id != None:
-                    current_manga.site_id = id
-                    current_manga.has_match = True
-                    series_scraper(id, current_manga)
+    for series, vol_count in valid_series.items():
+        has_match = database_manager.series_exists(series, library_id)
+        if has_match:
+            database_manager.update_volume_info(series, vol_count)
+        else:
+            print(f"New series added -> {series}")
+            current_manga = Manga(series, vol_count)
+            id = series_search(series)
 
-                manga.append(current_manga)
-        database_manager.insert_manga(manga, path.name)
+            if id != None:
+                current_manga.site_id = id
+                current_manga.has_match = True
+                series_scraper(id, current_manga)
 
-        db_series = database_manager.get_series(library_id)
-        for series in db_series:
-            if series not in valid_series:
-                print(f"Deleting {series}...")
-                database_manager.delete_series(series)
+            manga.append(current_manga)
+    database_manager.insert_manga(manga, path.name)
+
+    db_series = database_manager.get_series(library_id)
+    for series in db_series:
+        if series not in valid_series:
+            print(f"Deleting {series}...")
+            database_manager.delete_series(series)
 
 def update_library():
     library_id = choose_library()
-    if library_id == -1:
+
+    if not library_id:
         return
-        
+
     # Query DB and get ongoing series
     ongoing_series = database_manager.get_ongoing(library_id)
 
@@ -139,14 +143,13 @@ def find_new_volumes():
 
     library_id = choose_library()
 
-    if library_id == -1:
-        print("No libraries in database")
+    if not library_id:
         return
-    else:
-        series = database_manager.series_with_new_volumes(library_id)
+        
+    series = database_manager.series_with_new_volumes(library_id)
 
-        for s in series:
-            print(f"{s[0]:<50} Volume {s[1]} -> Volume {s[2]}")
+    for s in series:
+        print(f"{s[0]:<50} Volume {s[1]} -> Volume {s[2]}")
 
 
 def menu_loop():

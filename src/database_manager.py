@@ -41,7 +41,8 @@ def create_database():
                                 source_volumes INTEGER,
                                 source_status TEXT,
                                 has_match TEXT,
-                                year INTEGER);
+                                year INTEGER,
+                                cover_url TEXT);
                 """
             create_table(conn, manga_table)
 
@@ -99,13 +100,13 @@ def insert_manga(manga_list, library_name):
         for manga in manga_list:
             statement = """INSERT INTO manga_series (local_title,site_title,site_id,my_volumes,
                                                     is_licensed,eng_volumes,eng_status,source_volumes,
-                                                    source_status,has_match,year) 
+                                                    source_status,has_match,year,cover_url) 
                                 
-                                VALUES (?,?,?,?,?,?,?,?,?,?,?);"""
+                                VALUES (?,?,?,?,?,?,?,?,?,?,?,?);"""
 
             data = (manga.local_title,manga.site_title,manga.site_id,manga.my_volumes,
                     manga.is_licensed,manga.eng_volumes,manga.eng_status,manga.source_volumes, 
-                    manga.source_status,manga.has_match,manga.year)
+                    manga.source_status,manga.has_match,manga.year,manga.cover)
             cur.execute(statement, data)
             
             last_manga_id = cur.lastrowid
