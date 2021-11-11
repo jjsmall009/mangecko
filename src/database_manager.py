@@ -1,5 +1,6 @@
 # JJ Small
 # The database manager is a set of functions that manipulates the database, obviously.
+import requests
 import sqlite3
 
 db_path = "data\database.db"
@@ -114,7 +115,19 @@ def insert_manga(manga_list, library_name):
             junction = """INSERT INTO library_manga VALUES (?,?);"""
             cur.execute(junction, (library_id, last_manga_id))
 
+            if manga.cover:
+                download_cover(manga.site_id, manga.cover)
+
             conn.commit()
+
+
+def download_cover(site_id, url):
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        print("Downloading cover image...")
+        with open(f"data/covers/{site_id}.jpg", 'wb') as f:
+            f.write(response.content)
 
 
 def get_libraries():
