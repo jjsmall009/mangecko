@@ -31,7 +31,6 @@ left_content.addWidget(settings_btn)
 
 # Right content panel
 upper_hbox = QHBoxLayout()
-upper_hbox.setStyleSheet("background-color:red;")
 right_content.addLayout(upper_hbox)
 library_label = QLabel("Library Name")
 upper_hbox.addWidget(library_label)

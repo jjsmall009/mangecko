@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>main_window</class>
+ <widget class="QWidget" name="main_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Manga Manager 1.0</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" name="left_section">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="logo_label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Impact</family>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Manga Manager</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="libraries_list_header">
+       <property name="font">
+        <font>
+         <family>Verdana</family>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Libraries</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="libraries_list">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <item>
+        <property name="text">
+         <string>○ Ongoing</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>○ Completed</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>○ Short Series</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>○ Favorites</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="add_library_layout">
+       <item>
+        <widget class="QLabel" name="add_library_icon">
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="add_library_btn">
+         <property name="text">
+          <string>Add Library</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="divider_1">
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="lineWidth">
+        <number>2</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="settings_layout">
+       <item>
+        <widget class="QLabel" name="settings_icon">
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="settings_btn">
+         <property name="text">
+          <string>Settings</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="right_section">
+     <item>
+      <layout class="QHBoxLayout" name="library_actions_header">
+       <item>
+        <widget class="QLabel" name="library_name_label">
+         <property name="font">
+          <font>
+           <family>Verdana</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Library Name</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="library_buttons_layout">
+         <item>
+          <widget class="QPushButton" name="scan_library_btn">
+           <property name="text">
+            <string>Scan Library</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="update_library_btn">
+           <property name="text">
+            <string>Update Library</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="new_volumes_btn">
+           <property name="text">
+            <string>New Volumes</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="series_grid">
+       <item row="0" column="0">
+        <widget class="QWidget" name="widget" native="true"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QWidget" name="widget_2" native="true"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QWidget" name="widget_3" native="true"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QWidget" name="widget_4" native="true"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QWidget" name="widget_5" native="true"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QWidget" name="widget_6" native="true"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
