@@ -7,8 +7,8 @@ main.py
 Description:
     Clean and simple. Runs the main menu loop.
 """
-import database_manager
-import menu
+from models import database_manager
+from controllers import menu
 
 def main():
     # Initialize our database and setup our connection

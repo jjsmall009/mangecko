@@ -1,7 +1,7 @@
 # JJ Small
 # Scrapes data from MangaUpdates
 from bs4 import BeautifulSoup
-from fuzzywuzzy import fuzz, process
+from fuzzywuzzy import process
 import re
 import requests
 import time

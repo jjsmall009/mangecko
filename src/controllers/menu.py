@@ -1,8 +1,8 @@
-from library_scanner import LibraryScanner
-from manga_scraper import series_search, series_scraper
-from manga_model import Manga
+from utilities.library_scanner import LibraryScanner
+from utilities.manga_scraper import series_search, series_scraper
+from models.manga_model import Manga
 from pathlib import Path
-import database_manager
+from models import database_manager
 
 opening_header = "============================\n" + \
                  "Welcome to Manga Manager 1.0\n" + \
