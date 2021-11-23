@@ -85,7 +85,6 @@
        <widget class="QLabel" name="libraries_list_header">
         <property name="font">
          <font>
-          <family>Verdana</family>
           <pointsize>12</pointsize>
          </font>
         </property>
@@ -133,6 +132,19 @@
          <number>6</number>
         </property>
         <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="add_library_icon">
           <property name="text">
            <string>+</string>
@@ -143,7 +155,6 @@
          <widget class="QPushButton" name="add_library_btn">
           <property name="font">
            <font>
-            <family>Verdana</family>
             <pointsize>12</pointsize>
            </font>
           </property>
@@ -170,6 +181,19 @@
       <item>
        <layout class="QHBoxLayout" name="settings_layout">
         <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QLabel" name="settings_icon">
           <property name="text">
            <string>+</string>
@@ -180,7 +204,6 @@
          <widget class="QPushButton" name="settings_btn">
           <property name="font">
            <font>
-            <family>Verdana</family>
             <pointsize>12</pointsize>
            </font>
           </property>
@@ -229,12 +252,11 @@
         <property name="styleSheet">
          <string notr="true">background-color:#18263d; color:white;</string>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0">
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
          <item>
           <widget class="QLabel" name="library_name_label">
            <property name="font">
             <font>
-             <family>Verdana</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -251,10 +273,16 @@
            <item>
             <widget class="QPushButton" name="scan_library_btn">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>120</width>
+               <height>16777215</height>
+              </size>
              </property>
              <property name="font">
               <font>
@@ -277,6 +305,12 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>120</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <bold>true</bold>
@@ -298,13 +332,19 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>120</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <bold>true</bold>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:#f5f4f4; color:#dd7560;border-radius:3px;</string>
+              <string notr="true">background-color:#f5f4f4; color:#dd7560;border-radius:3px; width:100px;</string>
              </property>
              <property name="text">
               <string>New Volumes</string>
@@ -312,22 +352,6 @@
             </widget>
            </item>
           </layout>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>200</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </widget>

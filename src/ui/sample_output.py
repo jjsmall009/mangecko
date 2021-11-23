@@ -1,35 +1,37 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'layout 3CRJWuY.ui'
+## Form generated from reading UI file 'layout 3hifutL.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
+from os import getlogin
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+    QPalette, QPixmap, QRadialGradient, QTransform, QWindow)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QListWidget, QListWidgetItem, QPushButton,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+    QSizePolicy, QVBoxLayout, QWidget)
 
-class Ui_main_window(object):
-    def setupUi(self, main_window):
-        if not main_window.objectName():
-            main_window.setObjectName(u"main_window")
-        main_window.resize(1200, 800)
-        main_window.setStyleSheet(u"")
-        self.main_window_layout = QHBoxLayout(main_window)
+
+class Ui_main_window(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.resize(1200, 800)
+        self.setStyleSheet(u"")
+        self.main_window_layout = QHBoxLayout(self)
         self.main_window_layout.setSpacing(0)
         self.main_window_layout.setObjectName(u"main_window_layout")
         self.main_window_layout.setContentsMargins(0, 0, 0, 0)
-        self.left_section_wrapper = QWidget(main_window)
+        self.left_section_wrapper = QWidget(self)
         self.left_section_wrapper.setObjectName(u"left_section_wrapper")
         self.left_section_wrapper.setMaximumSize(QSize(200, 16777215))
         self.left_section_wrapper.setStyleSheet(u"background-color:#213447;color:white;")
@@ -44,7 +46,6 @@ class Ui_main_window(object):
         sizePolicy.setHeightForWidth(self.logo_label.sizePolicy().hasHeightForWidth())
         self.logo_label.setSizePolicy(sizePolicy)
         font = QFont()
-        font.setFamilies([u"Impact"])
         font.setPointSize(20)
         self.logo_label.setFont(font)
         self.logo_label.setStyleSheet(u"border-top:2px solid white; border-bottom:2px solid white;")
@@ -55,17 +56,12 @@ class Ui_main_window(object):
         self.libraries_list_header = QLabel(self.left_section_wrapper)
         self.libraries_list_header.setObjectName(u"libraries_list_header")
         font1 = QFont()
-        font1.setFamilies([u"Verdana"])
         font1.setPointSize(12)
         self.libraries_list_header.setFont(font1)
 
         self.left_outer_layout.addWidget(self.libraries_list_header)
 
         self.libraries_list = QListWidget(self.left_section_wrapper)
-        QListWidgetItem(self.libraries_list)
-        QListWidgetItem(self.libraries_list)
-        QListWidgetItem(self.libraries_list)
-        QListWidgetItem(self.libraries_list)
         self.libraries_list.setObjectName(u"libraries_list")
         sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
@@ -121,7 +117,7 @@ class Ui_main_window(object):
 
         self.main_window_layout.addWidget(self.left_section_wrapper)
 
-        self.right_section_wrapper = QWidget(main_window)
+        self.right_section_wrapper = QWidget(self)
         self.right_section_wrapper.setObjectName(u"right_section_wrapper")
         self.verticalLayout = QVBoxLayout(self.right_section_wrapper)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -145,22 +141,25 @@ class Ui_main_window(object):
         self.library_button_layout.setObjectName(u"library_button_layout")
         self.scan_library_btn = QPushButton(self.left_action_header)
         self.scan_library_btn.setObjectName(u"scan_library_btn")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.scan_library_btn.sizePolicy().hasHeightForWidth())
-        self.scan_library_btn.setSizePolicy(sizePolicy2)
+        sizePolicy.setHeightForWidth(self.scan_library_btn.sizePolicy().hasHeightForWidth())
+        self.scan_library_btn.setSizePolicy(sizePolicy)
+        self.scan_library_btn.setMaximumSize(QSize(120, 16777215))
         font2 = QFont()
         font2.setBold(True)
         self.scan_library_btn.setFont(font2)
         self.scan_library_btn.setStyleSheet(u"background-color:#f5f4f4; color:#dd7560;border-radius:3px;")
+        self.scan_library_btn.clicked.connect(self.clicked_me)
 
         self.library_button_layout.addWidget(self.scan_library_btn)
 
         self.update_library_btn = QPushButton(self.left_action_header)
         self.update_library_btn.setObjectName(u"update_library_btn")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.update_library_btn.sizePolicy().hasHeightForWidth())
         self.update_library_btn.setSizePolicy(sizePolicy2)
+        self.update_library_btn.setMaximumSize(QSize(120, 16777215))
         self.update_library_btn.setFont(font2)
         self.update_library_btn.setStyleSheet(u"background-color:#f5f4f4; color:#dd7560;border-radius:3px;")
 
@@ -170,17 +169,14 @@ class Ui_main_window(object):
         self.new_volumes_btn.setObjectName(u"new_volumes_btn")
         sizePolicy2.setHeightForWidth(self.new_volumes_btn.sizePolicy().hasHeightForWidth())
         self.new_volumes_btn.setSizePolicy(sizePolicy2)
+        self.new_volumes_btn.setMaximumSize(QSize(120, 16777215))
         self.new_volumes_btn.setFont(font2)
-        self.new_volumes_btn.setStyleSheet(u"background-color:#f5f4f4; color:#dd7560;border-radius:3px;")
+        self.new_volumes_btn.setStyleSheet(u"background-color:#f5f4f4; color:#dd7560;border-radius:3px; width:100px;")
 
         self.library_button_layout.addWidget(self.new_volumes_btn)
 
 
         self.horizontalLayout_2.addLayout(self.library_button_layout)
-
-        self.horizontalSpacer = QSpacerItem(200, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
-
-        self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
 
         self.verticalLayout.addWidget(self.left_action_header)
@@ -224,27 +220,25 @@ class Ui_main_window(object):
         self.main_window_layout.addWidget(self.right_section_wrapper)
 
 
-        self.retranslateUi(main_window)
-
-        QMetaObject.connectSlotsByName(main_window)
+        self.retranslateUi()
     # setupUi
 
-    def retranslateUi(self, main_window):
-        main_window.setWindowTitle(QCoreApplication.translate("main_window", u"Manga Manager 1.0", None))
-        self.logo_label.setText(QCoreApplication.translate("main_window", u"Manga Manager", None))
+    def clicked_me(self):
+        print("You clicked a button. Which one? Who knows...")
+
+    def populate_library_list(self):
+        libraries = get_libraries()
+
+        for lib in libraries:
+            item = QListWidgetItem(lib[1])
+            self.libraries_list.addItem(item)
+
+    def retranslateUi(self):
+        self.setWindowTitle("Manga Manager 1.0")
+        self.logo_label.setText("Manga Manager")
         self.libraries_list_header.setText(QCoreApplication.translate("main_window", u"Libraries", None))
 
-        __sortingEnabled = self.libraries_list.isSortingEnabled()
-        self.libraries_list.setSortingEnabled(False)
-        ___qlistwidgetitem = self.libraries_list.item(0)
-        ___qlistwidgetitem.setText(QCoreApplication.translate("main_window", u"\u25cb Ongoing", None));
-        ___qlistwidgetitem1 = self.libraries_list.item(1)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("main_window", u"\u25cb Completed", None));
-        ___qlistwidgetitem2 = self.libraries_list.item(2)
-        ___qlistwidgetitem2.setText(QCoreApplication.translate("main_window", u"\u25cb Short Series", None));
-        ___qlistwidgetitem3 = self.libraries_list.item(3)
-        ___qlistwidgetitem3.setText(QCoreApplication.translate("main_window", u"\u25cb Favorites", None));
-        self.libraries_list.setSortingEnabled(__sortingEnabled)
+        self.populate_library_list()
 
         self.add_library_icon.setText(QCoreApplication.translate("main_window", u"+", None))
         self.add_library_btn.setText(QCoreApplication.translate("main_window", u"Add Library", None))
@@ -256,3 +250,9 @@ class Ui_main_window(object):
         self.new_volumes_btn.setText(QCoreApplication.translate("main_window", u"New Volumes", None))
     # retranslateUi
 
+app = QApplication([])
+
+window = Ui_main_window()
+window.show()
+
+app.exec()
