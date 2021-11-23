@@ -13,6 +13,10 @@ There's still a lot to decide and design but in general this is some of the idea
 - There will be a button to scan through your series and check if any new volumes are out (it won't download anything, just let you know there's something new).
 - Specify different "shelves" based on some sort of criteria. Completed series, favorites, etc.
 
+## Potential UI
+
+![UI mockup](resources/mockup1.PNG)
+
 ## A Note on File Organization
 
 Like most media trackers/scanners/organization tools there is list of criteria that is necessary to follow in order to properly find files and folders.
@@ -28,17 +32,26 @@ As of now I don't do any sort of volume filename parsing to accurately count the
 
 ## Tech Stack
 
-I still have some research to do on which manga API I'll be using but here's the tech.
+After a couple of months I'm pretty well ingrained in the following:
 
 - Python
-- PyQT (still up in the air on the best/easiest Python GUI)
+- PyQT / PySide6
 - SQLite
 
 It will be a pretty basic CRUD app but I want to focus on the look and feel, responsiveness, and good software engineering principles and design.
 
 ## Current Progress
 
-This readme will be a working document to keep track of what I'm doing and what I need to next.
+### Stage 2 - GUI
+
+- [x] Do some initial layout planning and GUI mockups.
+- [x] Learn the basics of PyQt (PySide6 actually).
+- [x] Get started with Qt Designer.
+- [x] Organize files.
+- [ ] Integrate layout with the rest of my code.
+- [ ] Work on proper logging.
+
+### Stage 1 - Console Based Menu
 
 - [x] Create a basic design doc of ideas and program features.
 - [x] Take a look at which API has what I want.
