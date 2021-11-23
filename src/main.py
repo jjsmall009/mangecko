@@ -12,7 +12,7 @@ from controllers import menu
 
 def main():
     # Initialize our database and setup our connection
-    database_manager.create_database()
+    database_manager.initialize()
 
     menu.menu_loop()
 

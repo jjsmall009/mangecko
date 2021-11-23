@@ -2,8 +2,18 @@
 # The database manager is a set of functions that manipulates the database, obviously.
 import requests
 import sqlite3
+from pathlib import Path
 
-db_path = "data\database.db"
+db_path = "data/database.db"
+
+def initialize():
+    path = Path(db_path)
+
+    if not path.is_file():
+        create_database()
+    else:
+        print("Database already exists. Continuing...")
+
 
 def create_connection():
     """Connects to database or creates it if not found"""

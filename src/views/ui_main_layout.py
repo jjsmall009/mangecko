@@ -59,10 +59,7 @@ class Ui_main_window(object):
         self.left_section_layout.addWidget(self.libraries_list_label)
 
         self.libraries_list_widget = QListWidget(self.left_section)
-        QListWidgetItem(self.libraries_list_widget)
-        QListWidgetItem(self.libraries_list_widget)
         self.libraries_list_widget.setObjectName(u"libraries_list_widget")
-        self.libraries_list_widget.setStyleSheet(u"")
 
         self.left_section_layout.addWidget(self.libraries_list_widget)
 
@@ -165,10 +162,6 @@ class Ui_main_window(object):
 
         __sortingEnabled = self.libraries_list_widget.isSortingEnabled()
         self.libraries_list_widget.setSortingEnabled(False)
-        ___qlistwidgetitem = self.libraries_list_widget.item(0)
-        ___qlistwidgetitem.setText(QCoreApplication.translate("main_window", u"Test Library 1", None));
-        ___qlistwidgetitem1 = self.libraries_list_widget.item(1)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("main_window", u"Test Library 2", None));
         self.libraries_list_widget.setSortingEnabled(__sortingEnabled)
 
         self.add_library_btn.setText(QCoreApplication.translate("main_window", u"Add Library", None))
