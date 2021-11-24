@@ -2,6 +2,7 @@
 Setup and run our gui based manga manager application.
 """
 
+from PySide6 import QtWidgets
 from controllers.controller import MainWindow
 from models import database_manager
 from PySide6.QtWidgets import QApplication

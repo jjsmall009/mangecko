@@ -139,6 +139,16 @@ def download_cover(site_id, url):
         with open(f"data/covers/{site_id}.jpg", 'wb') as f:
             f.write(response.content)
 
+def get_library_id(lib_name):
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            cur.execute("""SELECT library_id from libraries
+                            WHERE library_name = ?""", (lib_name,))
+
+            return cur.fetchone()
+    except sqlite3.Error as e:
+        print(f"Error in getting libraries ---> {e}")
 
 def get_libraries():
     try:
@@ -192,6 +202,23 @@ def update_volume_info(title, volumes):
             conn.commit()
     except sqlite3.Error as e:
         print(f"Error in updating volume info ---> {e}")
+
+
+def get_series_from_library(library_id):
+    try:
+        with create_connection() as conn:
+            cur = conn.cursor()
+            statement = """SELECT manga_series.local_title, manga_series.my_volumes, manga_series.site_id
+                            FROM manga_series
+                            INNER JOIN library_manga
+                            ON manga_series.id = library_manga.manga_id
+                            WHERE library_manga.library_id = ?"""
+
+            cur.execute(statement, (library_id,))
+
+            return cur.fetchall()
+    except sqlite3.Error as e:
+        print(f"Error in getting ongoing series ---> {e}")
 
 
 def get_series(library_id):

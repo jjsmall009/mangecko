@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_layoutWeRdxG.ui'
+## Form generated from reading UI file 'main_layoutJYIBYz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -17,7 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QLayout, QListWidget, QListWidgetItem,
-    QPushButton, QSizePolicy, QVBoxLayout, QWidget)
+    QPushButton, QScrollArea, QSizePolicy, QVBoxLayout,
+    QWidget)
 
 class Ui_main_window(object):
     def setupUi(self, main_window):
@@ -25,10 +26,8 @@ class Ui_main_window(object):
             main_window.setObjectName(u"main_window")
         main_window.resize(1200, 800)
         main_window.setStyleSheet(u"")
-        self.horizontalLayout = QHBoxLayout(main_window)
-        self.horizontalLayout.setSpacing(0)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3 = QHBoxLayout(main_window)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.left_section = QWidget(main_window)
         self.left_section.setObjectName(u"left_section")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
@@ -44,7 +43,6 @@ class Ui_main_window(object):
         self.logo_label = QLabel(self.left_section)
         self.logo_label.setObjectName(u"logo_label")
         font = QFont()
-        font.setFamilies([u"Impact"])
         font.setPointSize(20)
         self.logo_label.setFont(font)
         self.logo_label.setStyleSheet(u"")
@@ -60,6 +58,7 @@ class Ui_main_window(object):
 
         self.libraries_list_widget = QListWidget(self.left_section)
         self.libraries_list_widget.setObjectName(u"libraries_list_widget")
+        self.libraries_list_widget.setStyleSheet(u"")
 
         self.left_section_layout.addWidget(self.libraries_list_widget)
 
@@ -84,7 +83,7 @@ class Ui_main_window(object):
         self.left_section_layout.addWidget(self.settings_btn)
 
 
-        self.horizontalLayout.addWidget(self.left_section)
+        self.horizontalLayout_3.addWidget(self.left_section)
 
         self.right_section = QVBoxLayout()
         self.right_section.setObjectName(u"right_section")
@@ -93,9 +92,9 @@ class Ui_main_window(object):
         self.library_upper_wrapper.setMinimumSize(QSize(0, 50))
         self.library_upper_wrapper.setMaximumSize(QSize(16777215, 50))
         self.library_upper_wrapper.setStyleSheet(u"")
-        self.horizontalLayout_2 = QHBoxLayout(self.library_upper_wrapper)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.library_upper_layout = QHBoxLayout(self.library_upper_wrapper)
+        self.library_upper_layout.setObjectName(u"library_upper_layout")
+        self.library_upper_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.current_library_label = QLabel(self.library_upper_wrapper)
         self.current_library_label.setObjectName(u"current_library_label")
         sizePolicy.setHeightForWidth(self.current_library_label.sizePolicy().hasHeightForWidth())
@@ -104,7 +103,7 @@ class Ui_main_window(object):
         self.current_library_label.setAlignment(Qt.AlignCenter)
         self.current_library_label.setMargin(0)
 
-        self.horizontalLayout_2.addWidget(self.current_library_label)
+        self.library_upper_layout.addWidget(self.current_library_label)
 
         self.current_library_buttons_layout = QHBoxLayout()
         self.current_library_buttons_layout.setObjectName(u"current_library_buttons_layout")
@@ -129,25 +128,31 @@ class Ui_main_window(object):
         self.current_library_buttons_layout.addWidget(self.new_volumes_btn)
 
 
-        self.horizontalLayout_2.addLayout(self.current_library_buttons_layout)
+        self.library_upper_layout.addLayout(self.current_library_buttons_layout)
 
 
         self.right_section.addWidget(self.library_upper_wrapper)
 
+        self.series_scroll_area = QScrollArea(main_window)
+        self.series_scroll_area.setObjectName(u"series_scroll_area")
+        self.series_scroll_area.setWidgetResizable(True)
+        self.series_grid_wrapper = QWidget()
+        self.series_grid_wrapper.setObjectName(u"series_grid_wrapper")
+        self.series_grid_wrapper.setGeometry(QRect(0, 0, 972, 722))
+        self.series_wrapper_layout_useless = QHBoxLayout(self.series_grid_wrapper)
+        self.series_wrapper_layout_useless.setObjectName(u"series_wrapper_layout_useless")
+        self.series_wrapper_layout_useless.setContentsMargins(0, 0, 0, 0)
         self.series_grid_layout = QGridLayout()
         self.series_grid_layout.setObjectName(u"series_grid_layout")
-        self.series_grid_layout.setContentsMargins(9, 9, 9, 9)
-        self.series1_label = QLabel(main_window)
-        self.series1_label.setObjectName(u"series1_label")
-        self.series1_label.setFrameShadow(QFrame.Sunken)
 
-        self.series_grid_layout.addWidget(self.series1_label, 0, 0, 1, 1)
+        self.series_wrapper_layout_useless.addLayout(self.series_grid_layout)
 
+        self.series_scroll_area.setWidget(self.series_grid_wrapper)
 
-        self.right_section.addLayout(self.series_grid_layout)
+        self.right_section.addWidget(self.series_scroll_area)
 
 
-        self.horizontalLayout.addLayout(self.right_section)
+        self.horizontalLayout_3.addLayout(self.right_section)
 
 
         self.retranslateUi(main_window)
@@ -159,17 +164,11 @@ class Ui_main_window(object):
         main_window.setWindowTitle(QCoreApplication.translate("main_window", u"Manga Manager", None))
         self.logo_label.setText(QCoreApplication.translate("main_window", u"Manga Manager", None))
         self.libraries_list_label.setText(QCoreApplication.translate("main_window", u"Libraries", None))
-
-        __sortingEnabled = self.libraries_list_widget.isSortingEnabled()
-        self.libraries_list_widget.setSortingEnabled(False)
-        self.libraries_list_widget.setSortingEnabled(__sortingEnabled)
-
         self.add_library_btn.setText(QCoreApplication.translate("main_window", u"Add Library", None))
         self.settings_btn.setText(QCoreApplication.translate("main_window", u"Settings", None))
         self.current_library_label.setText(QCoreApplication.translate("main_window", u"Library Name", None))
         self.scan_library_btn.setText(QCoreApplication.translate("main_window", u"Scan Library", None))
         self.update_library_btn.setText(QCoreApplication.translate("main_window", u"Update Library", None))
         self.new_volumes_btn.setText(QCoreApplication.translate("main_window", u"New Volumes", None))
-        self.series1_label.setText(QCoreApplication.translate("main_window", u"Dummy Series Lable -> Series Grid Layout", None))
     # retranslateUi
 

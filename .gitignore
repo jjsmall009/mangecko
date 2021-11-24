@@ -2,6 +2,8 @@
 __pycache__/
 db.sqlite3
 
+.qt_for_python
+
 .env
 .venv
 
