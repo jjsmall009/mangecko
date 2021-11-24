@@ -2,8 +2,11 @@ from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import (
     QApplication, QDialog, QListWidgetItem, QMainWindow, QMessageBox, QWidget
 )
-
+from pathlib import Path
+from models.manga_model import Manga
 from models import database_manager
+from utilities.manga_scraper import series_scraper, series_search
+from utilities.library_scanner import LibraryScanner
 from views.ui_main_layout import Ui_main_window
 from views.ui_card_widget import Ui_CardWidget
 
@@ -69,7 +72,10 @@ class MainWindow(QWidget, Ui_main_window):
         row, col = 0, 0
         for series in series_list:
             card = CardWidget()
-            cover = QPixmap(f"data/covers/{series[2]}.jpg")
+            if series[2] == None:
+                cover = QPixmap("data/covers/no-image.png")
+            else:
+                cover = QPixmap(f"data/covers/{series[2]}.jpg")
             card.cover_label.setPixmap(cover)
             card.series_label.setText(series[0])
             card.volume_label.setText(f"Volumes - {series[1]}")
@@ -91,9 +97,59 @@ class MainWindow(QWidget, Ui_main_window):
 
     def scan_library(self):
         print("You clicked scan library")
+        library_name = self.libraries_list_widget.currentItem().text()
+        library_id = database_manager.get_library_id(library_name)[0]
+        print(library_id)
+
+        path = Path(database_manager.get_library_path(library_id))
+        scanner = LibraryScanner(path)
+        scanner.scan_directory()
+        valid_series = scanner.valid_folders
+        manga = []
+
+        for series, vol_count in valid_series.items():
+            has_match = database_manager.series_exists(series, library_id)
+            if has_match:
+                database_manager.update_volume_info(series, vol_count)
+            else:
+                print(f"New series added -> {series}")
+                current_manga = Manga(series, vol_count)
+                id = series_search(series)
+
+                if id != None:
+                    current_manga.site_id = id
+                    current_manga.has_match = True
+                    series_scraper(id, current_manga)
+
+                manga.append(current_manga)
+        database_manager.insert_manga(manga, path.name)
+
+        db_series = database_manager.get_series(library_id)
+        for series in db_series:
+            if series not in valid_series:
+                print(f"Deleting {series}...")
+                database_manager.delete_series(series)
+
+        self.populate_series_grid()
 
     def update_library(self):
         print("You clicked update library")
+        library_name = self.libraries_list_widget.currentItem().text()
+        library_id = database_manager.get_library_id(library_name)[0]
+
+        # Query DB and get ongoing series
+        ongoing_series = database_manager.get_ongoing(library_id)
+
+        # Series tuple = (local_title, my_volumes, site_id)
+        for series in ongoing_series:
+            current_manga = Manga(series[0], series[1])
+            current_manga.site_id = series[2]
+
+            series_scraper(series[2], current_manga)
+
+            database_manager.update_manga(current_manga)
+
+        self.populate_series_grid()
 
     def view_new_volumes(self):
         print("You clicked view new volumes")

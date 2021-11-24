@@ -252,6 +252,9 @@ color:#f48c06;
             <property name="text">
              <string>Scan Library</string>
             </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>
