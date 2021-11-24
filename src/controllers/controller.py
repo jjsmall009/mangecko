@@ -68,7 +68,7 @@ class MainWindow(QWidget, Ui_main_window):
         row, col = 0, 0
         for series in series_list:
             card = CardWidget()
-            cover = QPixmap(f"../../data/covers/{series[2]}.jpg")
+            cover = QPixmap(f"data/covers/{series[2]}.jpg")
             card.cover_label.setPixmap(cover)
             card.series_label.setText(series[0])
             card.volume_label.setText(f"Volumes - {series[1]}")
