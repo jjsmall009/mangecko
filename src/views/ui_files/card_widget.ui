@@ -34,11 +34,17 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <layout class="QVBoxLayout" name="card_layout">
+  <layout class="QVBoxLayout" name="card_layout" stretch="1,0,0">
    <item>
     <widget class="QLabel" name="cover_label">
      <property name="text">
-      <string>Cover Image</string>
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -47,12 +53,18 @@
      <property name="text">
       <string>Series Name</string>
      </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="volume_label">
      <property name="text">
       <string>Volume Info</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

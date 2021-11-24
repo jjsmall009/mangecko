@@ -4,7 +4,7 @@ import requests
 import sqlite3
 from pathlib import Path
 
-db_path = "data/database.db"
+db_path = "../data/database.db"
 
 def initialize():
     path = Path(db_path)

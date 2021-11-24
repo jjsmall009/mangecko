@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'card_widgetYMxJPX.ui'
+## Form generated from reading UI file 'card_widgetxkzPKW.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -35,19 +35,24 @@ class Ui_CardWidget(object):
         self.card_layout.setObjectName(u"card_layout")
         self.cover_label = QLabel(CardWidget)
         self.cover_label.setObjectName(u"cover_label")
+        self.cover_label.setScaledContents(True)
+        self.cover_label.setWordWrap(True)
 
         self.card_layout.addWidget(self.cover_label)
 
         self.series_label = QLabel(CardWidget)
         self.series_label.setObjectName(u"series_label")
+        self.series_label.setWordWrap(True)
 
         self.card_layout.addWidget(self.series_label)
 
         self.volume_label = QLabel(CardWidget)
         self.volume_label.setObjectName(u"volume_label")
+        self.volume_label.setWordWrap(True)
 
         self.card_layout.addWidget(self.volume_label)
 
+        self.card_layout.setStretch(0, 1)
 
         self.retranslateUi(CardWidget)
 
@@ -56,7 +61,7 @@ class Ui_CardWidget(object):
 
     def retranslateUi(self, CardWidget):
         CardWidget.setWindowTitle(QCoreApplication.translate("CardWidget", u"Form", None))
-        self.cover_label.setText(QCoreApplication.translate("CardWidget", u"Cover Image", None))
+        self.cover_label.setText("")
         self.series_label.setText(QCoreApplication.translate("CardWidget", u"Series Name", None))
         self.volume_label.setText(QCoreApplication.translate("CardWidget", u"Volume Info", None))
     # retranslateUi
