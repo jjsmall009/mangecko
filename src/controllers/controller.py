@@ -61,6 +61,7 @@ class MainWindow(QWidget, Ui_main_window):
         deleteItemsOfLayout(self.series_grid_layout)
 
         library_name = self.libraries_list_widget.currentItem().text()
+        self.current_library_label.setText(library_name)
         library_id = database_manager.get_library_id(library_name)[0]
 
         series_list = database_manager.get_series_from_library(library_id)
