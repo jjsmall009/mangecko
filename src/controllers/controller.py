@@ -1,16 +1,16 @@
-from PySide6.QtGui import QPixmap
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize
-from PySide6.QtWidgets import (
-    QApplication, QDialog, QListWidgetItem, QMainWindow, QMessageBox, QWidget
-)
+from PySide6.QtWidgets import (QDial, QDialog, QLabel, QListWidgetItem, QMessageBox, QWidget)
+
 from pathlib import Path
+
 from models.manga_model import Manga
 from models import database_manager
 from utilities.manga_scraper import series_scraper, series_search
 from utilities.library_scanner import LibraryScanner
 from views.ui_main_layout import Ui_main_window
 from views.ui_card_widget import Ui_CardWidget
+from views.ui_new_volume_dialog import Ui_NewVolumeDialog
 
 
 def deleteItemsOfLayout(layout):
@@ -35,6 +35,25 @@ class CardWidget(QWidget, Ui_CardWidget):
         # Initialize and set up various things
         self.setupUi(self)
 
+class NewVolumeDialog(QDialog, Ui_NewVolumeDialog):
+    def __init__(self, library_id, parent=None):
+        super().__init__()
+        self.id = library_id
+
+        # Initialize and set up various things
+        self.setupUi(self)
+        self.view_button.clicked.connect(self.display)
+        self.close_button.clicked.connect(self.close)
+
+    def display(self):
+        # Display series with new volumes
+        series = database_manager.series_with_new_volumes(self.id)
+        
+        for series in series:
+            text = f"{series[0]}: Volume {series[1]} -> Volume {series[2]}"
+            label = QLabel(text)
+            self.label_layout.addWidget(label)
+
 
 class MainWindow(QWidget, Ui_main_window):
     def __init__(self):
@@ -55,7 +74,6 @@ class MainWindow(QWidget, Ui_main_window):
 
     def initialize_library_list(self):
         list = database_manager.get_libraries()
-
         if list is None:
             return
         
@@ -63,6 +81,9 @@ class MainWindow(QWidget, Ui_main_window):
             self.libraries_list_widget.addItem(QListWidgetItem(library[1]))
 
     def add_icons(self):
+        """
+        Qt Designer adds in the wrong path so here you go.
+        """
         icon1 = QIcon()
         icon1.addFile("resources/icons/add-128.png", QSize(), QIcon.Normal, QIcon.Off)
         self.add_library_btn.setIcon(icon1)
@@ -73,6 +94,10 @@ class MainWindow(QWidget, Ui_main_window):
 
 
     def populate_series_grid(self):
+        """
+        TODO - Redo the series grid to a flow layout so the card widgets wrap when the
+               screen gets resized.
+        """
         deleteItemsOfLayout(self.series_grid_layout)
         print("updating series grid...")
 
@@ -101,12 +126,11 @@ class MainWindow(QWidget, Ui_main_window):
             else:
                 col += 1
 
-
     def add_library(self):
         print("You clicked add library")
 
     def show_settings(self):
-        print("You clicked settings")
+        print("You clicked settings! No settings currently...")
 
     def scan_library(self):
         print("You clicked scan library")
@@ -147,8 +171,10 @@ class MainWindow(QWidget, Ui_main_window):
 
     def update_library(self):
         print("You clicked update library")
+        
         library_name = self.libraries_list_widget.currentItem().text()
         library_id = database_manager.get_library_id(library_name)[0]
+        
 
         # Query DB and get ongoing series
         ongoing_series = database_manager.get_ongoing(library_id)
@@ -166,4 +192,8 @@ class MainWindow(QWidget, Ui_main_window):
 
     def view_new_volumes(self):
         print("You clicked view new volumes")
+        library_name = self.libraries_list_widget.currentItem().text()
+        library_id = database_manager.get_library_id(library_name)[0]
 
+        dlg = NewVolumeDialog(library_id, self)
+        dlg.exec()
