@@ -62,6 +62,7 @@ class MainWindow(QWidget, Ui_main_window):
 
     def populate_series_grid(self):
         deleteItemsOfLayout(self.series_grid_layout)
+        print("updating series grid...")
 
         library_name = self.libraries_list_widget.currentItem().text()
         self.current_library_label.setText(library_name)

@@ -212,7 +212,8 @@ def get_series_from_library(library_id):
                             FROM manga_series
                             INNER JOIN library_manga
                             ON manga_series.id = library_manga.manga_id
-                            WHERE library_manga.library_id = ?"""
+                            WHERE library_manga.library_id = ?
+                            ORDER By manga_series.local_title"""
 
             cur.execute(statement, (library_id,))
 

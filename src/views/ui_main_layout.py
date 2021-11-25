@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_layoutuvLjOO.ui'
+## Form generated from reading UI file 'main_layoutZuVjKO.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -46,7 +46,6 @@ class Ui_main_window(object):
         self.logo_label = QLabel(self.left_section)
         self.logo_label.setObjectName(u"logo_label")
         font = QFont()
-        font.setFamilies([u"Impact"])
         font.setPointSize(20)
         self.logo_label.setFont(font)
         self.logo_label.setStyleSheet(u"")
@@ -57,7 +56,6 @@ class Ui_main_window(object):
         self.libraries_list_label = QLabel(self.left_section)
         self.libraries_list_label.setObjectName(u"libraries_list_label")
         font1 = QFont()
-        font1.setFamilies([u"Arial"])
         font1.setPointSize(12)
         self.libraries_list_label.setFont(font1)
         self.libraries_list_label.setStyleSheet(u"margin-top:10px;")
@@ -67,7 +65,6 @@ class Ui_main_window(object):
         self.libraries_list_widget = QListWidget(self.left_section)
         self.libraries_list_widget.setObjectName(u"libraries_list_widget")
         font2 = QFont()
-        font2.setFamilies([u"Arial"])
         font2.setPointSize(10)
         self.libraries_list_widget.setFont(font2)
         self.libraries_list_widget.setStyleSheet(u"")
@@ -129,10 +126,7 @@ class Ui_main_window(object):
         sizePolicy.setHeightForWidth(self.current_library_label.sizePolicy().hasHeightForWidth())
         self.current_library_label.setSizePolicy(sizePolicy)
         self.current_library_label.setMinimumSize(QSize(200, 0))
-        font3 = QFont()
-        font3.setFamilies([u"Arial Black"])
-        font3.setPointSize(12)
-        self.current_library_label.setFont(font3)
+        self.current_library_label.setFont(font1)
         self.current_library_label.setAlignment(Qt.AlignCenter)
         self.current_library_label.setMargin(0)
 
@@ -145,6 +139,7 @@ class Ui_main_window(object):
         self.scan_library_btn.setObjectName(u"scan_library_btn")
         self.scan_library_btn.setMaximumSize(QSize(125, 16777215))
         self.scan_library_btn.setFont(font1)
+        self.scan_library_btn.setFlat(False)
 
         self.current_library_buttons_layout.addWidget(self.scan_library_btn)
 
@@ -179,8 +174,9 @@ class Ui_main_window(object):
         self.series_grid_wrapper.setGeometry(QRect(0, 0, 998, 742))
         self.series_wrapper_layout_useless = QHBoxLayout(self.series_grid_wrapper)
         self.series_wrapper_layout_useless.setObjectName(u"series_wrapper_layout_useless")
-        self.series_wrapper_layout_useless.setContentsMargins(0, 0, 0, 0)
+        self.series_wrapper_layout_useless.setContentsMargins(0, 6, 0, 6)
         self.series_grid_layout = QGridLayout()
+        self.series_grid_layout.setSpacing(10)
         self.series_grid_layout.setObjectName(u"series_grid_layout")
 
         self.series_wrapper_layout_useless.addLayout(self.series_grid_layout)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'card_widgetxkzPKW.ui'
+## Form generated from reading UI file 'card_widgetcjRAym.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QSizePolicy, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QSizePolicy,
+    QVBoxLayout, QWidget)
 
 class Ui_CardWidget(object):
     def setupUi(self, CardWidget):
@@ -31,28 +31,46 @@ class Ui_CardWidget(object):
         CardWidget.setMinimumSize(QSize(150, 250))
         CardWidget.setMaximumSize(QSize(150, 250))
         CardWidget.setStyleSheet(u"")
-        self.card_layout = QVBoxLayout(CardWidget)
-        self.card_layout.setObjectName(u"card_layout")
-        self.cover_label = QLabel(CardWidget)
+        self.card_outer_layout = QVBoxLayout(CardWidget)
+        self.card_outer_layout.setSpacing(0)
+        self.card_outer_layout.setObjectName(u"card_outer_layout")
+        self.card_outer_layout.setContentsMargins(0, 0, 0, 0)
+        self.frame = QFrame(CardWidget)
+        self.frame.setObjectName(u"frame")
+        self.frame.setStyleSheet(u"QFrame#frame {\n"
+"border:1px solid grey;\n"
+"border-radius:5px;\n"
+"}")
+        self.frame.setFrameShape(QFrame.NoFrame)
+        self.frame.setFrameShadow(QFrame.Plain)
+        self.frame.setLineWidth(1)
+        self.frame_layout = QVBoxLayout(self.frame)
+        self.frame_layout.setSpacing(6)
+        self.frame_layout.setObjectName(u"frame_layout")
+        self.frame_layout.setContentsMargins(2, 2, 2, 2)
+        self.cover_label = QLabel(self.frame)
         self.cover_label.setObjectName(u"cover_label")
         self.cover_label.setScaledContents(True)
         self.cover_label.setWordWrap(True)
 
-        self.card_layout.addWidget(self.cover_label)
+        self.frame_layout.addWidget(self.cover_label)
 
-        self.series_label = QLabel(CardWidget)
+        self.series_label = QLabel(self.frame)
         self.series_label.setObjectName(u"series_label")
         self.series_label.setWordWrap(True)
 
-        self.card_layout.addWidget(self.series_label)
+        self.frame_layout.addWidget(self.series_label)
 
-        self.volume_label = QLabel(CardWidget)
+        self.volume_label = QLabel(self.frame)
         self.volume_label.setObjectName(u"volume_label")
         self.volume_label.setWordWrap(True)
 
-        self.card_layout.addWidget(self.volume_label)
+        self.frame_layout.addWidget(self.volume_label)
 
-        self.card_layout.setStretch(0, 1)
+        self.frame_layout.setStretch(0, 1)
+
+        self.card_outer_layout.addWidget(self.frame)
+
 
         self.retranslateUi(CardWidget)
 

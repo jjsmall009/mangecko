@@ -61,7 +61,6 @@ color:#faf9f9;</string>
        <widget class="QLabel" name="logo_label">
         <property name="font">
          <font>
-          <family>Impact</family>
           <pointsize>20</pointsize>
          </font>
         </property>
@@ -80,7 +79,6 @@ color:#faf9f9;</string>
        <widget class="QLabel" name="libraries_list_label">
         <property name="font">
          <font>
-          <family>Arial</family>
           <pointsize>12</pointsize>
          </font>
         </property>
@@ -96,7 +94,6 @@ color:#faf9f9;</string>
        <widget class="QListWidget" name="libraries_list_widget">
         <property name="font">
          <font>
-          <family>Arial</family>
           <pointsize>10</pointsize>
          </font>
         </property>
@@ -118,7 +115,6 @@ color:#faf9f9;</string>
        <widget class="QPushButton" name="add_library_btn">
         <property name="font">
          <font>
-          <family>Arial</family>
           <pointsize>12</pointsize>
          </font>
         </property>
@@ -150,7 +146,6 @@ color:#faf9f9;</string>
        <widget class="QPushButton" name="settings_btn">
         <property name="font">
          <font>
-          <family>Arial</family>
           <pointsize>12</pointsize>
          </font>
         </property>
@@ -215,7 +210,6 @@ color:#f48c06;
           </property>
           <property name="font">
            <font>
-            <family>Arial Black</family>
             <pointsize>12</pointsize>
            </font>
           </property>
@@ -245,7 +239,6 @@ color:#f48c06;
             </property>
             <property name="font">
              <font>
-              <family>Arial</family>
               <pointsize>12</pointsize>
              </font>
             </property>
@@ -267,7 +260,6 @@ color:#f48c06;
             </property>
             <property name="font">
              <font>
-              <family>Arial</family>
               <pointsize>12</pointsize>
              </font>
             </property>
@@ -292,7 +284,6 @@ color:#f48c06;
             </property>
             <property name="font">
              <font>
-              <family>Arial</family>
               <pointsize>12</pointsize>
              </font>
             </property>
@@ -331,16 +322,20 @@ color:#f48c06;
           <number>0</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>6</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>6</number>
          </property>
          <item>
-          <layout class="QGridLayout" name="series_grid_layout"/>
+          <layout class="QGridLayout" name="series_grid_layout">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+          </layout>
          </item>
         </layout>
        </widget>
