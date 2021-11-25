@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QDialog, QListWidgetItem
+from PySide6 import QtCore
 
 from models.manga_model import Manga
 from models import database_manager
@@ -38,5 +39,7 @@ class UpdateDialog(QDialog, Ui_Dialog):
     def update_view(self, manga):
         for series in manga:
             text = f"{series.local_title} - {series.my_volumes} - {series.eng_volumes} - {series.eng_status}"
-            self.list_widget.addItem(QListWidgetItem(text))
+            item = QListWidgetItem(text)
+            item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable)
+            self.list_widget.addItem(item)
         

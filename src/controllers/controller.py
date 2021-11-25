@@ -7,6 +7,7 @@ from pathlib import Path
 from controllers.new_volume_controller import NewVolumeDialog
 from controllers.scan_library_controller import ScanDialog
 from controllers.update_controller import UpdateDialog
+from controllers.add_library_controller import AddLibraryDialog
 from models.manga_model import Manga
 from models import database_manager
 from utilities.manga_scraper import series_scraper, series_search
@@ -111,6 +112,9 @@ class MainWindow(QWidget, Ui_main_window):
 
     def add_library(self):
         print("You clicked add library")
+
+        dlg = AddLibraryDialog(self)
+        dlg.exec()
 
     def show_settings(self):
         print("You clicked settings! No settings currently...")
