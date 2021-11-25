@@ -56,6 +56,11 @@
       <string notr="true">QFrame#frame {
 border:1px solid grey;
 border-radius:5px;
+}
+
+QFrame#frame::hover {
+border:2px solid grey;
+background-color:#e8e8e4;
 }</string>
      </property>
      <property name="frameShape">

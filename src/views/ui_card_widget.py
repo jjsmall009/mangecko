@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'card_widgetcjRAym.ui'
+## Form generated from reading UI file 'card_widgetiGkAru.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -40,6 +40,11 @@ class Ui_CardWidget(object):
         self.frame.setStyleSheet(u"QFrame#frame {\n"
 "border:1px solid grey;\n"
 "border-radius:5px;\n"
+"}\n"
+"\n"
+"QFrame#frame::hover {\n"
+"border:2px solid grey;\n"
+"background-color:#edf2f4;\n"
 "}")
         self.frame.setFrameShape(QFrame.NoFrame)
         self.frame.setFrameShadow(QFrame.Plain)

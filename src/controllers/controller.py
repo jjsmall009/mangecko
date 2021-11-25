@@ -1,4 +1,6 @@
 from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import QSize
 from PySide6.QtWidgets import (
     QApplication, QDialog, QListWidgetItem, QMainWindow, QMessageBox, QWidget
 )
@@ -41,6 +43,7 @@ class MainWindow(QWidget, Ui_main_window):
         # Initialize and set up various things
         self.setupUi(self)
         self.initialize_library_list()
+        self.add_icons()
 
         # Connect slots to signals
         self.libraries_list_widget.itemClicked.connect(self.populate_series_grid)
@@ -59,16 +62,25 @@ class MainWindow(QWidget, Ui_main_window):
         for library in list:
             self.libraries_list_widget.addItem(QListWidgetItem(library[1]))
 
+    def add_icons(self):
+        icon1 = QIcon()
+        icon1.addFile("resources/icons/add-128.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.add_library_btn.setIcon(icon1)
+
+        icon2 = QIcon()
+        icon2.addFile("resources/icons/settings-4-128.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.settings_btn.setIcon(icon2)
+
 
     def populate_series_grid(self):
         deleteItemsOfLayout(self.series_grid_layout)
         print("updating series grid...")
 
         library_name = self.libraries_list_widget.currentItem().text()
-        self.current_library_label.setText(library_name)
         library_id = database_manager.get_library_id(library_name)[0]
 
         series_list = database_manager.get_series_from_library(library_id)
+        self.current_library_label.setText(f"{library_name} | {len(series_list)}")
 
         row, col = 0, 0
         for series in series_list:

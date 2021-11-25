@@ -53,14 +53,29 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:#2a2d31;
-color:#faf9f9;</string>
+      <string notr="true">QWidget{
+background-color:#2a2d31;
+color:#faf9f9;
+}
+
+QPushButton {
+border:none;
+}
+
+QPushButton#add_library_btn::hover {
+font-weight: bold;
+}
+
+QPushButton#settings_btn::hover {
+font-weight: bold;
+}</string>
      </property>
      <layout class="QVBoxLayout" name="left_section_layout">
       <item>
        <widget class="QLabel" name="logo_label">
         <property name="font">
          <font>
+          <family>Impact</family>
           <pointsize>20</pointsize>
          </font>
         </property>
@@ -79,6 +94,7 @@ color:#faf9f9;</string>
        <widget class="QLabel" name="libraries_list_label">
         <property name="font">
          <font>
+          <family>Segoe UI Semilight</family>
           <pointsize>12</pointsize>
          </font>
         </property>
@@ -94,6 +110,7 @@ color:#faf9f9;</string>
        <widget class="QListWidget" name="libraries_list_widget">
         <property name="font">
          <font>
+          <family>Segoe UI</family>
           <pointsize>10</pointsize>
          </font>
         </property>
@@ -112,19 +129,44 @@ color:#faf9f9;</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="add_library_btn">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
+       <layout class="QHBoxLayout" name="add_lib_layout">
+        <property name="leftMargin">
+         <number>2</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Add Library</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QPushButton" name="add_library_btn">
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Add Library</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../../../resources/icons/add-128.png</normaloff>../../../resources/icons/add-128.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="add_lib_spacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="Line" name="divider">
@@ -135,7 +177,7 @@ color:#faf9f9;</string>
          <enum>QFrame::Plain</enum>
         </property>
         <property name="lineWidth">
-         <number>2</number>
+         <number>1</number>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -143,20 +185,45 @@ color:#faf9f9;</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="settings_btn">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
+       <layout class="QHBoxLayout" name="settings_layout">
+        <property name="leftMargin">
+         <number>2</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">color:#f48c06;
+        <item>
+         <widget class="QPushButton" name="settings_btn">
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:#f48c06;
 </string>
-        </property>
-        <property name="text">
-         <string>Settings</string>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string>Settings</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../../../resources/icons/settings-4-128.png</normaloff>../../../resources/icons/settings-4-128.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="settings_spacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
@@ -165,6 +232,12 @@ color:#faf9f9;</string>
     <layout class="QVBoxLayout" name="right_section">
      <item>
       <widget class="QWidget" name="library_upper_wrapper" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -187,7 +260,14 @@ color:white;
 }
 
 QPushButton {
+background-color:#f8f9fa;
 color:#f48c06;
+border:2px solid black;
+border-radius:5px;
+}
+
+QPushButton::hover{
+border:2px solid grey;
 }</string>
        </property>
        <layout class="QHBoxLayout" name="library_upper_layout" stretch="0,0">
@@ -197,7 +277,7 @@ color:#f48c06;
         <item>
          <widget class="QLabel" name="current_library_label">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -210,11 +290,12 @@ color:#f48c06;
           </property>
           <property name="font">
            <font>
+            <family>Segoe UI Semibold</family>
             <pointsize>12</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>Library Name</string>
+           <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -225,12 +306,37 @@ color:#f48c06;
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="current_library_buttons_layout" stretch="0,0,0">
+         <layout class="QHBoxLayout" name="current_library_buttons_layout" stretch="0,0,0,0,0">
           <property name="rightMargin">
            <number>0</number>
           </property>
           <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QPushButton" name="scan_library_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>125</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="maximumSize">
              <size>
               <width>125</width>
@@ -239,6 +345,7 @@ color:#f48c06;
             </property>
             <property name="font">
              <font>
+              <family>Segoe UI Semibold</family>
               <pointsize>12</pointsize>
              </font>
             </property>
@@ -252,27 +359,15 @@ color:#f48c06;
           </item>
           <item>
            <widget class="QPushButton" name="update_library_btn">
-            <property name="maximumSize">
-             <size>
-              <width>125</width>
-              <height>16777215</height>
-             </size>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Update Library</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="new_volumes_btn">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>125</width>
               <height>0</height>
              </size>
             </property>
@@ -284,6 +379,38 @@ color:#f48c06;
             </property>
             <property name="font">
              <font>
+              <family>Segoe UI Semibold</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Update Library</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="new_volumes_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>125</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>125</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI Semibold</family>
               <pointsize>12</pointsize>
              </font>
             </property>
@@ -291,6 +418,19 @@ color:#f48c06;
              <string>New Volumes</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
