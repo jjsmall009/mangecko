@@ -60,7 +60,7 @@ border-radius:5px;
 
 QFrame#frame::hover {
 border:2px solid grey;
-background-color:#e8e8e4;
+background-color:#edf2f4;
 }</string>
      </property>
      <property name="frameShape">
