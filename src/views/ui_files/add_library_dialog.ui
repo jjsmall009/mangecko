@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>900</width>
     <height>600</height>
    </rect>
   </property>
@@ -46,7 +46,6 @@
       <widget class="QPushButton" name="add_library_btn">
        <property name="font">
         <font>
-         <family>Segoe UI Semibold</family>
          <pointsize>10</pointsize>
         </font>
        </property>
@@ -67,7 +66,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>780</width>
+        <width>880</width>
         <height>488</height>
        </rect>
       </property>
@@ -90,12 +89,22 @@
          </column>
          <column>
           <property name="text">
-           <string>Volumes</string>
+           <string>Site ID</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Stuff</string>
+           <string>My Volumes</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>English Volumes</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Source Volumes</string>
           </property>
          </column>
         </widget>

@@ -57,6 +57,7 @@ class MainWindow(QWidget, Ui_main_window):
         self.new_volumes_btn.clicked.connect(self.view_new_volumes)
 
     def initialize_library_list(self):
+        self.libraries_list_widget.clear()
         list = database_manager.get_libraries()
         if list is None:
             return
@@ -115,6 +116,8 @@ class MainWindow(QWidget, Ui_main_window):
 
         dlg = AddLibraryDialog(self)
         dlg.exec()
+
+        self.initialize_library_list()
 
     def show_settings(self):
         print("You clicked settings! No settings currently...")
