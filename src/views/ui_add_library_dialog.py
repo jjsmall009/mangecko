@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_library_dialogfgSlEX.ui'
+## Form generated from reading UI file 'add_library_dialogqAocTp.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -94,6 +94,11 @@ class Ui_AddLibraryDialog(object):
 
         self.bottom_btn_layout.addItem(self.horizontalSpacer)
 
+        self.loading_label = QLabel(AddLibraryDialog)
+        self.loading_label.setObjectName(u"loading_label")
+
+        self.bottom_btn_layout.addWidget(self.loading_label)
+
         self.done_btn = QPushButton(AddLibraryDialog)
         self.done_btn.setObjectName(u"done_btn")
 
@@ -129,6 +134,7 @@ class Ui_AddLibraryDialog(object):
         ___qtablewidgetitem3.setText(QCoreApplication.translate("AddLibraryDialog", u"English Volumes", None));
         ___qtablewidgetitem4 = self.series_table.horizontalHeaderItem(4)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("AddLibraryDialog", u"Source Volumes", None));
+        self.loading_label.setText("")
         self.done_btn.setText(QCoreApplication.translate("AddLibraryDialog", u"Done", None))
         self.cancel_btn.setText(QCoreApplication.translate("AddLibraryDialog", u"Cancel", None))
     # retranslateUi

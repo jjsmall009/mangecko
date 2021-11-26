@@ -42,13 +42,20 @@ It will be a pretty basic CRUD app but I want to focus on the look and feel, res
 
 ## Current Progress
 
+### Stage 3 - Clean Up
+
+- [ ] Refactor and clean up my code.
+- [ ] Add in loading bars or spinners.
+- [ ] Improve UI and polish up the look and feel.
+- [ ] Create a flow based layout for the series grid.
+
 ### Stage 2 - GUI
 
 - [x] Do some initial layout planning and GUI mockups.
 - [x] Learn the basics of PyQt (PySide6 actually).
 - [x] Get started with Qt Designer.
 - [x] Organize files.
-- [ ] Integrate layout with the rest of my code.
+- [x] Integrate layout with the rest of my code.
 - [ ] Work on proper logging.
 
 ### Stage 1 - Console Based Menu

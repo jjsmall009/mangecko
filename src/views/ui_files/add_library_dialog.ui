@@ -129,6 +129,13 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="loading_label">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="done_btn">
        <property name="text">
         <string>Done</string>

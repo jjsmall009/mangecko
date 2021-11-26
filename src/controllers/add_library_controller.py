@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QDialog, QFileDialog, QMessageBox, QTableWidgetItem
-from PySide6 import QtCore
+from PySide6.QtGui import QMovie
 from pathlib import Path
 
 from models.manga_model import Manga
