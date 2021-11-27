@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_layoutYvVhYd.ui'
+## Form generated from reading UI file 'main_layoutxDPAzN.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -25,11 +25,13 @@ class Ui_main_window(object):
         if not main_window.objectName():
             main_window.setObjectName(u"main_window")
         main_window.resize(1200, 800)
-        main_window.setStyleSheet(u"")
+        main_window.setStyleSheet(u"QWidget#main_window{\n"
+"background-color:#212529;\n"
+"}")
         self.horizontalLayout_3 = QHBoxLayout(main_window)
-        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setSpacing(6)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setContentsMargins(6, 6, 6, 6)
         self.left_section = QWidget(main_window)
         self.left_section.setObjectName(u"left_section")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
@@ -54,6 +56,10 @@ class Ui_main_window(object):
 "\n"
 "QPushButton#settings_btn::hover {\n"
 "font-weight: bold;\n"
+"}\n"
+"\n"
+"QWidget#left_section {\n"
+"border-radius:4px;\n"
 "}")
         self.left_section_layout = QVBoxLayout(self.left_section)
         self.left_section_layout.setObjectName(u"left_section_layout")
@@ -71,7 +77,6 @@ class Ui_main_window(object):
         self.libraries_list_label = QLabel(self.left_section)
         self.libraries_list_label.setObjectName(u"libraries_list_label")
         font1 = QFont()
-        font1.setFamilies([u"Segoe UI Semilight"])
         font1.setPointSize(12)
         self.libraries_list_label.setFont(font1)
         self.libraries_list_label.setStyleSheet(u"margin-top:10px;")
@@ -81,10 +86,24 @@ class Ui_main_window(object):
         self.libraries_list_widget = QListWidget(self.left_section)
         self.libraries_list_widget.setObjectName(u"libraries_list_widget")
         font2 = QFont()
-        font2.setFamilies([u"Segoe UI"])
         font2.setPointSize(10)
         self.libraries_list_widget.setFont(font2)
-        self.libraries_list_widget.setStyleSheet(u"")
+        self.libraries_list_widget.setFocusPolicy(Qt.NoFocus)
+        self.libraries_list_widget.setStyleSheet(u"QListWidget::item {\n"
+"height:25px;\n"
+"border-left:2px solid #f48c06;\n"
+"margin-bottom:5px;\n"
+"}\n"
+"\n"
+"QListWidget::item:hover {\n"
+"background-color:#495057;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"background-color:#495057;\n"
+"border-left:2px solid #f48c06;\n"
+"color:#faf9f9;\n"
+"}")
         self.libraries_list_widget.setFrameShape(QFrame.Box)
         self.libraries_list_widget.setFrameShadow(QFrame.Sunken)
         self.libraries_list_widget.setLineWidth(1)
@@ -92,10 +111,16 @@ class Ui_main_window(object):
         self.left_section_layout.addWidget(self.libraries_list_widget)
 
         self.add_lib_layout = QHBoxLayout()
+        self.add_lib_layout.setSpacing(6)
         self.add_lib_layout.setObjectName(u"add_lib_layout")
         self.add_lib_layout.setContentsMargins(2, -1, -1, -1)
         self.add_library_btn = QPushButton(self.left_section)
         self.add_library_btn.setObjectName(u"add_library_btn")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.add_library_btn.sizePolicy().hasHeightForWidth())
+        self.add_library_btn.setSizePolicy(sizePolicy1)
         self.add_library_btn.setFont(font1)
         self.add_library_btn.setStyleSheet(u"")
         icon = QIcon()
@@ -156,6 +181,10 @@ class Ui_main_window(object):
 "background-color:#33373d;\n"
 "}\n"
 "\n"
+"QWidget#library_upper_wrapper {\n"
+"border-radius:4px;\n"
+"}\n"
+"\n"
 "QLabel {\n"
 "color:white;\n"
 "}\n"
@@ -163,8 +192,8 @@ class Ui_main_window(object):
 "QPushButton {\n"
 "background-color:#f8f9fa;\n"
 "color:#f48c06;\n"
-"border:2px solid black;\n"
-"border-radius:5px;\n"
+"\n"
+"border-radius:4px;\n"
 "}\n"
 "\n"
 "QPushButton::hover{\n"
@@ -175,16 +204,13 @@ class Ui_main_window(object):
         self.library_upper_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.current_library_label = QLabel(self.library_upper_wrapper)
         self.current_library_label.setObjectName(u"current_library_label")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.current_library_label.sizePolicy().hasHeightForWidth())
-        self.current_library_label.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.current_library_label.sizePolicy().hasHeightForWidth())
+        self.current_library_label.setSizePolicy(sizePolicy2)
         self.current_library_label.setMinimumSize(QSize(200, 0))
-        font3 = QFont()
-        font3.setFamilies([u"Segoe UI Semibold"])
-        font3.setPointSize(12)
-        self.current_library_label.setFont(font3)
+        self.current_library_label.setFont(font1)
         self.current_library_label.setAlignment(Qt.AlignCenter)
         self.current_library_label.setMargin(0)
 
@@ -199,13 +225,16 @@ class Ui_main_window(object):
 
         self.scan_library_btn = QPushButton(self.library_upper_wrapper)
         self.scan_library_btn.setObjectName(u"scan_library_btn")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.scan_library_btn.sizePolicy().hasHeightForWidth())
-        self.scan_library_btn.setSizePolicy(sizePolicy2)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.scan_library_btn.sizePolicy().hasHeightForWidth())
+        self.scan_library_btn.setSizePolicy(sizePolicy3)
         self.scan_library_btn.setMinimumSize(QSize(125, 0))
         self.scan_library_btn.setMaximumSize(QSize(125, 16777215))
+        font3 = QFont()
+        font3.setFamilies([u"Segoe UI Semibold"])
+        font3.setPointSize(12)
         self.scan_library_btn.setFont(font3)
         self.scan_library_btn.setFlat(False)
 
@@ -213,8 +242,8 @@ class Ui_main_window(object):
 
         self.update_library_btn = QPushButton(self.library_upper_wrapper)
         self.update_library_btn.setObjectName(u"update_library_btn")
-        sizePolicy2.setHeightForWidth(self.update_library_btn.sizePolicy().hasHeightForWidth())
-        self.update_library_btn.setSizePolicy(sizePolicy2)
+        sizePolicy3.setHeightForWidth(self.update_library_btn.sizePolicy().hasHeightForWidth())
+        self.update_library_btn.setSizePolicy(sizePolicy3)
         self.update_library_btn.setMinimumSize(QSize(125, 0))
         self.update_library_btn.setMaximumSize(QSize(125, 16777215))
         self.update_library_btn.setFont(font3)
@@ -223,8 +252,8 @@ class Ui_main_window(object):
 
         self.new_volumes_btn = QPushButton(self.library_upper_wrapper)
         self.new_volumes_btn.setObjectName(u"new_volumes_btn")
-        sizePolicy2.setHeightForWidth(self.new_volumes_btn.sizePolicy().hasHeightForWidth())
-        self.new_volumes_btn.setSizePolicy(sizePolicy2)
+        sizePolicy3.setHeightForWidth(self.new_volumes_btn.sizePolicy().hasHeightForWidth())
+        self.new_volumes_btn.setSizePolicy(sizePolicy3)
         self.new_volumes_btn.setMinimumSize(QSize(125, 0))
         self.new_volumes_btn.setMaximumSize(QSize(125, 16777215))
         self.new_volumes_btn.setFont(font3)
@@ -248,7 +277,10 @@ class Ui_main_window(object):
         self.series_scroll_area.setWidgetResizable(True)
         self.series_grid_wrapper = QWidget()
         self.series_grid_wrapper.setObjectName(u"series_grid_wrapper")
-        self.series_grid_wrapper.setGeometry(QRect(0, 0, 998, 742))
+        self.series_grid_wrapper.setGeometry(QRect(0, 0, 980, 730))
+        self.series_grid_wrapper.setStyleSheet(u"QWidget#series_grid_wrapper{\n"
+"background-color:#212529;\n"
+"}")
         self.series_wrapper_layout_useless = QHBoxLayout(self.series_grid_wrapper)
         self.series_wrapper_layout_useless.setObjectName(u"series_wrapper_layout_useless")
         self.series_wrapper_layout_useless.setContentsMargins(0, 6, 0, 6)

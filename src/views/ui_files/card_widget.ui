@@ -54,6 +54,7 @@
     <widget class="QFrame" name="frame">
      <property name="styleSheet">
       <string notr="true">QFrame#frame {
+background-color:white;
 border:1px solid grey;
 border-radius:5px;
 }

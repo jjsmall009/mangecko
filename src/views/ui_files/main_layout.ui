@@ -14,23 +14,25 @@
    <string>Manga Manager</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QWidget#main_window{
+background-color:#212529;
+}</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <property name="spacing">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>6</number>
    </property>
    <item>
     <widget class="QWidget" name="left_section" native="true">
@@ -68,6 +70,10 @@ font-weight: bold;
 
 QPushButton#settings_btn::hover {
 font-weight: bold;
+}
+
+QWidget#left_section {
+border-radius:4px;
 }</string>
      </property>
      <layout class="QVBoxLayout" name="left_section_layout">
@@ -94,7 +100,6 @@ font-weight: bold;
        <widget class="QLabel" name="libraries_list_label">
         <property name="font">
          <font>
-          <family>Segoe UI Semilight</family>
           <pointsize>12</pointsize>
          </font>
         </property>
@@ -110,12 +115,28 @@ font-weight: bold;
        <widget class="QListWidget" name="libraries_list_widget">
         <property name="font">
          <font>
-          <family>Segoe UI</family>
           <pointsize>10</pointsize>
          </font>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QListWidget::item {
+height:25px;
+border-left:2px solid #f48c06;
+margin-bottom:5px;
+}
+
+QListWidget::item:hover {
+background-color:#495057;
+}
+
+QListWidget::item:selected {
+background-color:#495057;
+border-left:2px solid #f48c06;
+color:#faf9f9;
+}</string>
         </property>
         <property name="frameShape">
          <enum>QFrame::Box</enum>
@@ -130,14 +151,22 @@ font-weight: bold;
       </item>
       <item>
        <layout class="QHBoxLayout" name="add_lib_layout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <property name="leftMargin">
          <number>2</number>
         </property>
         <item>
          <widget class="QPushButton" name="add_library_btn">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="font">
            <font>
-            <family>Segoe UI Semilight</family>
             <pointsize>12</pointsize>
            </font>
           </property>
@@ -157,6 +186,9 @@ font-weight: bold;
          <spacer name="add_lib_spacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -193,7 +225,6 @@ font-weight: bold;
          <widget class="QPushButton" name="settings_btn">
           <property name="font">
            <font>
-            <family>Segoe UI Semilight</family>
             <pointsize>12</pointsize>
            </font>
           </property>
@@ -255,6 +286,10 @@ font-weight: bold;
 background-color:#33373d;
 }
 
+QWidget#library_upper_wrapper {
+border-radius:4px;
+}
+
 QLabel {
 color:white;
 }
@@ -262,8 +297,8 @@ color:white;
 QPushButton {
 background-color:#f8f9fa;
 color:#f48c06;
-border:2px solid black;
-border-radius:5px;
+
+border-radius:4px;
 }
 
 QPushButton::hover{
@@ -290,7 +325,6 @@ border:2px solid grey;
           </property>
           <property name="font">
            <font>
-            <family>Segoe UI Semibold</family>
             <pointsize>12</pointsize>
            </font>
           </property>
@@ -453,9 +487,14 @@ border:2px solid grey;
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>998</width>
-          <height>742</height>
+          <width>980</width>
+          <height>730</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget#series_grid_wrapper{
+background-color:#212529;
+}</string>
         </property>
         <layout class="QHBoxLayout" name="series_wrapper_layout_useless">
          <property name="leftMargin">
