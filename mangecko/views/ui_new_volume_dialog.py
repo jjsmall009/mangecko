@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'new_volume_dialogRobKUv.ui'
+## Form generated from reading UI file 'new_volume_dialogqsxirn.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QProgressBar, QPushButton, QScrollArea, QSizePolicy,
+    QVBoxLayout, QWidget)
 
 class Ui_NewVolumeDialog(object):
     def setupUi(self, NewVolumeDialog):
@@ -25,46 +25,50 @@ class Ui_NewVolumeDialog(object):
             NewVolumeDialog.setObjectName(u"NewVolumeDialog")
         NewVolumeDialog.resize(600, 400)
         font = QFont()
-        font.setFamilies([u"Segoe UI Semibold"])
         font.setPointSize(10)
         NewVolumeDialog.setFont(font)
         self.verticalLayout = QVBoxLayout(NewVolumeDialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.scrollArea = QScrollArea(NewVolumeDialog)
         self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setStyleSheet(u"")
+        self.scrollArea.setFrameShape(QFrame.NoFrame)
+        self.scrollArea.setFrameShadow(QFrame.Plain)
         self.scrollArea.setWidgetResizable(True)
         self.label_widget = QWidget()
         self.label_widget.setObjectName(u"label_widget")
-        self.label_widget.setGeometry(QRect(0, 0, 580, 346))
+        self.label_widget.setGeometry(QRect(0, 0, 582, 348))
         self.label_layout = QVBoxLayout(self.label_widget)
         self.label_layout.setObjectName(u"label_layout")
+        self.label_layout.setContentsMargins(9, 9, 9, 9)
         self.scrollArea.setWidget(self.label_widget)
 
         self.verticalLayout.addWidget(self.scrollArea)
 
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.bottom_layout = QHBoxLayout()
+        self.bottom_layout.setObjectName(u"bottom_layout")
+        self.loading_bar = QProgressBar(NewVolumeDialog)
+        self.loading_bar.setObjectName(u"loading_bar")
+        self.loading_bar.setValue(24)
+        self.loading_bar.setInvertedAppearance(False)
+        self.loading_bar.setTextDirection(QProgressBar.TopToBottom)
 
-        self.horizontalLayout.addItem(self.horizontalSpacer)
+        self.bottom_layout.addWidget(self.loading_bar)
 
         self.view_button = QPushButton(NewVolumeDialog)
         self.view_button.setObjectName(u"view_button")
-        font1 = QFont()
-        font1.setFamilies([u"Segoe UI"])
-        font1.setPointSize(10)
-        self.view_button.setFont(font1)
+        self.view_button.setFont(font)
 
-        self.horizontalLayout.addWidget(self.view_button)
+        self.bottom_layout.addWidget(self.view_button)
 
         self.close_button = QPushButton(NewVolumeDialog)
         self.close_button.setObjectName(u"close_button")
-        self.close_button.setFont(font1)
+        self.close_button.setFont(font)
 
-        self.horizontalLayout.addWidget(self.close_button)
+        self.bottom_layout.addWidget(self.close_button)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout.addLayout(self.bottom_layout)
 
 
         self.retranslateUi(NewVolumeDialog)

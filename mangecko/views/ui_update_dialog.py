@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'update_dialogXJLGhO.ui'
+## Form generated from reading UI file 'update_dialogLSDGXC.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QGroupBox,
-    QHBoxLayout, QListWidget, QListWidgetItem, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QHBoxLayout, QListWidget, QListWidgetItem, QProgressBar,
+    QPushButton, QScrollArea, QSizePolicy, QVBoxLayout,
     QWidget)
 
 class Ui_Dialog(object):
@@ -46,6 +46,7 @@ class Ui_Dialog(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.list_widget = QListWidget(self.groupBox)
         self.list_widget.setObjectName(u"list_widget")
+        self.list_widget.setFrameShape(QFrame.NoFrame)
 
         self.horizontalLayout_3.addWidget(self.list_widget)
 
@@ -58,9 +59,11 @@ class Ui_Dialog(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.progressBar = QProgressBar(Dialog)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setValue(0)
 
-        self.horizontalLayout.addItem(self.horizontalSpacer)
+        self.horizontalLayout.addWidget(self.progressBar)
 
         self.update_button = QPushButton(Dialog)
         self.update_button.setObjectName(u"update_button")
