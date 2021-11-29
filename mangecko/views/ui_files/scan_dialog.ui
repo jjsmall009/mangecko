@@ -33,7 +33,7 @@
         <x>0</x>
         <y>0</y>
         <width>632</width>
-        <height>154</height>
+        <height>179</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -69,7 +69,6 @@
     <widget class="QScrollArea" name="scrollArea_2">
      <property name="font">
       <font>
-       <family>Segoe UI</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -85,7 +84,7 @@
         <x>0</x>
         <y>0</y>
         <width>632</width>
-        <height>191</height>
+        <height>178</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -131,7 +130,7 @@
         <x>0</x>
         <y>0</y>
         <width>632</width>
-        <height>191</height>
+        <height>179</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -177,6 +176,19 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="info_label">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="scan_button">

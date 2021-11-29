@@ -58,6 +58,7 @@ class MainWindow(QWidget, Ui_main_window):
         
 
     def initialize_library_list(self):
+        print("list")
         self.libraries_list_widget.clear()
         list = database_manager.get_libraries()
         if list is None:

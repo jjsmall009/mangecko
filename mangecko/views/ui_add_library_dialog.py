@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'add_library_dialogqAocTp.ui'
+## Form generated from reading UI file 'add_library_dialogYPsUkE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QGridLayout, QHBoxLayout,
-    QHeaderView, QLabel, QLineEdit, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QTableWidget,
+    QHeaderView, QLabel, QLineEdit, QProgressBar,
+    QPushButton, QScrollArea, QSizePolicy, QTableWidget,
     QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_AddLibraryDialog(object):
@@ -90,9 +90,11 @@ class Ui_AddLibraryDialog(object):
 
         self.bottom_btn_layout = QHBoxLayout()
         self.bottom_btn_layout.setObjectName(u"bottom_btn_layout")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.progressBar = QProgressBar(AddLibraryDialog)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setValue(0)
 
-        self.bottom_btn_layout.addItem(self.horizontalSpacer)
+        self.bottom_btn_layout.addWidget(self.progressBar)
 
         self.loading_label = QLabel(AddLibraryDialog)
         self.loading_label.setObjectName(u"loading_label")

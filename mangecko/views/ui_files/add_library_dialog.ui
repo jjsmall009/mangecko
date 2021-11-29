@@ -116,17 +116,11 @@
    <item>
     <layout class="QHBoxLayout" name="bottom_btn_layout">
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="value">
+        <number>0</number>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="loading_label">

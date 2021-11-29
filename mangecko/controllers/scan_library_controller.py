@@ -55,6 +55,10 @@ class ScanDialog(QDialog, Ui_ScanDialog):
         self.update_view(new_manga, updated_manga, removed)
         
     def update_view(self, new_manga, updated_manga, removed):
+        if (len(new_manga) and len(updated_manga) and len(removed)) == 0:
+            self.info_label.setText("No changes have been found")
+            return
+
         for series in new_manga:
             text = f"{series.local_title} - {series.my_volumes} volumes"
             self.new_series_list.addItem(QListWidgetItem(text))
@@ -66,3 +70,5 @@ class ScanDialog(QDialog, Ui_ScanDialog):
         for series in removed:
             text = f"{series}"
             self.removed_list.addItem(QListWidgetItem(text))
+
+        self.info_label.setText("Library has been updated")

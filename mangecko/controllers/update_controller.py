@@ -70,9 +70,3 @@ class UpdateDialog(QDialog, Ui_Dialog):
     def update_progress(self, count):
         progressPercent = int(count / self.total_series * 100)
         self.progressBar.setValue(progressPercent)
-
-    def update_view(self, manga):
-        for series in manga:
-            text = f"{series.local_title} - {series.my_volumes} - {series.eng_volumes} - {series.eng_status}"
-            item = QListWidgetItem(text)
-            self.list_widget.addItem(item)

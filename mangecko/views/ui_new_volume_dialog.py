@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'new_volume_dialogqsxirn.ui'
+## Form generated from reading UI file 'new_volume_dialogvIuUKz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -16,7 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
-    QProgressBar, QPushButton, QScrollArea, QSizePolicy,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
     QVBoxLayout, QWidget)
 
 class Ui_NewVolumeDialog(object):
@@ -47,13 +47,9 @@ class Ui_NewVolumeDialog(object):
 
         self.bottom_layout = QHBoxLayout()
         self.bottom_layout.setObjectName(u"bottom_layout")
-        self.loading_bar = QProgressBar(NewVolumeDialog)
-        self.loading_bar.setObjectName(u"loading_bar")
-        self.loading_bar.setValue(24)
-        self.loading_bar.setInvertedAppearance(False)
-        self.loading_bar.setTextDirection(QProgressBar.TopToBottom)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.bottom_layout.addWidget(self.loading_bar)
+        self.bottom_layout.addItem(self.horizontalSpacer)
 
         self.view_button = QPushButton(NewVolumeDialog)
         self.view_button.setObjectName(u"view_button")
