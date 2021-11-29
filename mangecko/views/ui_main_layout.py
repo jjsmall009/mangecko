@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_layoutxDPAzN.ui'
+## Form generated from reading UI file 'main_layouttDNvIe.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -190,18 +190,20 @@ class Ui_main_window(object):
 "}\n"
 "\n"
 "QPushButton {\n"
-"background-color:#f8f9fa;\n"
 "color:#f48c06;\n"
+"border-style:none;\n"
 "\n"
-"border-radius:4px;\n"
 "}\n"
 "\n"
 "QPushButton::hover{\n"
-"border:2px solid grey;\n"
+"border:1px solid #f48c06;\n"
+"border-radius:4px;\n"
+"font-family: \"Segoe UI Semibold\";\n"
 "}")
         self.library_upper_layout = QHBoxLayout(self.library_upper_wrapper)
         self.library_upper_layout.setObjectName(u"library_upper_layout")
         self.library_upper_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.library_upper_layout.setContentsMargins(9, -1, 36, -1)
         self.current_library_label = QLabel(self.library_upper_wrapper)
         self.current_library_label.setObjectName(u"current_library_label")
         sizePolicy2 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
@@ -233,7 +235,7 @@ class Ui_main_window(object):
         self.scan_library_btn.setMinimumSize(QSize(125, 0))
         self.scan_library_btn.setMaximumSize(QSize(125, 16777215))
         font3 = QFont()
-        font3.setFamilies([u"Segoe UI Semibold"])
+        font3.setFamilies([u"Segoe UI"])
         font3.setPointSize(12)
         self.scan_library_btn.setFont(font3)
         self.scan_library_btn.setFlat(False)
@@ -259,10 +261,6 @@ class Ui_main_window(object):
         self.new_volumes_btn.setFont(font3)
 
         self.current_library_buttons_layout.addWidget(self.new_volumes_btn)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.current_library_buttons_layout.addItem(self.horizontalSpacer_2)
 
 
         self.library_upper_layout.addLayout(self.current_library_buttons_layout)

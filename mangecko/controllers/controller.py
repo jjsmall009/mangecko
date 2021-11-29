@@ -1,6 +1,6 @@
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize
-from PySide6.QtWidgets import (QDial, QDialog, QLabel, QListWidgetItem, QMessageBox, QWidget)
+from PySide6.QtWidgets import (QListWidgetItem, QMessageBox, QWidget)
 
 from pathlib import Path
 
@@ -45,16 +45,17 @@ class MainWindow(QWidget, Ui_main_window):
 
         # Initialize and set up various things
         self.setupUi(self)
-        self.initialize_library_list()
         self.add_icons()
+        self.initialize_library_list()
 
         # Connect slots to signals
-        self.libraries_list_widget.itemClicked.connect(self.populate_series_grid)
+        self.libraries_list_widget.currentRowChanged.connect(self.populate_series_grid)
         self.add_library_btn.clicked.connect(self.add_library)
         self.settings_btn.clicked.connect(self.show_settings)
         self.scan_library_btn.clicked.connect(self.scan_library)
         self.update_library_btn.clicked.connect(self.update_library)
         self.new_volumes_btn.clicked.connect(self.view_new_volumes)
+        
 
     def initialize_library_list(self):
         self.libraries_list_widget.clear()
@@ -64,6 +65,7 @@ class MainWindow(QWidget, Ui_main_window):
         
         for library in list:
             self.libraries_list_widget.addItem(QListWidgetItem(library[1]))
+
 
     def add_icons(self):
         """
