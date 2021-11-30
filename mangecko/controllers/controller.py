@@ -113,6 +113,7 @@ class MainWindow(QWidget, Ui_main_window):
             self.series_grid_layout.addWidget(card, row, col)
 
             if col == 5:
+                
                 col = 0
                 row += 1
             else:
