@@ -126,18 +126,8 @@ class AddLibraryDialog(QDialog, Ui_AddLibraryDialog):
         self.series_table.setItem(self.count, 2, QTableWidgetItem(str(series.my_volumes)))
         self.series_table.setItem(self.count, 3, QTableWidgetItem(str(series.eng_volumes)))
         self.series_table.setItem(self.count, 4, QTableWidgetItem(str(series.source_volumes)))
+        self.count += 1
 
     def update_progress(self, count):
         progressPercent = int(count / len(self.valid_series) * 100)
         self.progressBar.setValue(progressPercent)
-
-    # def update_view(self, manga):
-    #     for row, series in enumerate(manga):
-    #         self.series_table.insertRow(row)
-    #         self.series_table.setItem(row, 0, QTableWidgetItem(series.local_title))
-    #         self.series_table.setItem(row, 1, QTableWidgetItem(str(series.site_id)))
-    #         self.series_table.setItem(row, 2, QTableWidgetItem(str(series.my_volumes)))
-    #         self.series_table.setItem(row, 3, QTableWidgetItem(str(series.eng_volumes)))
-    #         self.series_table.setItem(row, 4, QTableWidgetItem(str(series.source_volumes)))
-
-    #     self.series_table.resizeColumnsToContents()
