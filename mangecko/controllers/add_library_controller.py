@@ -62,6 +62,7 @@ class AddLibraryDialog(QDialog, Ui_AddLibraryDialog):
         self.done_btn.setEnabled(False)
         self.count = 0
         self.thread = QThread(parent=self)
+        self.series_table.setColumnWidth(0,400)
 
         # Create our signals and slots
         self.open_btn.clicked.connect(self.open_file)

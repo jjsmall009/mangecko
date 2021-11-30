@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'card_widgetLOjbts.ui'
+## Form generated from reading UI file 'card_widgetLQBwdd.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -63,7 +63,8 @@ class Ui_CardWidget(object):
 
         self.series_label = QLabel(self.frame)
         self.series_label.setObjectName(u"series_label")
-        self.series_label.setWordWrap(True)
+        self.series_label.setWordWrap(False)
+        self.series_label.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByMouse)
 
         self.frame_layout.addWidget(self.series_label)
 

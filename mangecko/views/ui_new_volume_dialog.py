@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'new_volume_dialogvIuUKz.ui'
+## Form generated from reading UI file 'new_volume_dialogCizanf.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -66,6 +66,7 @@ class Ui_NewVolumeDialog(object):
 
         self.verticalLayout.addLayout(self.bottom_layout)
 
+        self.verticalLayout.setStretch(0, 1)
 
         self.retranslateUi(NewVolumeDialog)
 

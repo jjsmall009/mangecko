@@ -18,7 +18,7 @@
 background-color:#212529;
 }</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_3">
+  <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
    <property name="spacing">
     <number>6</number>
    </property>
@@ -386,7 +386,6 @@ font-family: &quot;Segoe UI Semibold&quot;;
             </property>
             <property name="font">
              <font>
-              <family>Segoe UI</family>
               <pointsize>12</pointsize>
              </font>
             </property>
@@ -420,7 +419,6 @@ font-family: &quot;Segoe UI Semibold&quot;;
             </property>
             <property name="font">
              <font>
-              <family>Segoe UI</family>
               <pointsize>12</pointsize>
              </font>
             </property>
@@ -451,7 +449,6 @@ font-family: &quot;Segoe UI Semibold&quot;;
             </property>
             <property name="font">
              <font>
-              <family>Segoe UI</family>
               <pointsize>12</pointsize>
              </font>
             </property>

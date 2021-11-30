@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_layouttDNvIe.ui'
+## Form generated from reading UI file 'main_layoutYvHWgD.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -234,10 +234,7 @@ class Ui_main_window(object):
         self.scan_library_btn.setSizePolicy(sizePolicy3)
         self.scan_library_btn.setMinimumSize(QSize(125, 0))
         self.scan_library_btn.setMaximumSize(QSize(125, 16777215))
-        font3 = QFont()
-        font3.setFamilies([u"Segoe UI"])
-        font3.setPointSize(12)
-        self.scan_library_btn.setFont(font3)
+        self.scan_library_btn.setFont(font1)
         self.scan_library_btn.setFlat(False)
 
         self.current_library_buttons_layout.addWidget(self.scan_library_btn)
@@ -248,7 +245,7 @@ class Ui_main_window(object):
         self.update_library_btn.setSizePolicy(sizePolicy3)
         self.update_library_btn.setMinimumSize(QSize(125, 0))
         self.update_library_btn.setMaximumSize(QSize(125, 16777215))
-        self.update_library_btn.setFont(font3)
+        self.update_library_btn.setFont(font1)
 
         self.current_library_buttons_layout.addWidget(self.update_library_btn)
 
@@ -258,7 +255,7 @@ class Ui_main_window(object):
         self.new_volumes_btn.setSizePolicy(sizePolicy3)
         self.new_volumes_btn.setMinimumSize(QSize(125, 0))
         self.new_volumes_btn.setMaximumSize(QSize(125, 16777215))
-        self.new_volumes_btn.setFont(font3)
+        self.new_volumes_btn.setFont(font1)
 
         self.current_library_buttons_layout.addWidget(self.new_volumes_btn)
 
@@ -295,6 +292,7 @@ class Ui_main_window(object):
 
         self.horizontalLayout_3.addLayout(self.right_section)
 
+        self.horizontalLayout_3.setStretch(1, 1)
 
         self.retranslateUi(main_window)
 
