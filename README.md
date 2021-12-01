@@ -45,9 +45,10 @@ It will be a pretty basic CRUD app but I want to focus on the look and feel, res
 ### Stage 3 - Clean Up
 
 - [ ] Refactor and clean up my code.
-- [ ] Add in loading bars or spinners.
+- [x] Add in loading bars or spinners.
 - [ ] Improve UI and polish up the look and feel.
 - [ ] Create a flow based layout for the series grid.
+- [x] Application startup - load an initial library
 
 ### Stage 2 - GUI
 

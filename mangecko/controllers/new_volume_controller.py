@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QCheckBox, QDialog, QLabel
 
-from models import database_manager
-from views.ui_new_volume_dialog import Ui_NewVolumeDialog
+from ..models import database_manager
+from ..views.ui_new_volume_dialog import Ui_NewVolumeDialog
 
 
 class NewVolumeDialog(QDialog, Ui_NewVolumeDialog):

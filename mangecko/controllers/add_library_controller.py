@@ -2,11 +2,11 @@ from PySide6.QtWidgets import QDialog, QFileDialog, QMessageBox, QTableWidgetIte
 from PySide6.QtCore import QObject, QThread, Signal
 from pathlib import Path
 
-from models.manga_model import Manga
-from models import database_manager
-from utilities.manga_scraper import series_scraper, series_search
-from utilities.library_scanner import LibraryScanner
-from views.ui_add_library_dialog import Ui_AddLibraryDialog
+from ..models.manga_model import Manga
+from ..models import database_manager
+from ..utilities.manga_scraper import series_scraper, series_search
+from ..utilities.library_scanner import LibraryScanner
+from ..views.ui_add_library_dialog import Ui_AddLibraryDialog
 
 
 class LibraryAdder(QObject):

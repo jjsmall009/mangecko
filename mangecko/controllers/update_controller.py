@@ -1,10 +1,10 @@
 from PySide6.QtWidgets import QDialog, QListWidgetItem
 from PySide6.QtCore import QObject, QThread, Signal
 
-from models.manga_model import Manga
-from models import database_manager
-from utilities.manga_scraper import series_scraper
-from views.ui_update_dialog import Ui_Dialog
+from ..models.manga_model import Manga
+from ..models import database_manager
+from ..utilities.manga_scraper import series_scraper
+from ..views.ui_update_dialog import Ui_Dialog
 
 
 class Updater(QObject):

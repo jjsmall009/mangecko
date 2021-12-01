@@ -2,13 +2,13 @@ from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize
 from PySide6.QtWidgets import (QListWidgetItem, QMessageBox, QWidget)
 
-from controllers.new_volume_controller import NewVolumeDialog
-from controllers.scan_library_controller import ScanDialog
-from controllers.update_controller import UpdateDialog
-from controllers.add_library_controller import AddLibraryDialog
-from models import database_manager
-from views.ui_main_layout import Ui_main_window
-from views.ui_card_widget import Ui_CardWidget
+from .new_volume_controller import NewVolumeDialog
+from .scan_library_controller import ScanDialog
+from .update_controller import UpdateDialog
+from .add_library_controller import AddLibraryDialog
+from ..models import database_manager
+from ..views.ui_main_layout import Ui_main_window
+from ..views.ui_card_widget import Ui_CardWidget
 
 
 class CardWidget(QWidget, Ui_CardWidget):
@@ -64,6 +64,7 @@ class MainWindow(QWidget, Ui_main_window):
         
         for library in list:
             self.libraries_list_widget.addItem(QListWidgetItem(library[1]))
+
 
         self.libraries_list_widget.setCurrentRow(0)
 

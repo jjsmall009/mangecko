@@ -1,11 +1,11 @@
 from PySide6.QtWidgets import QDialog, QListWidgetItem
 from pathlib import Path
 
-from models.manga_model import Manga
-from models import database_manager
-from utilities.manga_scraper import series_scraper, series_search
-from utilities.library_scanner import LibraryScanner
-from views.ui_scan_dialog import Ui_ScanDialog
+from ..models.manga_model import Manga
+from ..models import database_manager
+from ..utilities.manga_scraper import series_scraper, series_search
+from ..utilities.library_scanner import LibraryScanner
+from ..views.ui_scan_dialog import Ui_ScanDialog
 
 class ScanDialog(QDialog, Ui_ScanDialog):
     def __init__(self, library_id, parent=None):
