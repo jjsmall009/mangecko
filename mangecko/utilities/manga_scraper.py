@@ -7,6 +7,7 @@ import requests
 import time
 import bs4
 
+
 def series_search(title):
     """
     Wrapper function to search for a series. Will try and do this concurrently to speed up requests
@@ -103,6 +104,7 @@ def series_scraper(manga_id, obj):
 
             break
 
+
 def get_cover_url(content_section):
     url_section = content_section[13]
 
@@ -110,7 +112,6 @@ def get_cover_url(content_section):
         return url_section.img['src']
     except TypeError:
         print("No image for this series...")
-
 
 
 def get_source_info(content_section):

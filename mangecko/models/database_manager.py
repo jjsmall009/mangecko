@@ -139,6 +139,7 @@ def download_cover(site_id, url):
         with open(f"data/covers/{site_id}.jpg", 'wb') as f:
             f.write(response.content)
 
+
 def get_library_id(lib_name):
     try:
         with create_connection() as conn:
@@ -149,6 +150,7 @@ def get_library_id(lib_name):
             return cur.fetchone()
     except sqlite3.Error as e:
         print(f"Error in getting libraries ---> {e}")
+
 
 def get_libraries():
     try:

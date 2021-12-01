@@ -1,6 +1,6 @@
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import QSize
-from PySide6.QtWidgets import (QListWidgetItem, QMessageBox, QWidget)
+from PySide6.QtWidgets import QListWidgetItem, QWidget
 
 from .new_volume_controller import NewVolumeDialog
 from .scan_library_controller import ScanDialog
@@ -102,10 +102,11 @@ class MainWindow(QWidget, Ui_main_window):
         row, col = 0, 0
         for series in series_list:
             card = CardWidget()
-            if series[2] == None:
+
+            cover = QPixmap(f"data/covers/{series[2]}.jpg")
+            if cover.isNull():
                 cover = QPixmap("data/covers/no-image.png")
-            else:
-                cover = QPixmap(f"data/covers/{series[2]}.jpg")
+
             card.cover_label.setPixmap(cover)
             card.series_label.setText(series[0])
             card.series_label.setToolTip(series[0])
