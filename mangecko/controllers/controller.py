@@ -9,6 +9,7 @@ from .add_library_controller import AddLibraryDialog
 from ..models import database_manager
 from ..views.ui_main_layout import Ui_main_window
 from ..views.ui_card_widget import Ui_CardWidget
+from ..views.ui_flow_layout import FlowLayout
 
 
 class CardWidget(QWidget, Ui_CardWidget):
@@ -23,11 +24,16 @@ class MainWindow(QWidget, Ui_main_window):
     def __init__(self):
         super().__init__()
 
-        # Initialize and set up various things
+        # Initialize the ui
         self.setupUi(self)
         self.add_icons()
-        self.connect_slots()
 
+        self.series_layout = FlowLayout()
+        self.series_layout.setSpacing(12)
+        self.series_wrapper_layout_useless.addLayout(self.series_layout)
+
+        # Connect things and populate things from the db
+        self.connect_slots()
         self.initialize_library_list()
 
 
@@ -90,7 +96,7 @@ class MainWindow(QWidget, Ui_main_window):
         TODO - Redo the series grid to a flow layout so the card widgets wrap when the
                screen gets resized.
         """
-        self.deleteItemsOfLayout(self.series_grid_layout)
+        self.deleteItemsOfLayout(self.series_layout)
         print("updating series grid...")
 
         library_name = self.libraries_list_widget.currentItem().text()
@@ -112,7 +118,7 @@ class MainWindow(QWidget, Ui_main_window):
             card.series_label.setToolTip(series[0])
             card.volume_label.setText(f"Volumes - {series[1]}")
 
-            self.series_grid_layout.addWidget(card, row, col)
+            self.series_layout.addWidget(card)
 
             if col == 5:
                 

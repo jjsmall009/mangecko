@@ -81,7 +81,6 @@ border-radius:4px;
        <widget class="QLabel" name="logo_label">
         <property name="font">
          <font>
-          <family>Impact</family>
           <pointsize>20</pointsize>
          </font>
         </property>

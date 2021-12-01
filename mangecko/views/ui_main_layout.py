@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_layoutQcLNKe.ui'
+## Form generated from reading UI file 'main_layouttNURNm.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QGridLayout,
-    QHBoxLayout, QLabel, QLayout, QListWidget,
-    QListWidgetItem, QPushButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QHBoxLayout,
+    QLabel, QLayout, QListWidget, QListWidgetItem,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 
 class Ui_main_window(object):
     def setupUi(self, main_window):
@@ -282,13 +282,6 @@ class Ui_main_window(object):
         self.series_wrapper_layout_useless.setObjectName(u"series_wrapper_layout_useless")
         self.series_wrapper_layout_useless.setSizeConstraint(QLayout.SetMinimumSize)
         self.series_wrapper_layout_useless.setContentsMargins(0, 6, 0, 6)
-        self.series_grid_layout = QGridLayout()
-        self.series_grid_layout.setSpacing(10)
-        self.series_grid_layout.setObjectName(u"series_grid_layout")
-        self.series_grid_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
-
-        self.series_wrapper_layout_useless.addLayout(self.series_grid_layout)
-
         self.series_scroll_area.setWidget(self.series_grid_wrapper)
 
         self.right_section.addWidget(self.series_scroll_area)
