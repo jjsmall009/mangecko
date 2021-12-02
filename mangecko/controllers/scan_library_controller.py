@@ -55,7 +55,7 @@ class ScanDialog(QDialog, Ui_ScanDialog):
         self.update_view(new_manga, updated_manga, removed)
         
     def update_view(self, new_manga, updated_manga, removed):
-        if (len(new_manga) and len(updated_manga) and len(removed)) == 0:
+        if (len(new_manga) or len(updated_manga) or len(removed)) == 0:
             self.info_label.setText("No changes have been found")
             return
 
