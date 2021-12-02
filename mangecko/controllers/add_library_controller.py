@@ -70,6 +70,12 @@ class AddLibraryDialog(QDialog, Ui_AddLibraryDialog):
         self.done_btn.clicked.connect(self.terminate)
         self.cancel_btn.clicked.connect(self.terminate)
 
+        self.name = ""
+
+    
+    def get_name(self):
+        return self.name
+
 
     def open_file(self):
         fname = QFileDialog.getExistingDirectory(self, 'c:\\')
@@ -104,6 +110,8 @@ class AddLibraryDialog(QDialog, Ui_AddLibraryDialog):
         self.adder.exists.connect(self.library_exists)
         self.adder.finished.connect(self.cleanup)
         self.thread.start()
+
+        self.name = self.path.name
 
 
     def cleanup(self):

@@ -31,6 +31,10 @@ class MainWindow(QWidget, Ui_main_window):
         # Connect things and populate things from the db
         self.connect_slots()
         self.populate_library_list()
+        if self.libraries_list_widget.count() > 0:
+            self.libraries_list_widget.setCurrentRow(0)
+
+        self.libraries_list_widget.model().rowsInserted.connect(self.new_library)
 
         
     def add_icons(self):
@@ -107,11 +111,20 @@ class MainWindow(QWidget, Ui_main_window):
 
         dlg = AddLibraryDialog(self)
         dlg.exec()
+        name = dlg.get_name()
 
-        self.populate_library_list()
+        if name != "":
+            self.libraries_list_widget.addItem(QListWidgetItem(name))      
+
+
+    def new_library(self):
+        last_row = self.libraries_list_widget.count() - 1
+        self.libraries_list_widget.setCurrentRow(last_row) 
+
 
     def show_settings(self):
         print("You clicked settings! No settings currently...")
+
 
     def scan_library(self):
         print("You clicked scan library")
@@ -122,6 +135,7 @@ class MainWindow(QWidget, Ui_main_window):
         dlg.exec()
 
         self.populate_series_grid()
+
 
     def update_library(self):
         print("You clicked update library")
@@ -134,6 +148,7 @@ class MainWindow(QWidget, Ui_main_window):
 
         self.populate_series_grid()
 
+
     def view_new_volumes(self):
         print("You clicked view new volumes")
         library_name = self.libraries_list_widget.currentItem().text()
@@ -141,6 +156,7 @@ class MainWindow(QWidget, Ui_main_window):
 
         dlg = NewVolumeDialog(library_id, self)
         dlg.exec()
+
 
     def deleteItemsOfLayout(self, layout):
         """
