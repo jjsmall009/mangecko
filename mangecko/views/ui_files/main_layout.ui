@@ -81,6 +81,7 @@ border-radius:4px;
        <widget class="QLabel" name="logo_label">
         <property name="font">
          <font>
+          <family>Impact</family>
           <pointsize>20</pointsize>
          </font>
         </property>
@@ -88,10 +89,10 @@ border-radius:4px;
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>Manga Manager</string>
+         <string>Mangecko</string>
         </property>
         <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>

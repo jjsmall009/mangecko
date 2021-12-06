@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_layouttNURNm.ui'
+## Form generated from reading UI file 'main_layoutESrPeC.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.1
 ##
@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QHBoxLayout,
-    QLabel, QLayout, QListWidget, QListWidgetItem,
-    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QGridLayout,
+    QHBoxLayout, QLabel, QLayout, QListWidget,
+    QListWidgetItem, QPushButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_main_window(object):
     def setupUi(self, main_window):
@@ -70,7 +70,7 @@ class Ui_main_window(object):
         font.setPointSize(20)
         self.logo_label.setFont(font)
         self.logo_label.setStyleSheet(u"")
-        self.logo_label.setAlignment(Qt.AlignCenter)
+        self.logo_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.left_section_layout.addWidget(self.logo_label)
 
@@ -282,6 +282,13 @@ class Ui_main_window(object):
         self.series_wrapper_layout_useless.setObjectName(u"series_wrapper_layout_useless")
         self.series_wrapper_layout_useless.setSizeConstraint(QLayout.SetMinimumSize)
         self.series_wrapper_layout_useless.setContentsMargins(0, 6, 0, 6)
+        self.series_grid_layout = QGridLayout()
+        self.series_grid_layout.setSpacing(10)
+        self.series_grid_layout.setObjectName(u"series_grid_layout")
+        self.series_grid_layout.setSizeConstraint(QLayout.SetDefaultConstraint)
+
+        self.series_wrapper_layout_useless.addLayout(self.series_grid_layout)
+
         self.series_scroll_area.setWidget(self.series_grid_wrapper)
 
         self.right_section.addWidget(self.series_scroll_area)
@@ -298,7 +305,7 @@ class Ui_main_window(object):
 
     def retranslateUi(self, main_window):
         main_window.setWindowTitle(QCoreApplication.translate("main_window", u"Manga Manager", None))
-        self.logo_label.setText(QCoreApplication.translate("main_window", u"Manga Manager", None))
+        self.logo_label.setText(QCoreApplication.translate("main_window", u"Mangecko", None))
         self.libraries_list_label.setText(QCoreApplication.translate("main_window", u"Libraries", None))
         self.add_library_btn.setText(QCoreApplication.translate("main_window", u"Add Library", None))
         self.settings_btn.setText(QCoreApplication.translate("main_window", u"Settings", None))
