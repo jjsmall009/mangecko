@@ -25,14 +25,36 @@ Like most media trackers/scanners/organization tools there is list of criteria t
 
 As of now I don't do any sort of volume filename parsing to accurately count the total number of volumes. Right now it just looks for the filename extension and counts those up.
 
-- Extensions: .cbr, .cbz, .zip, and PDF
+* Extensions: .cbr, .cbz, .zip, and PDF
 
 ## Tech Stack
 
 After a couple of months I'm pretty well ingrained in the following:
 
-- Python
-- PyQT / PySide6
-- SQLite
+* Python
+* PyQT / PySide6
+* SQLite
 
 It will be a pretty basic CRUD app but I want to focus on the look and feel, responsiveness, and good software engineering principles and design.
+
+## Mega Todo List and Bugfixes
+
+* Main window
+  * [ ] Library buttons - Errors out when clicked and no library is selected.
+  * [ ] Library view - Needs to scroll back to top when switching libraries.
+  * [ ] Add library/settings buttons get cut off on the right side when hovering.
+  * [ ] Some sort of indicator for series that need to be updated?
+  * [ ] A way to manually edit a series and maintain that through future updating.
+
+* Add Library Dialog
+  * [ ] Callback - Should probably improve how the name of the new library gets sent back.
+
+* Update Library Dialog
+  * [ ] Display info about which series actually got updated, not just the entire list of ongoing series.
+
+* Web scraper
+  * [ ] Find improperly matched series and update edge cases.
+  * [ ] Tweak the fuzzy string matching to better match series.
+
+* Directory scanner
+  * [ ] Check for omnibuses or multi-volume files.
