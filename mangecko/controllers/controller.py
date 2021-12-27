@@ -81,13 +81,10 @@ class MainWindow(QWidget, Ui_main_window):
 
 
     def populate_series_grid(self):
-        """
-        TODO - Redo the series grid to a flow layout so the card widgets wrap when the
-               screen gets resized.
-        """
-
         self.deleteItemsOfLayout(self.series_layout)
         print("updating series grid...")
+
+        self.series_scroll_area.verticalScrollBar().setValue(0)
 
         library_name = self.libraries_list_widget.currentItem().text()
         library_id = database_manager.get_library_id(library_name)[0]

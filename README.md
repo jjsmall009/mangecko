@@ -40,8 +40,8 @@ It will be a pretty basic CRUD app but I want to focus on the look and feel, res
 ## Mega Todo List and Bugfixes
 
 * Main window
-  * [ ] Library buttons - Errors out when clicked and no library is selected.
-  * [ ] Library view - Needs to scroll back to top when switching libraries.
+  * [x] Library buttons - Errors out when clicked and no library is selected.
+  * [x] Library view - Needs to scroll back to top when switching libraries.
   * [ ] Add library/settings buttons get cut off on the right side when hovering.
   * [ ] Some sort of indicator for series that need to be updated?
   * [ ] A way to manually edit a series and maintain that through future updating.
