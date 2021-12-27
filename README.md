@@ -48,6 +48,7 @@ It will be a pretty basic CRUD app but I want to focus on the look and feel, res
 
 * Add Library Dialog
   * [ ] Callback - Should probably improve how the name of the new library gets sent back.
+  * [ ] Cover image downloading - incorporate into loading bar.
 
 * Update Library Dialog
   * [ ] Display info about which series actually got updated, not just the entire list of ongoing series.

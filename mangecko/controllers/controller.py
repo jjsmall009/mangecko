@@ -27,12 +27,16 @@ class MainWindow(QWidget, Ui_main_window):
         self.setupUi(self)
         self.add_icons()
         self.setup_flow_layout()
-
-        # Connect things and populate things from the db
         self.connect_slots()
+
+        # If there are no libraries yet, disable the buttons to make it not error out
         self.populate_library_list()
         if self.libraries_list_widget.count() > 0:
             self.libraries_list_widget.setCurrentRow(0)
+        else:
+            self.scan_library_btn.setEnabled(False)
+            self.update_library_btn.setEnabled(False)
+            self.new_volumes_btn.setEnabled(False)
 
         self.libraries_list_widget.model().rowsInserted.connect(self.new_library)
 
@@ -119,7 +123,12 @@ class MainWindow(QWidget, Ui_main_window):
 
     def new_library(self):
         last_row = self.libraries_list_widget.count() - 1
-        self.libraries_list_widget.setCurrentRow(last_row) 
+        self.libraries_list_widget.setCurrentRow(last_row)
+
+        self.scan_library_btn.setEnabled(True)
+        self.update_library_btn.setEnabled(True)
+        self.new_volumes_btn.setEnabled(True)
+
 
 
     def show_settings(self):
@@ -172,6 +181,3 @@ class MainWindow(QWidget, Ui_main_window):
                     widget.setParent(None)
                 else:
                     self.deleteItemsOfLayout(item.layout())
-
-        # for i in reversed(range(layout.count())): 
-        #     layout.itemAt(i).widget().setParent(None)
