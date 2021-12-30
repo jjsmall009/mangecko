@@ -132,6 +132,10 @@ def insert_manga(manga_list, library_name):
 
 
 def download_cover(site_id, url):
+    if Path(f"data/covers/{site_id}.jpg").exists():
+        print("cover exists")
+        return
+        
     response = requests.get(url)
 
     if response.status_code == 200:

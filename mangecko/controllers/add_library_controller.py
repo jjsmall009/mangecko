@@ -72,17 +72,14 @@ class AddLibraryDialog(QDialog, Ui_AddLibraryDialog):
 
         self.name = ""
 
-    
     def get_name(self):
         return self.name
-
 
     def open_file(self):
         fname = QFileDialog.getExistingDirectory(self, 'c:\\')
         self.path_field.setText(fname)
 
         self.add_library_btn.setEnabled(True)
-
 
     def setup_library(self):
         self.path = Path(self.path_field.text())
@@ -113,23 +110,19 @@ class AddLibraryDialog(QDialog, Ui_AddLibraryDialog):
 
         self.name = self.path.name
 
-
     def cleanup(self):
         self.done_btn.setEnabled(True)
         self.adder.finished.connect(self.thread.quit)
         self.adder.finished.connect(self.adder.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
 
-
     def terminate(self):
         if self.thread.isRunning():
             self.thread.quit()
         self.close()
         
-
     def library_exists(self):
         QMessageBox.about(self, "Library exists", "Library already exists")
-
 
     def update_list(self, series):
         self.series_table.insertRow(self.count)
@@ -140,7 +133,6 @@ class AddLibraryDialog(QDialog, Ui_AddLibraryDialog):
         self.series_table.setItem(self.count, 4, QTableWidgetItem(str(series.source_volumes)))
         self.count += 1
         
-
     def update_progress(self, count):
         progressPercent = int(count / len(self.valid_series) * 100)
         self.progressBar.setValue(progressPercent)

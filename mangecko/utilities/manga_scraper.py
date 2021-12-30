@@ -33,7 +33,6 @@ def series_search(title):
                 return None
             break
 
-
 def search(manga_title):
     """
     Finds the most likely match from the list of series in the series section using the
@@ -64,7 +63,6 @@ def search(manga_title):
     else:
         print(f"---> No match for -> {manga_title}")
         return None
-            
 
 def series_scraper(manga_id, obj):
     """
@@ -104,7 +102,6 @@ def series_scraper(manga_id, obj):
 
             break
 
-
 def get_cover_url(content_section):
     url_section = content_section[13]
 
@@ -112,7 +109,6 @@ def get_cover_url(content_section):
         return url_section.img['src']
     except TypeError:
         print("No image for this series...")
-
 
 def get_source_info(content_section):
     source_section = [m.strip("\n") for m in content_section[6] if type(m) is bs4.element.NavigableString]
@@ -135,7 +131,6 @@ def get_source_info(content_section):
         status = "Unknown"
 
     return status, source_volumes
-
 
 def get_english_info(content_section):
     """

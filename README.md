@@ -1,8 +1,8 @@
 # Mangecko
 
-## Overview
+## Overview - Version 1.0
 
-Mangecko is a WIP manga cataloging program to visually keep track of your digital manga collection.
+Mangecko is a manga cataloging program to visually keep track of your digital manga collection (still a WIP).
 
 ![Main screen](resources/main_screen.PNG)
 
@@ -48,7 +48,7 @@ It will be a pretty basic CRUD app but I want to focus on the look and feel, res
 
 * Add Library Dialog
   * [ ] Callback - Should probably improve how the name of the new library gets sent back.
-  * [ ] Cover image downloading - incorporate into loading bar.
+  * [ ] Cover image downloading - incorporate into loading bar and only download images that don't already exist.
 
 * Update Library Dialog
   * [ ] Display info about which series actually got updated, not just the entire list of ongoing series.

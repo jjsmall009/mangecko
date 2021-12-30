@@ -39,7 +39,6 @@ class MainWindow(QWidget, Ui_main_window):
             self.new_volumes_btn.setEnabled(False)
 
         self.libraries_list_widget.model().rowsInserted.connect(self.new_library)
-
         
     def add_icons(self):
         """
@@ -53,13 +52,11 @@ class MainWindow(QWidget, Ui_main_window):
         icon2.addFile("resources/icons/settings-4-128.png", QSize(), QIcon.Normal, QIcon.Off)
         self.settings_btn.setIcon(icon2)
 
-
     def setup_flow_layout(self):
         self.series_layout = FlowLayout()
         self.series_layout.setSpacing(12)
         self.series_wrapper_layout_useless.addLayout(self.series_layout)
         
-
     def connect_slots(self):
         # Connect slots to signals
         self.libraries_list_widget.currentRowChanged.connect(self.populate_series_grid)
@@ -69,7 +66,6 @@ class MainWindow(QWidget, Ui_main_window):
         self.update_library_btn.clicked.connect(self.update_library)
         self.new_volumes_btn.clicked.connect(self.view_new_volumes)
 
-
     def populate_library_list(self):
         self.libraries_list_widget.clear()
         list = database_manager.get_libraries()
@@ -78,7 +74,6 @@ class MainWindow(QWidget, Ui_main_window):
         
         for library in list:
             self.libraries_list_widget.addItem(QListWidgetItem(library[1]))
-
 
     def populate_series_grid(self):
         self.deleteItemsOfLayout(self.series_layout)
@@ -106,7 +101,6 @@ class MainWindow(QWidget, Ui_main_window):
 
             self.series_layout.addWidget(card)
 
-
     def add_library(self):
         print("You clicked add library")
 
@@ -117,7 +111,6 @@ class MainWindow(QWidget, Ui_main_window):
         if name != "":
             self.libraries_list_widget.addItem(QListWidgetItem(name))      
 
-
     def new_library(self):
         last_row = self.libraries_list_widget.count() - 1
         self.libraries_list_widget.setCurrentRow(last_row)
@@ -126,11 +119,8 @@ class MainWindow(QWidget, Ui_main_window):
         self.update_library_btn.setEnabled(True)
         self.new_volumes_btn.setEnabled(True)
 
-
-
     def show_settings(self):
         print("You clicked settings! No settings currently...")
-
 
     def scan_library(self):
         print("You clicked scan library")
@@ -141,7 +131,6 @@ class MainWindow(QWidget, Ui_main_window):
         dlg.exec()
 
         self.populate_series_grid()
-
 
     def update_library(self):
         print("You clicked update library")
@@ -154,7 +143,6 @@ class MainWindow(QWidget, Ui_main_window):
 
         self.populate_series_grid()
 
-
     def view_new_volumes(self):
         print("You clicked view new volumes")
         library_name = self.libraries_list_widget.currentItem().text()
@@ -162,7 +150,6 @@ class MainWindow(QWidget, Ui_main_window):
 
         dlg = NewVolumeDialog(library_id, self)
         dlg.exec()
-
 
     def deleteItemsOfLayout(self, layout):
         """
