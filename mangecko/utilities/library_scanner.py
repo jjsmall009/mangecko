@@ -6,30 +6,23 @@ from pathlib import Path
 class LibraryScanner():
     """
     This is a class because it's easier to track the state of which folder in the directory is what.
-    
     """
-    FILE_EXT = (".cbz", ".cbr", ".zip", ".pdf")
+    FILE_EXT: tuple = (".cbz", ".cbr", ".zip", ".pdf")
 
-    def __init__(self, path):
+    def __init__(self, path: Path) -> None:
         self.path = path
-        self.valid_folders = {}
-        self.invalid_folders = []
+        self.valid_folders: dict = {str, int}
+        self.invalid_folders: list[str] = []
 
-    def scan_directory(self):
+    def scan_directory(self) -> None:
         """
-        Scans the specified folder and returns each manga title and how many volumes there are.
-        
-        Parameters:
-            path (Path object or string): Path of the directory to scan.
-
-        Returns:
-            dict: title/volume count of each series found.
+        Scans the specified folder and finds each manga title and how many volumes there are.
         
         Notes:
             Ignores standalone files and empty directories.
         """
 
-        manga_folders = [folder for folder in self.path.iterdir() if folder.is_dir()]
+        manga_folders: list[Path] = [folder for folder in self.path.iterdir() if folder.is_dir()]
 
         for manga in manga_folders:
             volumes = [vol for vol in manga.iterdir() if vol.suffix in self.FILE_EXT]
@@ -38,7 +31,7 @@ class LibraryScanner():
             else:
                 self.invalid_folders.append(manga.name)
 
-    def print_valid(self):
+    def print_valid(self) -> None:
         """Helper function to print out the valid folders"""
 
         print("\n==================================================================")
@@ -48,7 +41,7 @@ class LibraryScanner():
 
         print(f"There are {len(self.valid_folders)} valid series")
 
-    def print_invalid(self):
+    def print_invalid(self) -> None:
         """Helper function to print out the invalid foldesr"""
 
         print("\n=======================================================")
