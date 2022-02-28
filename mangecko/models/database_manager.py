@@ -3,17 +3,17 @@
 import requests
 import sqlite3
 from pathlib import Path
+from typing import Union
 
-db_path = "data/database.db"
+db_path: str = "data/database.db"
 
-def initialize():
-    path = Path(db_path)
+def initialize() -> None:
+    path: Path = Path(db_path)
 
     if not path.is_file():
         create_database()
     else:
         print("Database already exists. Continuing...")
-
 
 def create_connection():
     """Connects to database or creates it if not found"""
@@ -25,9 +25,8 @@ def create_connection():
         return conn
     except sqlite3.Error as e:
         print(e)
-
-
-def create_database():
+    
+def create_database() -> None:
     """First time running the program create the database"""
 
     try:
@@ -35,9 +34,7 @@ def create_database():
             libraries_table = """CREATE TABLE IF NOT EXISTS libraries (
                                     library_id INTEGER PRIMARY KEY,
                                     library_name TEXT UNIQUE,
-                                    path_name TEXT);
-
-                """
+                                    path_name TEXT);"""
             create_table(conn, libraries_table)
 
             manga_table = """CREATE TABLE IF NOT EXISTS manga_series (
@@ -53,24 +50,21 @@ def create_database():
                                 source_status TEXT,
                                 has_match TEXT,
                                 year INTEGER,
-                                cover_url TEXT);
-                """
+                                cover_url TEXT);"""
             create_table(conn, manga_table)
 
             junction = """CREATE TABLE IF NOT EXISTS library_manga (
                             library_id INTEGER,
                             manga_id INTEGER,
                             FOREIGN KEY(library_id) REFERENCES libraries(library_id) ON DELETE CASCADE,
-                            FOREIGN KEY(manga_id) REFERENCES manga_series(id) ON DELETE CASCADE);
-                """
+                            FOREIGN KEY(manga_id) REFERENCES manga_series(id) ON DELETE CASCADE);"""
             create_table(conn, junction)
             
             print("Database created successfully.")
     except sqlite3.Error as e:
         print(e)
 
-
-def create_table(conn, statement):
+def create_table(conn: sqlite3.Connection, statement: str) -> None:
     """Creates a table for a library of manga"""
 
     try:
@@ -79,8 +73,7 @@ def create_table(conn, statement):
     except sqlite3.Error as e:
         print(e)
 
-
-def insert_library(name, path):
+def insert_library(name: str, path: str) -> bool:
     """A library is a collection of related manga series"""
 
     try:
@@ -95,8 +88,7 @@ def insert_library(name, path):
         print("Library already exists. Moving on...")
         return False
 
-
-def insert_manga(manga_list, library_name):
+def insert_manga(manga_list: list, library_name: str) -> None:
     """
     In order to maintain good data integrity we use a junction table to connect a manga
     to a library. That is, a library has many manga and a manga can be in many libraries.
@@ -106,7 +98,7 @@ def insert_manga(manga_list, library_name):
         cur = conn.cursor()
         find_library = """SELECT library_id from libraries WHERE library_name = ?;"""
         cur.execute(find_library, [library_name])
-        library_id = cur.fetchall()[0][0]
+        library_id: int = cur.fetchall()[0][0]
 
         for manga in manga_list:
             statement = """INSERT INTO manga_series (local_title,site_title,site_id,my_volumes,
@@ -120,7 +112,7 @@ def insert_manga(manga_list, library_name):
                     manga.source_status,manga.has_match,manga.year,manga.cover)
             cur.execute(statement, data)
             
-            last_manga_id = cur.lastrowid
+            last_manga_id: int = cur.lastrowid
 
             junction = """INSERT INTO library_manga VALUES (?,?);"""
             cur.execute(junction, (library_id, last_manga_id))
@@ -130,8 +122,7 @@ def insert_manga(manga_list, library_name):
 
             conn.commit()
 
-
-def download_cover(site_id, url):
+def download_cover(site_id: int, url: str) -> None:
     if Path(f"data/covers/{site_id}.jpg").exists():
         print("cover exists")
         return
@@ -143,8 +134,7 @@ def download_cover(site_id, url):
         with open(f"data/covers/{site_id}.jpg", 'wb') as f:
             f.write(response.content)
 
-
-def get_library_id(lib_name):
+def get_library_id(lib_name: str):
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -154,7 +144,6 @@ def get_library_id(lib_name):
             return cur.fetchone()
     except sqlite3.Error as e:
         print(f"Error in getting libraries ---> {e}")
-
 
 def get_libraries():
     try:
@@ -166,8 +155,7 @@ def get_libraries():
     except sqlite3.Error as e:
         print(f"Error in getting libraries ---> {e}")
 
-
-def get_library_path(library_id):
+def get_library_path(library_id: int):
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -177,8 +165,7 @@ def get_library_path(library_id):
     except sqlite3.Error as e:
         print(f"Error in getting libraries ---> {e}")
 
-
-def series_exists(title, library_id):
+def series_exists(title: str, library_id: int):
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -195,8 +182,7 @@ def series_exists(title, library_id):
     except sqlite3.Error as e:
         print(f"Error in seraching for series ---> {e}")
         
-
-def update_volume_info(title, volumes):
+def update_volume_info(title: str, volumes: int) -> None:
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -209,8 +195,7 @@ def update_volume_info(title, volumes):
     except sqlite3.Error as e:
         print(f"Error in updating volume info ---> {e}")
 
-
-def get_series_from_library(library_id):
+def get_series_from_library(library_id: int):
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -227,8 +212,7 @@ def get_series_from_library(library_id):
     except sqlite3.Error as e:
         print(f"Error in getting ongoing series ---> {e}")
 
-
-def get_series(library_id):
+def get_series(library_id: int):
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -244,8 +228,7 @@ def get_series(library_id):
     except sqlite3.Error as e:
         print(f"Error in getting all series ---> {e}")
 
-
-def get_ongoing(library_id):
+def get_ongoing(library_id: int):
     try:
         with create_connection() as conn:
             cur = conn.cursor()
@@ -265,8 +248,7 @@ def get_ongoing(library_id):
     except sqlite3.Error as e:
         print(f"Error in getting ongoing series ---> {e}")
 
-
-def update_manga(manga):
+def update_manga(manga) -> None:
     """Update new data for things we care about"""
 
     try:
@@ -285,8 +267,7 @@ def update_manga(manga):
     except sqlite3.Error as e:
         print(f"Error in updating manga ---> {e}")
 
-
-def series_with_new_volumes(library_id):
+def series_with_new_volumes(library_id: int):
     """
     The main focus is series that have an official translation in English, but we fall back
     onto checking the original Japanese source if there isn't an English version.
@@ -326,8 +307,7 @@ def series_with_new_volumes(library_id):
     except sqlite3.Error as e:
         print(f"Error in doing volume stuff ---> {e}")
 
-
-def delete_series(title):
+def delete_series(title: str) -> None:
     with create_connection() as conn:
         cur = conn.cursor()
         cur.execute("""DELETE FROM manga_series WHERE local_title = ?""", (title,))

@@ -11,7 +11,7 @@ class LibraryScanner():
 
     def __init__(self, path: Path) -> None:
         self.path = path
-        self.valid_folders: dict = {str, int}
+        self.valid_folders: dict[str, int] = {}
         self.invalid_folders: list[str] = []
 
     def scan_directory(self) -> None:
@@ -19,7 +19,7 @@ class LibraryScanner():
         Scans the specified folder and finds each manga title and how many volumes there are.
         
         Notes:
-            Ignores standalone files and empty directories.
+            Ignores standalone files and empty directories. I.e, folder with stuff in them.
         """
 
         manga_folders: list[Path] = [folder for folder in self.path.iterdir() if folder.is_dir()]
