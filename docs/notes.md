@@ -13,6 +13,13 @@ There's still a lot to decide and design but in general this is some of the idea
 
 ## Current Progress
 
+### Stage 4 - Better Software Design
+
+- [ ] Type annotations
+- [ ] Data classes maybe
+- [ ] Logging
+- [ ] Unit testing
+
 ### Stage 3 - Clean Up
 
 - [ ] Refactor and clean up my code.
@@ -40,6 +47,16 @@ There's still a lot to decide and design but in general this is some of the idea
 - [x] Compare volume results
 - [x] Test some database functionality and design.
 - [x] Implement console menu design.
+
+## Volume regex types
+
+There is no standard format for how a file is named in regards to what volume it is. That's why I'm going to write out some common patterns.
+
+- Aho-Girl v01 - leading 0 - [v0#] to [v##]
+- Ichigo 100% 01 - no v/vol/volume - [0#] to [##]
+- Kyochuu Rettou Volume 5 - no v/vol/volume and no leading 0 - [1] to [12]
+- Ana Satsujin Vol. 1 - vol and then a space - [v/Vol. #]
+- Wrapped in () - [(v##)]
 
 ## Program Components
 

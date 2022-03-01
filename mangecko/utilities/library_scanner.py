@@ -25,9 +25,13 @@ class LibraryScanner():
         manga_folders: list[Path] = [folder for folder in self.path.iterdir() if folder.is_dir()]
 
         for manga in manga_folders:
-            volumes = [vol for vol in manga.iterdir() if vol.suffix in self.FILE_EXT]
-            if len(volumes) > 0:
-                self.valid_folders[manga.name.split(" [", 1)[0]] = len(volumes)
+            num_volumes = 0 #[vol for vol in manga.iterdir() if vol.suffix in self.FILE_EXT]
+            for vol in manga.iterdir():
+                if vol.suffix in self.FILE_EXT:
+                    num_volumes += 1
+
+            if num_volumes > 0:
+                self.valid_folders[manga.name.split(" [", 1)[0]] = num_volumes
             else:
                 self.invalid_folders.append(manga.name)
 
