@@ -36,3 +36,7 @@ This project uses the following:
 * SQLite
 
 It's nothing fancy but I want to focus on the look and feel, responsiveness, and good software engineering principles and design.
+
+### Big todo...
+
+MangaUpdates recently removed the option to return the series search page in json format so I'll need to redo the web scraper to accommodate that...

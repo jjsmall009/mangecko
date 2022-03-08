@@ -15,6 +15,7 @@
   * [ ] Display info about which series actually got updated, not just the entire list of ongoing series.
 
 * Web scraper
+  * [ ] Redo scraper because MU removed their json header type option on the search page.
   * [ ] Find improperly matched series and update edge cases.
   * [ ] Tweak the fuzzy string matching to better match series.
 
@@ -22,3 +23,4 @@
   * [x] Parse out the volume number and maintain a list for each series.
   * [x] Check for omnibuses and other edition types
   * [ ] Multi-volume files - maybe?
+  
