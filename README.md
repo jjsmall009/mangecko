@@ -35,8 +35,6 @@ This project uses the following:
 * PyQT / PySide6
 * SQLite
 
-It's nothing fancy but I want to focus on the look and feel, responsiveness, and good software engineering principles and design.
-
 ### Big todo...
 
-MangaUpdates recently removed the option to return the series search page in json format so I'll need to redo the web scraper to accommodate that...
+Mangaupdates has since created an API you can use so when I have the time to dive back into this project I'll have to do a rewrite to use it.
